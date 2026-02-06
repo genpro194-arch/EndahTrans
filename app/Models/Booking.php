@@ -16,8 +16,9 @@ class Booking extends Model
         'customer_email',
         'customer_phone',
         'customer_address',
-        'number_of_persons',
+        'number_of_buses',
         'booking_date',
+        'departure_time',
         'total_price',
         'special_requests',
         'status',
@@ -30,6 +31,7 @@ class Booking extends Model
 
     protected $casts = [
         'booking_date' => 'date',
+        'departure_time' => 'datetime:H:i',
         'total_price' => 'decimal:2',
         'paid_at' => 'datetime',
     ];

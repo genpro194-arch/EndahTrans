@@ -12,6 +12,8 @@ class Package extends Model
     protected $fillable = [
         'destination_id',
         'name',
+        'bus_type',
+        'capacity',
         'slug',
         'description',
         'itinerary',

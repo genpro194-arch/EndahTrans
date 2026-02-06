@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PackageController as AdminPackageController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
+Route::get('/paket-unggulan', [HomeController::class, 'popularRoutes'])->name('popular-routes');
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 
@@ -54,12 +56,17 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 // Admin Protected Routes
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/revenue-update', [DashboardController::class, 'getRevenueUpdate'])->name('revenue-update');
     
     // Packages
     Route::resource('packages', AdminPackageController::class);
+    Route::post('packages/{package}/toggle-featured', [AdminPackageController::class, 'toggleFeatured'])->name('packages.toggle-featured');
     
     // Destinations
     Route::resource('destinations', DestinationController::class);
+    
+    // Teams
+    Route::resource('teams', TeamController::class);
     
     // Bookings
     Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');

@@ -5,20 +5,23 @@
 @section('page-subtitle', 'Ringkasan performa bisnis Anda')
 
 @section('content')
-    <!-- Welcome Banner -->
-    <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-8 mb-8 text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-2xl"></div>
-        <div class="absolute bottom-0 left-1/2 w-48 h-48 bg-secondary-500/20 rounded-full blur-2xl"></div>
-        <div class="relative">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+    <!-- Welcome Section -->
+    <div class="mb-12">
+        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 text-white">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
-                    <h2 class="text-2xl font-bold mb-2">Selamat Datang, {{ auth()->user()->name ?? 'Admin' }}! 👋</h2>
-                    <p class="text-primary-100">Berikut ringkasan aktivitas bisnis Anda hari ini.</p>
+                    <p class="text-sm font-semibold text-slate-400 mb-2 uppercase tracking-widest">Selamat Datang Kembali</p>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-3">{{ auth()->user()->name ?? 'Admin' }} 👋</h1>
+                    <p class="text-slate-300 text-lg">Pantau performa bisnis Endah Travel secara real-time</p>
                 </div>
-                <div class="mt-4 md:mt-0 flex gap-3">
+                <div class="flex flex-col sm:flex-row gap-3">
                     <a href="{{ route('admin.packages.create') }}" 
-                       class="inline-flex items-center px-5 py-2.5 bg-white text-primary-700 rounded-xl font-semibold hover:bg-primary-50 transition shadow-lg">
-                        <i class="fas fa-plus mr-2"></i> Tambah Paket
+                       class="inline-flex items-center justify-center px-7 py-3.5 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-100 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                        <i class="fas fa-plus mr-2"></i> Paket Baru
+                    </a>
+                    <a href="{{ route('admin.destinations.create') }}" 
+                       class="inline-flex items-center justify-center px-7 py-3.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold transition-all duration-200 border border-slate-600">
+                        <i class="fas fa-map-marker-alt mr-2"></i> Destinasi
                     </a>
                 </div>
             </div>
@@ -27,100 +30,103 @@
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Total Bookings -->
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100 stat-card">
-            <div class="flex items-center justify-between mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
-                    <i class="fas fa-calendar-check text-white text-xl"></i>
+        <!-- Card 1: Total Bookings -->
+        <div id="totalBookingsCard" class="group bg-white rounded-2xl p-7 hover:shadow-xl transition-all duration-300 border border-slate-200">
+            <div class="flex items-start justify-between mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-calendar-check text-blue-600 text-xl"></i>
                 </div>
-                <span class="text-xs font-semibold px-3 py-1 bg-primary-100 text-primary-600 rounded-full">Total</span>
+                <span class="text-xs font-extrabold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg">TOTAL</span>
             </div>
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-1">{{ number_format($stats['total_bookings']) }}</h3>
-            <p class="text-gray-500 text-sm">Total Pemesanan</p>
+            <div class="space-y-1 mb-5">
+                <h3 id="totalBookingsAmount" class="text-4xl font-black text-slate-900">{{ $stats['total_bookings'] }}</h3>
+                <p class="text-sm text-slate-600 font-medium">Total Pemesanan</p>
+            </div>
+            <a href="{{ route('admin.bookings.index') }}" class="text-blue-600 text-sm font-bold hover:text-blue-700 transition inline-flex items-center gap-2">
+                Lihat Detail <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
 
-        <!-- Pending Bookings -->
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100 stat-card">
-            <div class="flex items-center justify-between mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
-                    <i class="fas fa-clock text-white text-xl"></i>
+        <!-- Card 2: Pending -->
+        <div id="pendingBookingsCard" class="group bg-white rounded-2xl p-7 hover:shadow-xl transition-all duration-300 border border-slate-200">
+            <div class="flex items-start justify-between mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-hourglass-end text-amber-600 text-xl"></i>
                 </div>
                 @if($stats['pending_bookings'] > 0)
-                <span class="text-xs font-semibold px-3 py-1 bg-primary-100 text-primary-600 rounded-full animate-pulse">
-                    Perlu Aksi
+                <span class="text-xs font-extrabold text-red-600 bg-red-50 px-3 py-1.5 rounded-lg animate-pulse">
+                    ⚠️ {{ $stats['pending_bookings'] }} AKSI
                 </span>
+                @else
+                <span class="text-xs font-extrabold text-green-600 bg-green-50 px-3 py-1.5 rounded-lg">✓ AMAN</span>
                 @endif
             </div>
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-1">{{ number_format($stats['pending_bookings']) }}</h3>
-            <p class="text-gray-500 text-sm">Menunggu Konfirmasi</p>
+            <div class="space-y-1 mb-5">
+                <h3 id="pendingBookingsAmount" class="text-4xl font-black text-slate-900">{{ $stats['pending_bookings'] }}</h3>
+                <p class="text-sm text-slate-600 font-medium">Menunggu Konfirmasi</p>
+            </div>
+            <a href="{{ route('admin.bookings.index', ['status' => 'pending']) }}" class="text-amber-600 text-sm font-bold hover:text-amber-700 transition inline-flex items-center gap-2">
+                Konfirmasi <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
 
-        <!-- Revenue -->
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100 stat-card">
-            <div class="flex items-center justify-between mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-secondary-500/30">
-                    <i class="fas fa-wallet text-white text-xl"></i>
+        <!-- Card 3: Revenue -->
+        <div id="revenueCard" class="group bg-white rounded-2xl p-7 hover:shadow-xl transition-all duration-300 border border-slate-200">
+            <div class="flex items-start justify-between mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-chart-line text-emerald-600 text-xl"></i>
                 </div>
-                <span class="text-xs font-semibold px-3 py-1 bg-secondary-100 text-secondary-600 rounded-full">
-                    <i class="fas fa-arrow-up mr-1"></i>Revenue
-                </span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg">📈 +12%</span>
+                    <span id="revenueUpdateIndicator" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-gray-900 mb-1">Rp {{ number_format($stats['total_revenue'] / 1000000, 1) }}Jt</h3>
-            <p class="text-gray-500 text-sm">Total Pendapatan</p>
+            <div class="space-y-1 mb-5">
+                <h3 id="revenueAmount" class="text-3xl font-black text-slate-900">Rp {{ number_format($stats['total_revenue'] / 1000000, 1) }}Jt</h3>
+                <p class="text-sm text-slate-600 font-medium">Total Pendapatan</p>
+            </div>
+            <p id="revenueTimestamp" class="text-emerald-600 text-xs font-bold">Diperbarui: now</p>
         </div>
 
-        <!-- Active Packages -->
-        <div class="bg-white rounded-2xl p-6 card-hover shadow-sm border border-gray-100 stat-card">
-            <div class="flex items-center justify-between mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
-                    <i class="fas fa-suitcase-rolling text-white text-xl"></i>
+        <!-- Card 4: Packages -->
+        <div class="group bg-white rounded-2xl p-7 hover:shadow-xl transition-all duration-300 border border-slate-200">
+            <div class="flex items-start justify-between mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-suitcase-rolling text-purple-600 text-xl"></i>
                 </div>
-                <span class="text-xs font-semibold px-3 py-1 bg-primary-100 text-primary-600 rounded-full">Aktif</span>
+                <span class="text-xs font-extrabold text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg">AKTIF</span>
             </div>
-            <h3 class="text-3xl font-extrabold text-gray-900 mb-1">{{ number_format($stats['active_packages']) }}</h3>
-            <p class="text-gray-500 text-sm">Paket Wisata</p>
+            <div class="space-y-1 mb-5">
+                <h3 class="text-4xl font-black text-slate-900">{{ $stats['active_packages'] }}</h3>
+                <p class="text-sm text-slate-600 font-medium">Paket Wisata</p>
+            </div>
+            <a href="{{ route('admin.packages.index') }}" class="text-purple-600 text-sm font-bold hover:text-purple-700 transition inline-flex items-center gap-2">
+                Kelola <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Chart & Status Distribution -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
         <!-- Revenue Chart -->
-        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-gray-900">Statistik Pendapatan</h3>
-                    <p class="text-sm text-gray-500">7 hari terakhir</p>
+        <div class="lg:col-span-2 bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300">
+            <div class="mb-8">
+                <div class="flex items-baseline gap-3">
+                    <h3 class="text-2xl font-bold text-slate-900">Pendapatan</h3>
+                    <span class="text-sm text-slate-500">7 Hari Terakhir</span>
                 </div>
-                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-chart-bar text-primary-600"></i>
-                </div>
+                <p class="text-slate-600 text-sm mt-2">Pantau tren pendapatan bisnis Anda</p>
             </div>
-            <div class="p-6">
-                <div class="h-72">
-                    <canvas id="revenueChart"></canvas>
-                </div>
+            <div class="h-80">
+                <canvas id="revenueChart"></canvas>
             </div>
         </div>
 
-        <!-- Booking Status -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-gray-900">Status Pemesanan</h3>
-                    <p class="text-sm text-gray-500">Distribusi saat ini</p>
-                </div>
-                <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-chart-pie text-secondary-600"></i>
-                </div>
-            </div>
-            <div class="p-6 space-y-4">
+        <!-- Status Distribution -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300">
+            <h3 class="text-2xl font-bold text-slate-900 mb-8">Status Pemesanan</h3>
+            <div class="space-y-6">
                 @php
-                    $statusColors = [
-                        'pending' => ['bg' => 'bg-primary-500', 'light' => 'bg-primary-100'],
-                        'confirmed' => ['bg' => 'bg-primary-500', 'light' => 'bg-primary-100'],
-                        'paid' => ['bg' => 'bg-secondary-500', 'light' => 'bg-secondary-100'],
-                        'completed' => ['bg' => 'bg-gray-500', 'light' => 'bg-gray-200'],
-                        'cancelled' => ['bg' => 'bg-primary-600', 'light' => 'bg-primary-100'],
-                    ];
                     $statusLabels = [
                         'pending' => 'Menunggu',
                         'confirmed' => 'Dikonfirmasi',
@@ -128,21 +134,28 @@
                         'completed' => 'Selesai',
                         'cancelled' => 'Dibatalkan',
                     ];
+                    $statusColors = [
+                        'pending' => ['bar' => 'bg-amber-500', 'light' => 'bg-amber-50'],
+                        'confirmed' => ['bar' => 'bg-blue-500', 'light' => 'bg-blue-50'],
+                        'paid' => ['bar' => 'bg-emerald-500', 'light' => 'bg-emerald-50'],
+                        'completed' => ['bar' => 'bg-green-500', 'light' => 'bg-green-50'],
+                        'cancelled' => ['bar' => 'bg-red-500', 'light' => 'bg-red-50'],
+                    ];
                     $totalBookings = max(array_sum($bookingStats), 1);
                 @endphp
                 
                 @foreach(['pending', 'confirmed', 'paid', 'completed', 'cancelled'] as $status)
                     @php $percentage = round(($bookingStats[$status] / $totalBookings) * 100); @endphp
                     <div class="group">
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 {{ $statusColors[$status]['bg'] }} rounded-full mr-3"></div>
-                                <span class="text-sm font-medium text-gray-700">{{ $statusLabels[$status] }}</span>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-sm font-semibold text-slate-700">{{ $statusLabels[$status] }}</span>
+                            <div class="text-right">
+                                <span class="text-lg font-black text-slate-900">{{ $bookingStats[$status] }}</span>
+                                <span class="text-xs text-slate-500 ml-2">{{ $percentage }}%</span>
                             </div>
-                            <span class="text-sm font-bold text-gray-900">{{ $bookingStats[$status] }}</span>
                         </div>
-                        <div class="w-full h-2 {{ $statusColors[$status]['light'] }} rounded-full overflow-hidden">
-                            <div class="{{ $statusColors[$status]['bg'] }} h-full rounded-full transition-all duration-500" 
+                        <div class="h-3 {{ $statusColors[$status]['light'] }} rounded-full overflow-hidden">
+                            <div class="h-full {{ $statusColors[$status]['bar'] }} rounded-full transition-all duration-500 group-hover:shadow-lg group-hover:brightness-110" 
                                  style="width: {{ $percentage }}%"></div>
                         </div>
                     </div>
@@ -152,142 +165,131 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-10">
         <a href="{{ route('admin.packages.create') }}" 
-           class="group bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl p-5 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 transform hover:-translate-y-1">
-            <div class="flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-plus text-xl"></i>
-                </div>
-                <span class="font-semibold text-sm">Tambah Paket</span>
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50/50 transition-all duration-300 text-center">
+            <div class="w-12 h-12 bg-blue-100 group-hover:bg-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-plus text-blue-600 text-lg font-bold"></i>
             </div>
+            <p class="text-sm font-bold text-slate-900">Paket Baru</p>
+            <p class="text-xs text-slate-500 mt-1">Buat paket wisata</p>
         </a>
+        
         <a href="{{ route('admin.bookings.index', ['status' => 'pending']) }}" 
-           class="group bg-gradient-to-br from-primary-400 to-primary-600 text-white rounded-2xl p-5 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 transform hover:-translate-y-1">
-            <div class="flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-clock text-xl"></i>
-                </div>
-                <span class="font-semibold text-sm">Pending ({{ $stats['pending_bookings'] }})</span>
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-amber-300 hover:shadow-lg hover:bg-amber-50/50 transition-all duration-300 text-center">
+            <div class="absolute -top-3 -right-3 w-7 h-7 bg-red-500 text-white rounded-full text-xs font-black flex items-center justify-center">
+                {{ $stats['pending_bookings'] }}
             </div>
-        </a>
-        <a href="{{ route('admin.destinations.create') }}" 
-           class="group bg-gradient-to-br from-secondary-500 to-secondary-700 text-white rounded-2xl p-5 hover:shadow-xl hover:shadow-secondary-500/30 transition-all duration-300 transform hover:-translate-y-1">
-            <div class="flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-map-marker-alt text-xl"></i>
-                </div>
-                <span class="font-semibold text-sm">Tambah Destinasi</span>
+            <div class="w-12 h-12 bg-amber-100 group-hover:bg-amber-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-hourglass-end text-amber-600 text-lg font-bold"></i>
             </div>
+            <p class="text-sm font-bold text-slate-900">Pending</p>
+            <p class="text-xs text-slate-500 mt-1">Konfirmasi</p>
         </a>
+        
+        <a href="{{ route('admin.destinations.index') }}" 
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-emerald-300 hover:shadow-lg hover:bg-emerald-50/50 transition-all duration-300 text-center">
+            <div class="w-12 h-12 bg-emerald-100 group-hover:bg-emerald-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-globe text-emerald-600 text-lg font-bold"></i>
+            </div>
+            <p class="text-sm font-bold text-slate-900">Destinasi</p>
+            <p class="text-xs text-slate-500 mt-1">{{ $stats['total_destinations'] }} aktif</p>
+        </a>
+        
         <a href="{{ route('admin.contacts.index') }}" 
-           class="group bg-gradient-to-br from-primary-600 to-primary-800 text-white rounded-2xl p-5 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 transform hover:-translate-y-1">
-            <div class="flex flex-col items-center text-center">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform relative">
-                    <i class="fas fa-envelope text-xl"></i>
-                    @if($stats['unread_messages'] > 0)
-                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-primary-500 rounded-full text-xs flex items-center justify-center animate-pulse">
-                        {{ $stats['unread_messages'] }}
-                    </span>
-                    @endif
-                </div>
-                <span class="font-semibold text-sm">Pesan Masuk</span>
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-purple-300 hover:shadow-lg hover:bg-purple-50/50 transition-all duration-300 text-center">
+            <div class="absolute -top-3 -right-3 w-7 h-7 bg-red-500 text-white rounded-full text-xs font-black flex items-center justify-center animate-pulse">
+                {{ $stats['unread_messages'] }}
             </div>
+            <div class="w-12 h-12 bg-purple-100 group-hover:bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-envelope text-purple-600 text-lg font-bold"></i>
+            </div>
+            <p class="text-sm font-bold text-slate-900">Pesan</p>
+            <p class="text-xs text-slate-500 mt-1">Pesan masuk</p>
         </a>
     </div>
 
-    <!-- Recent Bookings -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-                <h3 class="text-lg font-bold text-gray-900">Pemesanan Terbaru</h3>
-                <p class="text-sm text-gray-500">10 pemesanan terakhir</p>
+    <!-- Recent Bookings Table -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300">
+        <div class="px-8 py-7 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-transparent">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">Pemesanan Terbaru</h3>
+                    <p class="text-slate-600 text-sm mt-1">10 pemesanan terakhir dari pelanggan Anda</p>
+                </div>
+                <a href="{{ route('admin.bookings.index') }}" 
+                   class="text-blue-600 text-sm font-bold hover:text-blue-700 transition inline-flex items-center gap-2">
+                    Lihat Semua <i class="fas fa-arrow-right text-xs"></i>
+                </a>
             </div>
-            <a href="{{ route('admin.bookings.index') }}" 
-               class="inline-flex items-center px-4 py-2 bg-primary-50 text-primary-600 rounded-xl font-semibold hover:bg-primary-100 transition text-sm">
-                Lihat Semua <i class="fas fa-arrow-right ml-2"></i>
-            </a>
         </div>
+        
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="bg-gray-50/50">
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kode Booking</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pelanggan</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Paket</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Total</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Aksi</th>
+                    <tr class="border-b border-slate-200 bg-slate-50/50">
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Booking ID</th>
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Pelanggan</th>
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Paket</th>
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Total</th>
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Status</th>
+                        <th class="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Tanggal</th>
+                        <th class="px-8 py-4 text-center text-xs font-bold text-slate-600 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-slate-200">
                     @forelse($recentBookings as $booking)
-                    <tr class="hover:bg-gray-50/50 transition">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="inline-flex items-center px-3 py-1 bg-primary-50 text-primary-700 rounded-lg font-mono text-sm font-semibold">
-                                #{{ $booking->booking_code }}
+                    <tr class="hover:bg-slate-50 transition-colors duration-150">
+                        <td class="px-8 py-5 whitespace-nowrap">
+                            <span class="text-xs font-black text-blue-600 font-mono bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200">
+                                {{ substr($booking->booking_code, 0, 8) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow">
-                                    {{ strtoupper(substr($booking->customer_name, 0, 1)) }}
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-semibold text-gray-900">{{ $booking->customer_name }}</p>
-                                    <p class="text-xs text-gray-500">{{ $booking->customer_phone }}</p>
-                                </div>
+                        <td class="px-8 py-5 whitespace-nowrap">
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">{{ \Illuminate\Support\Str::limit($booking->customer_name, 20) }}</p>
+                                <p class="text-xs text-slate-500 font-medium mt-0.5">{{ $booking->customer_phone }}</p>
                             </div>
                         </td>
-                        <td class="px-6 py-4">
-                            <p class="text-sm text-gray-900 font-medium line-clamp-1 max-w-[200px]">{{ $booking->package->name ?? '-' }}</p>
+                        <td class="px-8 py-5">
+                            <p class="text-sm font-semibold text-slate-900 line-clamp-1">{{ $booking->package->name ?? '-' }}</p>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="text-sm font-bold text-gray-900">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
+                        <td class="px-8 py-5 whitespace-nowrap">
+                            <span class="text-sm font-black text-slate-900">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-8 py-5 whitespace-nowrap">
                             @php
-                                $statusClasses = [
-                                    'pending' => 'bg-primary-100 text-primary-700 border-primary-200',
-                                    'confirmed' => 'bg-primary-100 text-primary-700 border-primary-200',
-                                    'paid' => 'bg-secondary-100 text-secondary-700 border-secondary-200',
-                                    'completed' => 'bg-gray-100 text-gray-700 border-gray-200',
-                                    'cancelled' => 'bg-primary-100 text-primary-700 border-primary-200',
+                                $statusMap = [
+                                    'pending' => ['bg' => 'bg-amber-50', 'text' => 'text-amber-700', 'border' => 'border-amber-200', 'label' => 'Menunggu'],
+                                    'confirmed' => ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'border' => 'border-blue-200', 'label' => 'Dikonfirmasi'],
+                                    'paid' => ['bg' => 'bg-emerald-50', 'text' => 'text-emerald-700', 'border' => 'border-emerald-200', 'label' => 'Dibayar'],
+                                    'completed' => ['bg' => 'bg-green-50', 'text' => 'text-green-700', 'border' => 'border-green-200', 'label' => 'Selesai'],
+                                    'cancelled' => ['bg' => 'bg-red-50', 'text' => 'text-red-700', 'border' => 'border-red-200', 'label' => 'Dibatalkan'],
                                 ];
-                                $statusText = [
-                                    'pending' => 'Menunggu',
-                                    'confirmed' => 'Dikonfirmasi',
-                                    'paid' => 'Dibayar',
-                                    'completed' => 'Selesai',
-                                    'cancelled' => 'Dibatalkan',
-                                ];
+                                $status = $statusMap[$booking->status] ?? ['bg' => 'bg-slate-50', 'text' => 'text-slate-700', 'border' => 'border-slate-200', 'label' => ucfirst($booking->status)];
                             @endphp
-                            <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold border {{ $statusClasses[$booking->status] ?? 'bg-gray-100 text-gray-700' }}">
-                                {{ $statusText[$booking->status] ?? $booking->status }}
+                            <span class="text-xs font-bold px-3 py-1.5 rounded-lg border {{ $status['bg'] }} {{ $status['text'] }} {{ $status['border'] }}">
+                                {{ $status['label'] }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <p class="text-sm text-gray-500">{{ $booking->created_at->format('d M Y') }}</p>
-                            <p class="text-xs text-gray-400">{{ $booking->created_at->format('H:i') }}</p>
+                        <td class="px-8 py-5 whitespace-nowrap">
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900">{{ $booking->created_at->format('d M Y') }}</p>
+                                <p class="text-xs text-slate-500 font-medium mt-0.5">{{ $booking->created_at->format('H:i') }}</p>
+                            </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                        <td class="px-8 py-5 whitespace-nowrap text-center">
                             <a href="{{ route('admin.bookings.show', $booking) }}" 
-                               class="inline-flex items-center justify-center w-9 h-9 bg-primary-50 text-primary-600 rounded-lg hover:bg-primary-100 transition">
-                                <i class="fas fa-eye"></i>
+                               class="inline-flex items-center justify-center w-9 h-9 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 border border-transparent hover:border-blue-200">
+                                <i class="fas fa-eye text-sm font-bold"></i>
                             </a>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-16 text-center">
-                            <div class="flex flex-col items-center">
-                                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                                    <i class="fas fa-inbox text-3xl text-gray-400"></i>
-                                </div>
-                                <p class="text-gray-500 font-medium">Belum ada pemesanan</p>
-                                <p class="text-gray-400 text-sm">Pemesanan baru akan muncul di sini</p>
-                            </div>
+                        <td colspan="7" class="px-8 py-20 text-center">
+                            <p class="text-slate-600 font-bold text-lg">Belum ada pemesanan</p>
+                            <p class="text-slate-500 text-sm mt-2">Pemesanan baru akan muncul di sini</p>
                         </td>
                     </tr>
                     @endforelse
@@ -297,77 +299,102 @@
     </div>
 
     @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        
-        // Create gradient
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.5)');
-        gradient.addColorStop(1, 'rgba(99, 102, 241, 0.05)');
-        
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode(array_column($revenueData, 'date')) !!},
-                datasets: [{
-                    label: 'Pendapatan',
-                    data: {!! json_encode(array_column($revenueData, 'revenue')) !!},
-                    backgroundColor: gradient,
-                    borderColor: 'rgb(99, 102, 241)',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: '#1e1b4b',
-                        titleFont: { size: 13, weight: '600' },
-                        bodyFont: { size: 12 },
-                        padding: 12,
-                        cornerRadius: 10,
-                        callbacks: {
-                            label: function(context) {
-                                return 'Rp ' + context.raw.toLocaleString('id-ID');
-                            }
-                        }
-                    }
+        const ctx = document.getElementById('revenueChart');
+        if (ctx) {
+            new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: {!! json_encode(array_column($revenueData, 'date')) !!},
+                    datasets: [{
+                        label: 'Pendapatan (Rp)',
+                        data: {!! json_encode(array_column($revenueData, 'revenue')) !!},
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#3B82F6',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 6
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0,0,0,0.05)',
-                        },
-                        ticks: {
-                            font: { size: 11 },
-                            color: '#6b7280',
-                            callback: function(value) {
-                                if (value >= 1000000) {
-                                    return 'Rp ' + (value / 1000000) + 'Jt';
-                                }
-                                return 'Rp ' + value.toLocaleString('id-ID');
-                            }
-                        }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
                     },
-                    x: {
-                        grid: {
-                            display: false
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: {
+                                color: '#64748B',
+                                font: { size: 12 },
+                                callback: function(value) {
+                                    return 'Rp ' + (value / 1000000).toFixed(0) + 'Jt';
+                                }
+                            }
                         },
-                        ticks: {
-                            font: { size: 11 },
-                            color: '#6b7280'
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#64748B', font: { size: 12 } }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+
+        // Auto-update revenue and stats every 30 seconds
+        function updateDashboardData() {
+            fetch('{{ route("admin.revenue-update") }}')
+                .then(response => response.json())
+                .then(data => {
+                    // Update Revenue Card
+                    const revenueAmount = document.getElementById('revenueAmount');
+                    const revenueTimestamp = document.getElementById('revenueTimestamp');
+                    const indicator = document.getElementById('revenueUpdateIndicator');
+
+                    if (revenueAmount && revenueTimestamp) {
+                        revenueAmount.textContent = data.total_revenue_formatted;
+                        revenueTimestamp.textContent = 'Diperbarui: ' + data.updated_at;
+
+                        // Pulse effect on update indicator
+                        if (indicator) {
+                            indicator.style.animation = 'none';
+                            setTimeout(() => {
+                                indicator.style.animation = '';
+                            }, 10);
+                        }
+                    }
+
+                    // Update Total Bookings Card
+                    const totalBookingsAmount = document.getElementById('totalBookingsAmount');
+                    if (totalBookingsAmount) {
+                        totalBookingsAmount.textContent = data.total_bookings;
+                    }
+
+                    // Update Pending Bookings Card
+                    const pendingBookingsAmount = document.getElementById('pendingBookingsAmount');
+                    if (pendingBookingsAmount) {
+                        pendingBookingsAmount.textContent = data.pending_bookings;
+                    }
+
+                    // Update Active Packages info in real-time (optional)
+                    console.log('Dashboard updated at:', data.updated_at);
+                })
+                .catch(error => console.error('Dashboard update error:', error));
+        }
+
+        // Update immediately on page load
+        updateDashboardData();
+
+        // Update every 30 seconds
+        setInterval(updateDashboardData, 30000);
     </script>
     @endpush
 @endsection

@@ -255,13 +255,14 @@
             <div class="flex justify-between h-20">
                 <div class="flex items-center">
                     <a href="{{ route('home') }}" class="flex items-center group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 via-secondary-500 to-primary-500 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                            <i class="fas fa-plane-departure text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <span class="text-2xl font-bold gradient-text">Endah Travel</span>
-                            <span class="block text-xs text-gray-500 -mt-1">Explore Indonesia</span>
-                        </div>
+                        <!-- Logo Image or Icon -->
+                        @if(file_exists(public_path('images/logo.png')))
+                            <img src="{{ asset('images/logo.png') }}" alt="Endah Travel Logo" class="h-14 group-hover:scale-110 transition-transform duration-300">
+                        @else
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 via-secondary-500 to-primary-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-plane-departure text-white text-xl"></i>
+                            </div>
+                        @endif
                     </a>
                 </div>
                 
@@ -492,7 +493,7 @@
     </footer>
     
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/6281234567890" target="_blank" 
+    <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya" target="_blank" 
        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300 group">
         <i class="fab fa-whatsapp text-white text-2xl"></i>
         <span class="absolute right-full mr-3 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">

@@ -151,6 +151,14 @@
                        class="flex-1 py-2.5 text-center text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-xl transition text-sm font-semibold">
                         <i class="fas fa-external-link-alt mr-1"></i> Preview
                     </a>
+                    <form action="{{ route('admin.packages.toggle-featured', $package) }}" method="POST" class="flex-none">
+                        @csrf
+                        <button type="submit" 
+                                class="w-10 h-10 flex items-center justify-center {{ $package->is_featured ? 'text-yellow-600 bg-yellow-50 hover:bg-yellow-100' : 'text-gray-400 bg-gray-100 hover:bg-gray-200' }} rounded-xl transition"
+                                title="{{ $package->is_featured ? 'Hapus dari Terpopuler' : 'Tandai Terpopuler' }}">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </form>
                     <a href="{{ route('admin.packages.edit', $package) }}" 
                        class="flex-1 py-2.5 text-center text-primary-600 hover:text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-xl transition text-sm font-semibold">
                         <i class="fas fa-edit mr-1"></i> Edit

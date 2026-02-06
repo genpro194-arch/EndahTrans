@@ -19,11 +19,14 @@
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Kode Booking</label>
                         <input type="text" name="booking_code" value="{{ old('booking_code') }}" required
-                               placeholder="Contoh: ET202601281234"
+                               placeholder="Contoh: ET20260206ABCD"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-center text-lg tracking-wider uppercase @error('booking_code') border-red-500 @enderror">
                         @error('booking_code')
                             <p class="text-red-500 text-sm mt-2 text-center">{{ $message }}</p>
                         @enderror
+                        <p class="text-gray-500 text-xs mt-2 text-center">
+                            Kode booking dikirim via email setelah pemesanan. Format: ET + tanggal + kode unik
+                        </p>
                     </div>
 
                     <button type="submit" 
@@ -31,6 +34,18 @@
                         <i class="fas fa-search mr-2"></i> Cari Booking
                     </button>
                 </form>
+            </div>
+
+            <!-- Info Box -->
+            <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h3 class="font-semibold text-blue-900 mb-2 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i> Informasi Kode Booking
+                </h3>
+                <ul class="text-sm text-blue-800 space-y-1">
+                    <li>✓ Dikirim ke email Anda setelah pemesanan berhasil</li>
+                    <li>✓ Format: <strong>ET + tanggal + kode unik</strong> (contoh: ET20260206ABCD)</li>
+                    <li>✓ Gunakan untuk mengecek status pemesanan kapan saja</li>
+                </ul>
             </div>
 
             <div class="mt-8 text-center">

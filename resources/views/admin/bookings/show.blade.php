@@ -49,8 +49,8 @@
                                 <p class="font-medium">{{ $booking->booking_date->format('d F Y') }}</p>
                             </div>
                             <div>
-                                <p class="text-gray-500">Jumlah Peserta</p>
-                                <p class="font-medium">{{ $booking->number_of_persons }} orang</p>
+                                <p class="text-gray-500">Jumlah Bus</p>
+                                <p class="font-medium">{{ $booking->number_of_buses }} bus</p>
                             </div>
                         </div>
                     </div>
@@ -125,12 +125,8 @@
                     <h3 class="font-semibold text-gray-900 mb-4">Ringkasan Pembayaran</h3>
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between">
-                            <span class="text-gray-500">Harga per orang</span>
-                            <span>Rp {{ number_format($booking->total_price / $booking->number_of_persons, 0, ',', '.') }}</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-500">Jumlah peserta</span>
-                            <span>{{ $booking->number_of_persons }} orang</span>
+                            <span class="text-gray-500">Jumlah Bus</span>
+                            <span>{{ $booking->number_of_buses }} bus</span>
                         </div>
                         <div class="border-t pt-3">
                             <div class="flex justify-between font-bold text-lg">

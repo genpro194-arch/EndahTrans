@@ -132,7 +132,7 @@
                         <td class="px-6 py-4">
                             <p class="text-sm font-medium text-gray-900 line-clamp-1 max-w-[180px]">{{ $booking->package->name ?? '-' }}</p>
                             <p class="text-xs text-gray-500">
-                                <i class="fas fa-users mr-1"></i> {{ $booking->number_of_persons }} orang
+                                <i class="fas fa-bus mr-1"></i> {{ $booking->number_of_buses }} bus
                             </p>
                         </td>
                         <td class="px-6 py-4">

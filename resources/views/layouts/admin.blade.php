@@ -92,114 +92,129 @@
     <div class="flex h-screen overflow-hidden">
         
         <!-- Sidebar -->
-        <aside :class="sidebarOpen ? 'w-72' : 'w-20'" 
+        <aside :class="sidebarOpen ? 'w-48' : 'w-18'" 
                class="hidden lg:flex flex-col sidebar-gradient text-white transition-all duration-300 ease-in-out shadow-2xl">
             <!-- Logo -->
-            <div class="flex items-center h-20 px-6">
+            <div class="flex items-center h-14 px-3">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center">
-                    <div class="w-11 h-11 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur">
-                        <i class="fas fa-plane-departure text-xl text-white"></i>
-                    </div>
-                    <div x-show="sidebarOpen" class="ml-3" x-transition>
-                        <span class="text-xl font-bold">Endah Travel</span>
-                        <p class="text-xs text-primary-300">Admin Panel</p>
+                    <!-- Admin Logo Image or Icon -->
+                    @if(file_exists(public_path('images/logo.png')))
+                        <img src="{{ asset('images/logo.png') }}" alt="Endah Travel Logo" class="h-8 mr-2 rounded">
+                    @else
+                        <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur">
+                            <i class="fas fa-plane-departure text-sm text-white"></i>
+                        </div>
+                    @endif
+                    <div x-show="sidebarOpen" class="ml-2" x-transition>
+                        <span class="text-sm font-bold">Endah</span>
                     </div>
                 </a>
             </div>
             
             <!-- Navigation -->
-            <nav class="flex-1 overflow-y-auto py-6">
-                <div class="px-4 mb-4" x-show="sidebarOpen">
-                    <p class="text-xs uppercase text-primary-300 tracking-wider font-semibold">Menu Utama</p>
+            <nav class="flex-1 overflow-y-auto py-3">
+                <div class="px-3 mb-2" x-show="sidebarOpen">
+                    <p class="text-xs uppercase text-primary-300 tracking-wider font-semibold">Menu</p>
                 </div>
-                <ul class="space-y-1 px-3">
+                <ul class="space-y-0.5 px-2">
                     <li>
                         <a href="{{ route('admin.dashboard') }}" 
-                           class="flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 group
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
                                   {{ request()->routeIs('admin.dashboard') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-all
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
                                         {{ request()->routeIs('admin.dashboard') ? 'bg-primary-500' : 'bg-white/10 group-hover:bg-primary-500/50' }}">
                                 <i class="fas fa-th-large"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Dashboard</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.bookings.index') }}" 
-                           class="flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 group
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
                                   {{ request()->routeIs('admin.bookings.*') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-all
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
                                         {{ request()->routeIs('admin.bookings.*') ? 'bg-secondary-500' : 'bg-white/10 group-hover:bg-secondary-500/50' }}">
                                 <i class="fas fa-calendar-check"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Pemesanan</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Booking</span>
                             @php $pendingCount = \App\Models\Booking::where('status', 'pending')->count(); @endphp
                             @if($pendingCount > 0)
-                                <span x-show="sidebarOpen" class="ml-auto bg-red-500 text-xs px-2.5 py-1 rounded-full font-semibold animate-pulse">{{ $pendingCount }}</span>
+                                <span x-show="sidebarOpen" class="ml-auto bg-red-500 text-xs px-1.5 py-0.5 rounded-full font-semibold animate-pulse text-white text-2xs">{{ $pendingCount }}</span>
                             @endif
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.packages.index') }}" 
-                           class="flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 group
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
                                   {{ request()->routeIs('admin.packages.*') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-all
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
                                         {{ request()->routeIs('admin.packages.*') ? 'bg-primary-500' : 'bg-white/10 group-hover:bg-primary-500/50' }}">
                                 <i class="fas fa-suitcase-rolling"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Paket Wisata</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Paket</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.destinations.index') }}" 
-                           class="flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 group
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
                                   {{ request()->routeIs('admin.destinations.*') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-all
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
                                         {{ request()->routeIs('admin.destinations.*') ? 'bg-secondary-500' : 'bg-white/10 group-hover:bg-secondary-500/50' }}">
                                 <i class="fas fa-map-marked-alt"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Destinasi</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Destinasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.contacts.index') }}" 
-                           class="flex items-center px-4 py-3.5 rounded-xl transition-all duration-200 group
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
                                   {{ request()->routeIs('admin.contacts.*') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center transition-all
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
                                         {{ request()->routeIs('admin.contacts.*') ? 'bg-primary-400' : 'bg-white/10 group-hover:bg-primary-400/50' }}">
                                 <i class="fas fa-envelope-open-text"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Pesan Masuk</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Pesan</span>
                             @php $unreadCount = \App\Models\Contact::where('is_read', false)->count(); @endphp
                             @if($unreadCount > 0)
-                                <span x-show="sidebarOpen" class="ml-auto bg-primary-400 text-primary-900 text-xs px-2.5 py-1 rounded-full font-semibold">{{ $unreadCount }}</span>
+                                <span x-show="sidebarOpen" class="ml-auto bg-primary-400 text-primary-900 text-xs px-1.5 py-0.5 rounded-full font-semibold text-2xs">{{ $unreadCount }}</span>
                             @endif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.teams.index') }}" 
+                           class="flex items-center px-2.5 py-2.5 rounded-lg transition-all duration-200 group
+                                  {{ request()->routeIs('admin.teams.*') ? 'nav-item-active bg-white/10 text-white' : 'text-primary-200 hover:bg-white/5 hover:text-white' }}">
+                            <div class="w-8 h-8 rounded flex items-center justify-center transition-all text-sm
+                                        {{ request()->routeIs('admin.teams.*') ? 'bg-secondary-500' : 'bg-white/10 group-hover:bg-secondary-500/50' }}">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Tim Profesional</span>
                         </a>
                     </li>
                 </ul>
                 
-                <div class="mt-8 px-4" x-show="sidebarOpen">
-                    <p class="text-xs uppercase text-primary-300 tracking-wider font-semibold mb-4">Lainnya</p>
+                <div class="mt-4 px-3" x-show="sidebarOpen">
+                    <p class="text-xs uppercase text-primary-300 tracking-wider font-semibold mb-2">Lainnya</p>
                 </div>
-                <ul class="space-y-1 px-3">
+                <ul class="space-y-0.5 px-2">
                     <li>
                         <a href="{{ route('home') }}" target="_blank"
-                           class="flex items-center px-4 py-3.5 text-primary-200 rounded-xl hover:bg-white/5 hover:text-white transition-all duration-200 group">
-                            <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all">
+                           class="flex items-center px-2.5 py-2.5 text-primary-200 rounded-lg hover:bg-white/5 hover:text-white transition-all duration-200 group">
+                            <div class="w-8 h-8 bg-white/10 rounded flex items-center justify-center group-hover:bg-white/20 transition-all text-sm">
                                 <i class="fas fa-external-link-alt"></i>
                             </div>
-                            <span x-show="sidebarOpen" class="ml-3 font-medium">Lihat Website</span>
+                            <span x-show="sidebarOpen" class="ml-2 font-medium text-xs">Website</span>
                         </a>
                     </li>
                 </ul>
             </nav>
             
             <!-- Sidebar Footer -->
-            <div class="p-4 border-t border-white/10">
+            <div class="p-2 border-t border-white/10">
                 <button @click="sidebarOpen = !sidebarOpen" 
-                        class="w-full flex items-center justify-center py-3 text-primary-300 hover:text-white hover:bg-white/10 rounded-xl transition">
+                        class="w-full flex items-center justify-center py-2 text-primary-300 hover:text-white hover:bg-white/10 rounded-lg transition text-xs">
                     <i :class="sidebarOpen ? 'fa-angles-left' : 'fa-angles-right'" class="fas"></i>
-                    <span x-show="sidebarOpen" class="ml-2 text-sm">Tutup Sidebar</span>
+                    <span x-show="sidebarOpen" class="ml-1.5 text-2xs">Tutup</span>
                 </button>
             </div>
         </aside>

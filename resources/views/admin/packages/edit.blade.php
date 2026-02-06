@@ -4,157 +4,192 @@
 @section('page-title', 'Edit Paket Wisata')
 
 @section('content')
-    <div class="max-w-4xl">
-        <div class="bg-white rounded-xl shadow-sm">
-            <div class="p-6 border-b">
-                <a href="{{ route('admin.packages.index') }}" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-arrow-left mr-2"></i> Kembali
-                </a>
+    <div class="max-w-5xl">
+        <!-- Header -->
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900">Edit Paket Wisata</h1>
+                <p class="text-slate-600 mt-1">Perbarui informasi paket wisata</p>
+            </div>
+            <a href="{{ route('admin.packages.index') }}" class="inline-flex items-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-900 rounded-lg font-medium transition">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali
+            </a>
+        </div>
+
+        <form action="{{ route('admin.packages.update', $package) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <!-- Basic Information -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Informasi Dasar</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Nama Paket -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Nama Paket <span class="text-red-500">*</span></label>
+                        <input type="text" name="name" value="{{ old('name', $package->name) }}" required
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all @error('name') border-red-500 @enderror">
+                        @error('name')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Destinasi -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Destinasi <span class="text-red-500">*</span></label>
+                        <select name="destination_id" required
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                            @foreach($destinations as $destination)
+                                <option value="{{ $destination->id }}" {{ old('destination_id', $package->destination_id) == $destination->id ? 'selected' : '' }}>
+                                    {{ $destination->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Deskripsi -->
+                <div class="mt-6">
+                    <label class="block text-sm font-bold text-slate-900 mb-2">Deskripsi <span class="text-red-500">*</span></label>
+                    <textarea name="description" rows="4" required
+                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('description', $package->description) }}</textarea>
+                </div>
             </div>
 
-            <form action="{{ route('admin.packages.update', $package) }}" method="POST" enctype="multipart/form-data" class="p-6">
-                @csrf
-                @method('PUT')
+            <!-- Details -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Detail Paket</h2>
+                
+                <!-- Itinerary -->
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-slate-900 mb-2">Itinerary</label>
+                    <textarea name="itinerary" rows="3"
+                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('itinerary', $package->itinerary) }}</textarea>
+                </div>
 
+                <!-- Includes & Excludes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Termasuk</label>
+                        <textarea name="includes" rows="3"
+                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('includes', $package->includes) }}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Tidak Termasuk</label>
+                        <textarea name="excludes" rows="3"
+                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('excludes', $package->excludes) }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Harga & Durasi</h2>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Left Column -->
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Paket <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" value="{{ old('name', $package->name) }}" required
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 @error('name') border-red-500 @enderror">
-                            @error('name')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Destinasi <span class="text-red-500">*</span></label>
-                            <select name="destination_id" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                                @foreach($destinations as $destination)
-                                    <option value="{{ $destination->id }}" {{ old('destination_id', $package->destination_id) == $destination->id ? 'selected' : '' }}>
-                                        {{ $destination->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi <span class="text-red-500">*</span></label>
-                            <textarea name="description" rows="4" required
-                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ old('description', $package->description) }}</textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Itinerary</label>
-                            <textarea name="itinerary" rows="4"
-                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ old('itinerary', $package->itinerary) }}</textarea>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Termasuk</label>
-                                <textarea name="includes" rows="3"
-                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ old('includes', $package->includes) }}</textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Tidak Termasuk</label>
-                                <textarea name="excludes" rows="3"
-                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ old('excludes', $package->excludes) }}</textarea>
-                            </div>
-                        </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Harga Normal <span class="text-red-500">*</span></label>
+                        <input type="number" name="price" value="{{ old('price', $package->price) }}" required min="0"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
                     </div>
-
-                    <!-- Right Column -->
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Harga Normal <span class="text-red-500">*</span></label>
-                                <input type="number" name="price" value="{{ old('price', $package->price) }}" required min="0"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Harga Diskon</label>
-                                <input type="number" name="discount_price" value="{{ old('discount_price', $package->discount_price) }}" min="0"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Durasi (Hari)</label>
-                                <input type="number" name="duration_days" value="{{ old('duration_days', $package->duration_days) }}" required min="1"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Min Peserta</label>
-                                <input type="number" name="min_person" value="{{ old('min_person', $package->min_person) }}" required min="1"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Max Peserta</label>
-                                <input type="number" name="max_person" value="{{ old('max_person', $package->max_person) }}" required min="1"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Keberangkatan</label>
-                                <input type="date" name="departure_date" value="{{ old('departure_date', $package->departure_date?->format('Y-m-d')) }}"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Jam Keberangkatan</label>
-                                <input type="time" name="departure_time" value="{{ old('departure_time', $package->departure_time) }}"
-                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Titik Kumpul</label>
-                            <input type="text" name="meeting_point" value="{{ old('meeting_point', $package->meeting_point) }}"
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Gambar Utama</label>
-                            @if($package->image)
-                                <div class="mb-2">
-                                    <img src="{{ $package->image_url }}" alt="{{ $package->name }}" class="w-32 h-20 object-cover rounded-lg">
-                                </div>
-                            @endif
-                            <input type="file" name="image" accept="image/*"
-                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <p class="text-xs text-gray-500 mt-1">Kosongkan jika tidak ingin mengubah gambar</p>
-                        </div>
-
-                        <div class="flex items-center space-x-6">
-                            <label class="flex items-center">
-                                <input type="checkbox" name="is_active" value="1" {{ old('is_active', $package->is_active) ? 'checked' : '' }}
-                                       class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
-                                <span class="ml-2 text-sm text-gray-700">Aktif</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $package->is_featured) ? 'checked' : '' }}
-                                       class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
-                                <span class="ml-2 text-sm text-gray-700">Paket Unggulan</span>
-                            </label>
-                        </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Harga Diskon</label>
+                        <input type="number" name="discount_price" value="{{ old('discount_price', $package->discount_price) }}" min="0"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
                     </div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t flex justify-end space-x-4">
-                    <a href="{{ route('admin.packages.index') }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
-                        Batal
-                    </a>
-                    <button type="submit" class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition">
-                        <i class="fas fa-save mr-2"></i> Update
-                    </button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Durasi (Hari) <span class="text-red-500">*</span></label>
+                        <input type="number" name="duration_days" value="{{ old('duration_days', $package->duration_days) }}" required min="1"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Min Peserta <span class="text-red-500">*</span></label>
+                        <input type="number" name="min_person" value="{{ old('min_person', $package->min_person) }}" required min="1"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Max Peserta <span class="text-red-500">*</span></label>
+                        <input type="number" name="max_person" value="{{ old('max_person', $package->max_person) }}" required min="1"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <!-- Schedule -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Jadwal Keberangkatan</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Tanggal Keberangkatan</label>
+                        <input type="date" name="departure_date" value="{{ old('departure_date', $package->departure_date?->format('Y-m-d')) }}"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-2">Jam Keberangkatan</label>
+                        <input type="time" name="departure_time" value="{{ old('departure_time', $package->departure_time) }}"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-slate-900 mb-2">Titik Kumpul</label>
+                    <input type="text" name="meeting_point" value="{{ old('meeting_point', $package->meeting_point) }}"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                </div>
+            </div>
+
+            <!-- Media -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-6">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Gambar Paket</h2>
+                
+                @if($package->image)
+                    <div class="mb-4">
+                        <p class="text-sm text-slate-600 mb-2">Gambar Saat Ini:</p>
+                        <img src="{{ $package->image_url }}" alt="{{ $package->name }}" class="w-40 h-28 object-cover rounded-lg border border-slate-200">
+                    </div>
+                @endif
+                
+                <div>
+                    <label class="block text-sm font-bold text-slate-900 mb-2">Ubah Gambar</label>
+                    <input type="file" name="image" accept="image/*"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                    <p class="text-xs text-slate-600 mt-2">Format: JPG, PNG, WEBP (Max 2MB). Kosongkan jika tidak ingin mengubah.</p>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Status Paket</h2>
+                
+                <div class="flex items-center gap-8">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', $package->is_active) ? 'checked' : '' }}
+                               class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500/50 cursor-pointer">
+                        <span class="ml-3 text-sm font-medium text-slate-900">Aktif</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $package->is_featured) ? 'checked' : '' }}
+                               class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500/50 cursor-pointer">
+                        <span class="ml-3 text-sm font-medium text-slate-900">Paket Unggulan</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-4">
+                <a href="{{ route('admin.packages.index') }}" class="px-6 py-3 border border-slate-300 rounded-lg text-slate-900 font-medium hover:bg-slate-50 transition">
+                    Batal
+                </a>
+                <button type="submit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md inline-flex items-center gap-2">
+                    <i class="fas fa-save"></i> Update Paket
+                </button>
+            </div>
+        </form>
     </div>
 @endsection
 

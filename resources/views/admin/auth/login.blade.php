@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Endah Travel</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -24,161 +36,123 @@
             }
         }
     </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .gradient-bg {
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #10b981 100%);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; }
+        body { 
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        input::-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #f9fafb inset !important;
+            -webkit-text-fill-color: #1f2937 !important;
         }
-        .glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-        }
-        .blob {
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: blob 8s ease-in-out infinite;
-        }
-        @keyframes blob {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.3);
         }
     </style>
 </head>
-<body class="min-h-screen flex">
-    <!-- Left Side - Branding -->
-    <div class="hidden lg:flex lg:w-1/2 gradient-bg relative overflow-hidden">
-        <!-- Decorative Blobs -->
-        <div class="absolute top-20 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl blob"></div>
-        <div class="absolute bottom-20 right-20 w-96 h-96 bg-white/10 rounded-full blur-3xl blob" style="animation-delay: 2s;"></div>
-        
-        <!-- Floating Icons -->
-        <div class="absolute top-1/4 right-1/4 w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center animate-bounce" style="animation-duration: 3s;">
-            <i class="fas fa-plane text-white text-xl"></i>
-        </div>
-        <div class="absolute bottom-1/3 left-1/4 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center animate-bounce" style="animation-duration: 4s; animation-delay: 1s;">
-            <i class="fas fa-umbrella-beach text-white text-lg"></i>
-        </div>
-        
-        <!-- Content -->
-        <div class="relative z-10 flex flex-col justify-center items-center w-full p-12 text-white">
-            <div class="w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center mb-8 backdrop-blur">
-                <i class="fas fa-plane-departure text-5xl"></i>
-            </div>
-            <h1 class="text-4xl font-extrabold mb-4 text-center">Endah Travel</h1>
-            <p class="text-xl text-white/80 mb-8 text-center">Admin Dashboard</p>
-            <div class="max-w-sm text-center text-white/70">
-                <p class="mb-6">Kelola paket wisata, booking, dan pelanggan dengan mudah dari satu tempat.</p>
-                <div class="flex justify-center gap-8">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold">6+</div>
-                        <div class="text-sm text-white/60">Destinasi</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold">7+</div>
-                        <div class="text-sm text-white/60">Paket</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold">10K+</div>
-                        <div class="text-sm text-white/60">Pelanggan</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Right Side - Login Form -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
-        <div class="max-w-md w-full">
-            <!-- Mobile Logo -->
-            <div class="lg:hidden text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+<body>
+    <div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md">
+            <!-- Logo & Header -->
+            <div class="text-center mb-12">
+                <div class="w-16 h-16 bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
                     <i class="fas fa-plane-departure text-white text-2xl"></i>
                 </div>
-                <h1 class="text-2xl font-bold gradient-text">Endah Travel</h1>
-                <p class="text-gray-500 text-sm">Admin Dashboard</p>
+                <h1 class="text-3xl font-bold text-slate-900 mb-2">Endah Travel</h1>
+                <p class="text-slate-600">Admin Dashboard</p>
             </div>
 
-            <div class="glass rounded-3xl shadow-2xl p-8 border border-gray-100">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Selamat Datang! 👋</h2>
-                    <p class="text-gray-500">Silakan login untuk melanjutkan</p>
+            <!-- Login Form Card -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">Masuk</h2>
+                    <p class="text-slate-500 text-sm mt-1">Masukkan kredensial admin Anda</p>
                 </div>
 
+                <!-- Error Messages -->
                 @if(session('error'))
-                <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-6 flex items-center">
-                    <i class="fas fa-exclamation-circle mr-3"></i>
-                    {{ session('error') }}
+                <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6 flex items-start gap-3">
+                    <i class="fas fa-exclamation-circle mt-0.5 flex-shrink-0"></i>
+                    <span class="text-sm">{{ session('error') }}</span>
                 </div>
                 @endif
 
                 @if($errors->any())
-                <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-6">
+                <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6">
                     @foreach($errors->all() as $error)
-                        <p class="flex items-center"><i class="fas fa-exclamation-circle mr-2"></i>{{ $error }}</p>
+                        <p class="text-sm flex items-center gap-2 mb-2">
+                            <i class="fas fa-circle text-xs"></i>{{ $error }}
+                        </p>
                     @endforeach
                 </div>
                 @endif
 
+                <!-- Login Form -->
                 <form action="{{ route('admin.login.post') }}" method="POST" class="space-y-5">
                     @csrf
+                    
+                    <!-- Email Field -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            <i class="fas fa-envelope text-primary-500 mr-1"></i> Email
-                        </label>
-                        <input type="email" name="email" value="{{ old('email') }}" required
-                               class="w-full px-4 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all text-gray-800"
+                        <label for="email" class="block text-sm font-medium text-slate-900 mb-2">Email</label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" required 
+                               autocomplete="email"
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/10 transition-all text-slate-900 placeholder-slate-400"
                                placeholder="admin@endahtravel.com">
                     </div>
 
-                    <div x-data="{ show: false }">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            <i class="fas fa-lock text-primary-500 mr-1"></i> Password
-                        </label>
+                    <!-- Password Field -->
+                    <div x-data="{ showPassword: false }">
+                        <label for="password" class="block text-sm font-medium text-slate-900 mb-2">Password</label>
                         <div class="relative">
-                            <input :type="show ? 'text' : 'password'" name="password" required
-                                   class="w-full px-4 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all text-gray-800 pr-12"
+                            <input :type="showPassword ? 'text' : 'password'" id="password" name="password" 
+                                   required autocomplete="current-password"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/10 transition-all text-slate-900 placeholder-slate-400 pr-11"
                                    placeholder="••••••••">
-                            <button type="button" @click="show = !show" 
-                                    class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-primary-500 transition">
-                                <i :class="show ? 'fa-eye-slash' : 'fa-eye'" class="fas text-lg"></i>
+                            <button type="button" @click="showPassword = !showPassword" 
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition focus:outline-none">
+                                <i :class="showPassword ? 'fa-eye-slash' : 'fa-eye'" class="fas text-base"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="remember" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
-                            <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
+                    <!-- Remember Me -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="remember" 
+                               class="w-4 h-4 text-slate-700 border-slate-300 rounded focus:ring-slate-500 cursor-pointer">
+                        <label for="remember" class="ml-2.5 text-sm text-slate-600 cursor-pointer">
+                            Ingat saya
                         </label>
                     </div>
 
-                    <button type="submit" 
-                            class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-xl font-bold text-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                    <!-- Login Button -->
+                    <button type="submit" class="btn-primary w-full bg-slate-700 hover:bg-slate-800 text-white py-3 rounded-lg font-medium transition-all duration-200 shadow-md flex items-center justify-center gap-2 mt-6">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
                     </button>
                 </form>
 
-                <div class="mt-6 pt-6 border-t border-gray-100 text-center">
-                    <p class="text-gray-500 text-sm mb-2">Demo Credentials:</p>
-                    <code class="text-xs bg-gray-100 px-3 py-1 rounded-lg text-gray-600">admin@endahtravel.com / password</code>
+                <!-- Demo Credentials -->
+                <div class="mt-8 pt-8 border-t border-slate-200 bg-slate-50 rounded-lg p-4 text-center">
+                    <p class="text-slate-600 text-xs font-medium mb-2">Kredensial Demo:</p>
+                    <p class="text-slate-900 text-sm font-mono mb-1">admin@endahtravel.com</p>
+                    <p class="text-slate-900 text-sm font-mono">password</p>
                 </div>
             </div>
 
+            <!-- Back Link -->
             <div class="text-center mt-8">
-                <a href="{{ route('home') }}" class="inline-flex items-center text-gray-600 hover:text-primary-600 font-medium transition">
-                    <i class="fas fa-arrow-left mr-2"></i> Kembali ke Website
+                <a href="{{ route('home') }}" class="inline-flex items-center text-slate-600 hover:text-slate-900 text-sm font-medium transition gap-2">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Website
                 </a>
             </div>
         </div>
     </div>
 </body>
 </html>
+
 

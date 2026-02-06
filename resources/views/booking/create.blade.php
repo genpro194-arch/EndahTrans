@@ -69,13 +69,17 @@
 
     <section class="py-8 bg-gray-50 min-h-screen" 
         x-data="{ 
-            persons: {{ old('number_of_persons', $package->min_person ?? 1) }},
-            pricePerPerson: {{ $package->final_price ?? 0 }},
-            minPersons: {{ $package->min_person ?? 1 }},
-            maxPersons: {{ $package->max_person ?? 10 }},
-            get total() { return this.persons * this.pricePerPerson },
-            increase() { if (this.persons < this.maxPersons) this.persons++ },
-            decrease() { if (this.persons > this.minPersons) this.persons-- },
+            buses: {{ old('number_of_buses', 1) }},
+            pricePerBus: {{ $package->final_price ?? 0 }},
+            minBuses: 1,
+            maxBuses: 10,
+            capacity: {{ $package->capacity ?? 35 }},
+            busType: '{{ $package->bus_type ?? 'medium' }}',
+            durationDays: {{ $package->duration_days ?? 1 }},
+            get total() { return this.buses * this.pricePerBus * this.durationDays },
+            get totalCapacity() { return this.buses * this.capacity },
+            increase() { if (this.buses < this.maxBuses) this.buses++ },
+            decrease() { if (this.buses > this.minBuses) this.buses-- },
             format(num) { return new Intl.NumberFormat('id-ID').format(num) }
         }">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,7 +116,7 @@
                                     <h4 class="text-xl font-bold text-gray-900 mb-2">{{ $package->name }}</h4>
                                     <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ $package->description }}</p>
                                     
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         <div class="bg-gray-50 rounded-xl p-3 text-center">
                                             <i class="fas fa-calendar-alt text-primary-500 text-lg mb-1"></i>
                                             <p class="text-xs text-gray-500">Durasi</p>
@@ -120,18 +124,8 @@
                                         </div>
                                         <div class="bg-gray-50 rounded-xl p-3 text-center">
                                             <i class="fas fa-users text-primary-500 text-lg mb-1"></i>
-                                            <p class="text-xs text-gray-500">Penumpang</p>
-                                            <p class="font-bold text-gray-900">{{ $package->min_person }}-{{ $package->max_person }}</p>
-                                        </div>
-                                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-                                            <i class="fas fa-utensils text-primary-500 text-lg mb-1"></i>
-                                            <p class="text-xs text-gray-500">Makan</p>
-                                            <p class="font-bold text-gray-900">Termasuk</p>
-                                        </div>
-                                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-                                            <i class="fas fa-hotel text-primary-500 text-lg mb-1"></i>
-                                            <p class="text-xs text-gray-500">Hotel</p>
-                                            <p class="font-bold text-gray-900">Termasuk</p>
+                                            <p class="text-xs text-gray-500">Kapasitas Bus</p>
+                                            <p class="font-bold text-gray-900">{{ $package->capacity }} Orang</p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +155,15 @@
                         </div>
                         @endif
 
-                        <!-- Date & Passengers Card -->
+                        <!-- Date & Bus Card -->
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 mb-6">
                             <div class="bg-gradient-to-r from-secondary-500 to-secondary-600 px-6 py-4">
                                 <h3 class="text-lg font-bold text-white flex items-center">
-                                    <i class="fas fa-calendar-check mr-2"></i> Pilih Tanggal & Jumlah Penumpang
+                                    <i class="fas fa-calendar-check mr-2"></i> Pilih Tanggal, Jam & Jumlah Bus
                                 </h3>
                             </div>
                             <div class="p-6">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <!-- Date Picker -->
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">
@@ -188,30 +182,55 @@
                                         <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Minimal pemesanan H-1</p>
                                     </div>
 
-                                    <!-- Passenger Counter -->
+                                    <!-- Time Picker -->
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">
-                                            <i class="fas fa-users text-primary-500 mr-1"></i> Jumlah Penumpang
+                                            <i class="fas fa-clock text-primary-500 mr-1"></i> Jam Keberangkatan
+                                        </label>
+                                        <div class="relative">
+                                            <input type="time" name="departure_time" 
+                                                   value="{{ old('departure_time', $package->departure_time?->format('H:i') ?? '20:00') }}" 
+                                                   required
+                                                   class="w-full px-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all text-lg font-medium @error('departure_time') border-red-500 @enderror">
+                                            @error('departure_time')
+                                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Format: HH:MM</p>
+                                    </div>
+
+                                    <!-- Bus Counter -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                            <i class="fas fa-bus text-primary-500 mr-1"></i> Jumlah Bus
                                         </label>
                                         <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl p-2">
                                             <button type="button" @click="decrease()" 
                                                     class="w-12 h-12 bg-white rounded-lg shadow flex items-center justify-center text-primary-600 hover:bg-primary-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                                    :disabled="persons <= minPersons">
+                                                    :disabled="buses <= minBuses">
                                                 <i class="fas fa-minus text-lg"></i>
                                             </button>
-                                            <div class="flex-1 text-center">
-                                                <input type="hidden" name="number_of_persons" :value="persons">
-                                                <span class="text-3xl font-bold text-gray-900" x-text="persons"></span>
-                                                <p class="text-xs text-gray-500">Penumpang</p>
+                                            <div class="flex-1">
+                                                <div class="text-center">
+                                                    <input type="hidden" name="number_of_buses" :value="buses">
+                                                    <span class="text-3xl font-bold text-gray-900" x-text="buses"></span>
+                                                    <p class="text-xs text-gray-500">Bus <span x-text="busType === 'big' ? '40' : '35'"></span> Penumpang</p>
+                                                </div>
                                             </div>
                                             <button type="button" @click="increase()" 
                                                     class="w-12 h-12 bg-white rounded-lg shadow flex items-center justify-center text-primary-600 hover:bg-primary-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                                    :disabled="persons >= maxPersons">
+                                                    :disabled="buses >= maxBuses">
                                                 <i class="fas fa-plus text-lg"></i>
                                             </button>
                                         </div>
-                                        <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Min {{ $package->min_person }}, Max {{ $package->max_person }} penumpang</p>
+                                        <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Min 1, Max 10 bus</p>
                                     </div>
+                                </div>
+
+                                <!-- Total Capacity -->
+                                <div class="mt-6 bg-primary-50 border border-primary-200 rounded-xl p-4">
+                                    <p class="text-sm text-gray-600 mb-2">Total Kapasitas Penumpang:</p>
+                                    <p class="text-2xl font-bold text-primary-600" x-text="totalCapacity + ' Penumpang'"></p>
                                 </div>
                             </div>
                         </div>
@@ -324,7 +343,7 @@
                             <!-- Price Breakdown -->
                             <div class="space-y-4 mb-6">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Harga Paket</span>
+                                    <span class="text-gray-600">Harga Per Bus</span>
                                     <div class="text-right">
                                         @if($package->discount_price)
                                         <span class="text-sm text-gray-400 line-through block">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
@@ -333,15 +352,27 @@
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Jumlah Penumpang</span>
+                                    <span class="text-gray-600">Jumlah Bus</span>
                                     <span class="font-semibold text-gray-900">
-                                        <span x-text="persons"></span> x Rp {{ number_format($package->final_price, 0, ',', '.') }}
+                                        <span x-text="buses"></span> bus
+                                    </span>
+                                </div>
+                                <div class="flex justify-between items-center bg-blue-50 p-3 rounded-lg border border-blue-200">
+                                    <span class="text-gray-600 text-sm">Durasi (Perjalanan Malam)</span>
+                                    <span class="font-semibold text-blue-600">
+                                        <span x-text="durationDays"></span>x
+                                    </span>
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t-2 border-gray-200">
+                                    <span class="text-gray-600">Subtotal</span>
+                                    <span class="font-semibold text-gray-900">
+                                        <span x-text="'Rp ' + format(buses * pricePerBus * durationDays)"></span>
                                     </span>
                                 </div>
                                 @if($package->discount_price)
                                 <div class="flex justify-between items-center text-secondary-600">
-                                    <span>Diskon {{ $package->discount_percent }}%</span>
-                                    <span class="font-semibold">- Rp <span x-text="format(persons * {{ $package->price - ($package->discount_price ?? $package->price) }})"></span></span>
+                                    <span>Diskon</span>
+                                    <span class="font-semibold">- Rp <span x-text="format(buses * durationDays * {{ $package->price - ($package->discount_price ?? $package->price) }})"></span></span>
                                 </div>
                                 @endif
                             </div>

@@ -36,7 +36,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- WhatsApp -->
-                <a href="https://wa.me/6281234567890" target="_blank" 
+                <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya" target="_blank" 
                    class="group bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100" data-aos="fade-up">
                     <div class="w-16 h-16 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-secondary-500/30 group-hover:scale-110 transition-transform">
                         <i class="fab fa-whatsapp text-white text-3xl"></i>
@@ -227,35 +227,91 @@
         </div>
     </section>
 
-    <!-- Map -->
-    <section class="py-16">
+    <!-- Google Maps Section -->
+    <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
             <div class="text-center mb-12" data-aos="fade-up">
-                <span class="inline-flex items-center px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-semibold mb-4">
-                    <i class="fas fa-map mr-2"></i> Lokasi Kami
-                </span>
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Kunjungi Kantor Kami</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Temui kami langsung untuk konsultasi perjalanan Anda</p>
+                <div class="inline-flex items-center bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-4">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    <span class="text-sm font-semibold">Lokasi Kami</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Kunjungi Kantor Endah Trans
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Lokasi strategis di pusat kota, mudah diakses dari berbagai tempat. Kunjungi kantor kami untuk konsultasi dan pemesanan paket wisata.
+                </p>
             </div>
-            
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100" data-aos="zoom-in">
-                <div class="relative">
-                    <div class="absolute top-4 left-4 z-10 bg-white rounded-2xl shadow-lg p-4 max-w-xs">
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-building text-white"></i>
-                            </div>
-                            <div class="ml-3">
-                                <h4 class="font-bold text-gray-900">Endah Travel Office</h4>
-                                <p class="text-sm text-gray-600">Jl. Raya Utama No. 123, Jakarta</p>
+
+            <!-- Maps Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Maps Embed -->
+                <div class="lg:col-span-2" data-aos="fade-right">
+                    <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-primary-100 h-96 lg:h-96">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.200488506536!2d110.750231!3d-6.7453843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70ddc096dc10ad%3A0xef6083aef28b357b!2sPo.Endah%20Trans%20Jepara!5e0!3m2!1sid!2sid!4v1769998406551!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; min-height: 384px;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                allow="geolocation"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Info Card -->
+                <div class="lg:col-span-1" data-aos="fade-left">
+                    <div class="bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <i class="fas fa-map-location-dot mr-2"></i> Informasi Lokasi
+                        </h3>
+
+                        <!-- Address -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">ALAMAT</p>
+                            <p class="text-base font-semibold">Jl. Raya Jepara - Kudus, Rw. 03<br>Pelang, Kec. Mayong<br>Kabupaten Jepara, Jawa Tengah</p>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">TELEPON</p>
+                            <a href="tel:+6281234567890" class="text-lg font-semibold hover:text-primary-200 transition">
+                                <i class="fas fa-phone-alt mr-2"></i> +62 812-3456-7890
+                            </a>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">EMAIL</p>
+                            <a href="mailto:info@endahtravel.com" class="text-lg font-semibold hover:text-primary-200 transition">
+                                <i class="fas fa-envelope mr-2"></i> info@endahtravel.com
+                            </a>
+                        </div>
+
+                        <!-- Operating Hours -->
+                        <div class="mb-6">
+                            <p class="text-sm text-white/70 mb-3 font-semibold">JAM OPERASIONAL</p>
+                            <div class="space-y-2 text-sm">
+                                <p><span class="font-semibold">Senin - Jumat:</span> 08:00 - 17:00 WIB</p>
+                                <p><span class="font-semibold">Sabtu:</span> 09:00 - 14:00 WIB</p>
+                                <p><span class="font-semibold">Minggu:</span> Tutup</p>
                             </div>
                         </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="space-y-3 mt-8">
+                            <a href="https://maps.app.goo.gl/SQ1EFkbtUonSbyha7?g_st=aw" target="_blank"
+                               class="w-full inline-flex items-center justify-center bg-white text-primary-600 py-3 rounded-xl font-bold hover:bg-gray-100 transition-all hover:shadow-lg">
+                                <i class="fas fa-directions mr-2"></i> Lihat di Google Maps
+                            </a>
+                            <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya%20tentang%20lokasi%20dan%20jam%20operasional" target="_blank"
+                               class="w-full inline-flex items-center justify-center bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition-all hover:shadow-lg">
+                                <i class="fab fa-whatsapp mr-2"></i> Hubungi WhatsApp
+                            </a>
+                        </div>
                     </div>
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253840.65295101045!2d106.68942990815699!3d-6.229386706537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bf0fdad786a2!2sJakarta%2C%20Indonesia!5e0!3m2!1sen!2s!4v1640000000000!5m2!1sen!2s"
-                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        class="grayscale hover:grayscale-0 transition-all duration-500">
-                    </iframe>
                 </div>
             </div>
         </div>

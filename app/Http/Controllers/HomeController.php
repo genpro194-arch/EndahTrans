@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\Destination;
 use App\Models\Testimonial;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,15 +15,15 @@ class HomeController extends Controller
         $featuredPackages = Package::with('destination')
             ->active()
             ->featured()
-            ->latest()
-            ->take(6)
+            ->orderBy('name', 'asc')
             ->get();
 
         $destinations = Destination::where('is_active', true)
+            ->whereNotIn('name', ['Yogyakarta', 'Labuan Bajo', 'Raja Ampat'])
             ->withCount(['packages' => function ($query) {
                 $query->where('is_active', true);
             }])
-            ->take(8)
+            ->take(3)
             ->get();
 
         $testimonials = Testimonial::active()
@@ -41,6 +42,31 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('about');
+        $teams = Team::all()->toArray();
+        
+        $stats = [
+            'destinations' => Destination::where('is_active', true)->count(),
+            'packages' => Package::active()->count(),
+            'customers' => \App\Models\Booking::where('status', 'completed')->count(),
+        ];
+
+        return view('about', compact('teams', 'stats'));
+    }
+
+    public function popularRoutes()
+    {
+        $popularPackages = Package::with('destination')
+            ->where('is_active', true)
+            ->where('is_featured', true)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $stats = [
+            'destinations' => Destination::where('is_active', true)->count(),
+            'packages' => Package::active()->count(),
+            'customers' => \App\Models\Booking::where('status', 'completed')->count(),
+        ];
+
+        return view('featured-packages', compact('popularPackages', 'stats'));
     }
 }

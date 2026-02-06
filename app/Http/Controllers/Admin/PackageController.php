@@ -131,4 +131,13 @@ class PackageController extends Controller
         return redirect()->route('admin.packages.index')
             ->with('success', 'Paket berhasil dihapus!');
     }
+
+    public function toggleFeatured(Package $package)
+    {
+        $package->update(['is_featured' => !$package->is_featured]);
+
+        $status = $package->is_featured ? 'ditambahkan ke' : 'dihapus dari';
+        return redirect()->route('admin.packages.index')
+            ->with('success', "Paket berhasil $status rute terpopuler!");
+    }
 }

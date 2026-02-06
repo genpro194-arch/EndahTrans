@@ -315,7 +315,7 @@
                                 <a href="mailto:info@endahtravel.com" class="w-12 h-12 bg-secondary-100 rounded-xl flex items-center justify-center text-secondary-600 hover:bg-secondary-200 transition">
                                     <i class="fas fa-envelope"></i>
                                 </a>
-                                <a href="https://wa.me/6281234567890" class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 hover:bg-green-200 transition">
+                                <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya%20tentang%20paket%20wisata" class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600 hover:bg-green-200 transition">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </div>

@@ -15,10 +15,12 @@ class Destination extends Model
         'description',
         'image',
         'is_active',
+        'is_featured',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
     ];
 
     public function packages()

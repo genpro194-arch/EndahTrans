@@ -223,9 +223,9 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 @foreach([
                     ['number' => '10+', 'label' => 'Tahun Pengalaman', 'icon' => 'fa-calendar-alt'],
-                    ['number' => '50+', 'label' => 'Destinasi Wisata', 'icon' => 'fa-map-marker-alt'],
-                    ['number' => '10K+', 'label' => 'Pelanggan Puas', 'icon' => 'fa-users'],
-                    ['number' => '100+', 'label' => 'Paket Wisata', 'icon' => 'fa-suitcase'],
+                    ['number' => $stats['destinations'], 'label' => 'Destinasi Wisata', 'icon' => 'fa-map-marker-alt'],
+                    ['number' => $stats['customers'] . '+', 'label' => 'Pelanggan Puas', 'icon' => 'fa-users'],
+                    ['number' => $stats['packages'] . '+', 'label' => 'Paket Wisata', 'icon' => 'fa-suitcase'],
                 ] as $index => $stat)
                 <div class="text-center text-white" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
                     <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -251,26 +251,26 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach([
-                    ['name' => 'Endah Pratiwi', 'role' => 'Founder & CEO', 'img' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400'],
-                    ['name' => 'Ahmad Rizky', 'role' => 'Operations Manager', 'img' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'],
-                    ['name' => 'Siti Nurhaliza', 'role' => 'Customer Relations', 'img' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400'],
-                ] as $index => $member)
+                @foreach($teams as $index => $member)
                 <div class="group" data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
                     <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                         <div class="relative h-80 overflow-hidden">
-                            <img src="{{ $member['img'] }}" 
+                            <img src="{{ $member['image'] ? asset('storage/' . $member['image']) : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400' }}" 
                                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
                                  alt="{{ $member['name'] }}">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform">
                                 <div class="flex justify-center space-x-3">
-                                    <a href="#" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-primary-600 transition">
+                                    @if($member['linkedin_url'])
+                                    <a href="{{ $member['linkedin_url'] }}" target="_blank" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-blue-600 transition">
                                         <i class="fab fa-linkedin-in"></i>
                                     </a>
-                                    <a href="#" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-primary-600 transition">
+                                    @endif
+                                    @if($member['instagram_url'])
+                                    <a href="{{ $member['instagram_url'] }}" target="_blank" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-pink-600 transition">
                                         <i class="fab fa-instagram"></i>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

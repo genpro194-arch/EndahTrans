@@ -61,7 +61,7 @@
                         <i class="fas fa-compass mr-3 group-hover:rotate-45 transition-transform duration-300"></i> 
                         Explore Paket Wisata
                     </a>
-                    <a href="https://wa.me/6281234567890" target="_blank"
+                    <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya%20tentang%20paket%20wisata" target="_blank"
                        class="group inline-flex items-center justify-center bg-secondary-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-secondary-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                         <i class="fab fa-whatsapp mr-3 text-xl"></i> 
                         Chat Sekarang
@@ -184,112 +184,7 @@
         </div>
     </section>
 
-    <!-- Featured Packages -->
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-14" data-aos="fade-up">
-                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                    <i class="fas fa-fire mr-1"></i> PAKET TERPOPULER
-                </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                    Paket Wisata <span class="gradient-text">Unggulan</span>
-                </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Pilihan paket wisata terbaik dengan harga spesial untuk pengalaman liburan tak terlupakan
-                </p>
-            </div>
-            
-            @if($featuredPackages->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($featuredPackages as $index => $package)
-                <a href="{{ route('packages.show', $package->slug) }}" class="group bg-white rounded-3xl shadow-lg overflow-hidden card-hover border border-gray-100 block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="relative h-56 overflow-hidden">
-                        @if($package->image_url)
-                        <img src="{{ $package->image_url }}" alt="{{ $package->name }}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                             onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400'">
-                        @else
-                        <div class="w-full h-full bg-gradient-to-br from-primary-400 to-secondary-500 flex items-center justify-center">
-                            <i class="fas fa-mountain text-white/50 text-6xl"></i>
-                        </div>
-                        @endif
-                        
-                        <!-- Overlay Gradient -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        
-                        @if($package->discount_price)
-                        <div class="absolute top-4 left-4 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg shimmer">
-                            <i class="fas fa-bolt mr-1"></i> -{{ $package->discount_percent }}%
-                        </div>
-                        @endif
-                        
-                        <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-sm font-semibold text-gray-700 shadow-lg">
-                            <i class="fas fa-clock text-primary-500 mr-1"></i> {{ $package->duration_days }}D/{{ $package->duration_nights }}N
-                        </div>
-                        
-                        <!-- Quick View Button -->
-                        <div class="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 group-hover:bg-primary-500 group-hover:text-white">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <span class="inline-flex items-center bg-secondary-50 text-secondary-600 px-3 py-1 rounded-full font-medium">
-                                <i class="fas fa-map-marker-alt mr-1.5"></i>
-                                {{ $package->destination->name ?? 'Indonesia' }}
-                            </span>
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
-                            {{ $package->name ?? 'Paket Wisata' }}
-                        </h3>
-                        
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ Str::limit($package->description ?? 'Paket wisata menarik dengan berbagai destinasi indah.', 100) }}</p>
-                        
-                        <!-- Features -->
-                        <div class="flex items-center gap-4 mb-4 text-xs text-gray-400">
-                            <span><i class="fas fa-users mr-1"></i> {{ $package->min_person ?? 1 }}-{{ $package->max_person ?? 20 }} Orang</span>
-                            <span><i class="fas fa-utensils mr-1"></i> Meals</span>
-                            <span><i class="fas fa-hotel mr-1"></i> Hotel</span>
-                        </div>
-                        
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                            <div>
-                                @if($package->discount_price)
-                                    <span class="text-sm text-gray-400 line-through block">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
-                                    <div class="text-2xl font-extrabold text-primary-600">Rp {{ number_format($package->discount_price, 0, ',', '.') }}</div>
-                                @else
-                                    <div class="text-2xl font-extrabold text-primary-600">Rp {{ number_format($package->price, 0, ',', '.') }}</div>
-                                @endif
-                                <span class="text-xs text-gray-400">/orang • min {{ $package->min_person ?? 1 }} orang</span>
-                            </div>
-                            <span class="btn-gradient text-white px-6 py-3 rounded-xl font-semibold shadow-lg">
-                                Lihat Detail
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-            
-            <div class="text-center mt-12" data-aos="fade-up">
-                <a href="{{ route('packages.index') }}" 
-                   class="inline-flex items-center btn-gradient-orange text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg">
-                    Lihat Semua Paket <i class="fas fa-arrow-right ml-3"></i>
-                </a>
-            </div>
-            @else
-            <div class="text-center text-gray-500 py-16 bg-gray-50 rounded-3xl">
-                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-suitcase-rolling text-4xl text-gray-300"></i>
-                </div>
-                <p class="text-xl font-medium">Belum ada paket wisata tersedia.</p>
-                <p class="text-gray-400 mt-2">Silakan cek kembali nanti</p>
-            </div>
-            @endif
-        </div>
-    </section>
+
 
     <!-- Why Choose Us -->
     <section class="py-20 bg-white relative overflow-hidden">
@@ -346,50 +241,93 @@
         </div>
     </section>
 
-    <!-- Destinations -->
-    @if($destinations->count() > 0)
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <!-- Paket Unggulan Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14" data-aos="fade-up">
-                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                    <i class="fas fa-globe-asia mr-1"></i> DESTINASI FAVORIT
+                <span class="inline-block bg-secondary-100 text-secondary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-star mr-1"></i> PILIHAN TERBAIK
                 </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                    Jelajahi <span class="gradient-text">Destinasi Populer</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Paket <span class="gradient-text">Unggulan</span>
                 </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Temukan keindahan Indonesia dari Sabang sampai Merauke
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Paket wisata pilihan dengan kualitas terbaik dari Endah Trans
                 </p>
             </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                @foreach($destinations as $index => $destination)
-                <a href="{{ route('packages.index', ['destination' => $destination->id]) }}" 
-                   class="group relative h-56 md:h-64 rounded-2xl overflow-hidden card-hover" 
-                   data-aos="fade-up" 
-                   data-aos-delay="{{ $index * 50 }}">
-                    <img src="{{ $destination->image_url }}" alt="{{ $destination->name }}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                         onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                    
-                    <!-- Hover Overlay -->
-                    <div class="absolute inset-0 bg-primary-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">Lihat Paket <i class="fas fa-arrow-right ml-2"></i></span>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Paket Unggulan akan diload dari database -->
+                @forelse($featuredPackages as $package)
+                <div class="group bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-aos="fade-up">
+                    <!-- Image -->
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ $package->image_url }}" alt="{{ $package->name }}" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                        
+                        <!-- Badge -->
+                        <div class="absolute top-3 left-3">
+                            <span class="inline-flex items-center px-3 py-1 bg-secondary-500 text-white text-xs font-bold rounded-full shadow-lg">
+                                <i class="fas fa-star mr-1"></i> UNGGULAN
+                            </span>
+                        </div>
+                        
+                        <!-- Diskon -->
+                        @if($package->discount_price)
+                            <div class="absolute top-3 right-3">
+                                <span class="inline-flex items-center px-2 py-1 bg-primary-600 text-white text-xs font-bold rounded shadow-lg">
+                                    DISKON {{ $package->discount_percent }}%
+                                </span>
+                            </div>
+                        @endif
                     </div>
                     
-                    <div class="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 class="text-xl font-bold mb-1">{{ $destination->name }}</h3>
-                        <p class="text-sm text-white/80 flex items-center">
-                            <i class="fas fa-suitcase mr-1.5"></i> {{ $destination->packages_count }} Paket Tersedia
+                    <!-- Content -->
+                    <div class="p-5">
+                        <p class="text-xs text-gray-500 mb-2">
+                            <i class="fas fa-map-marker-alt text-primary-500 mr-1"></i>
+                            {{ $package->destination->name }}
                         </p>
+                        <h3 class="font-bold text-gray-900 line-clamp-2 mb-2">{{ $package->name }}</h3>
+                        
+                        <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                            <span><i class="fas fa-clock text-primary-500 mr-1"></i> {{ $package->duration_days }} Hari</span>
+                            <span><i class="fas fa-users text-primary-500 mr-1"></i> {{ $package->max_person }} Org</span>
+                        </div>
+                        
+                        <!-- Price -->
+                        @if($package->discount_price)
+                            <div class="mb-4">
+                                <p class="text-lg font-bold text-primary-600">Rp {{ number_format($package->discount_price, 0, ',', '.') }}</p>
+                                <p class="text-xs text-gray-400 line-through">Rp {{ number_format($package->price, 0, ',', '.') }}</p>
+                            </div>
+                        @else
+                            <p class="text-lg font-bold text-gray-900 mb-4">Rp {{ number_format($package->price, 0, ',', '.') }}</p>
+                        @endif
+                        
+                        <a href="{{ route('booking.create', $package->slug) }}" 
+                           class="w-full inline-flex items-center justify-center btn-gradient text-white py-3 rounded-xl font-bold transition-all hover:shadow-lg">
+                            Pesan Sekarang <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
+                </div>
+                @empty
+                <div class="md:col-span-3 text-center py-8">
+                    <p class="text-gray-500">Paket unggulan sedang dipersiapkan...</p>
+                </div>
+                @endforelse
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="{{ route('popular-routes') }}" 
+                   class="inline-flex items-center px-8 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition shadow-lg">
+                    Lihat Semua Paket Unggulan <i class="fas fa-arrow-right ml-2"></i>
                 </a>
-                @endforeach
             </div>
         </div>
     </section>
-    @endif
 
     <!-- Testimonials -->
     @if($testimonials->count() > 0)
@@ -509,5 +447,163 @@
             </div>
         </div>
     </section>
+
+    <!-- Harga Terbaik Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-tag mr-1"></i> HARGA TERBAIK
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Paket Dengan Harga <span class="gradient-text">Termurah</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Nikmati perjalanan nyaman dengan harga yang paling terjangkau
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach(['Big Bus', 'Medium Bus'] as $busType)
+                <div class="group bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl shadow-lg overflow-hidden card-hover border-2 border-primary-100 p-8" data-aos="fade-up">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                                <i class="fas fa-bus text-primary-600 mr-2"></i> {{ $busType }}
+                            </h3>
+                            <p class="text-gray-600">Kapasitas {{ $busType === 'Big Bus' ? '40' : '35' }} penumpang</p>
+                        </div>
+                        <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-md">
+                            <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 mb-6">
+                        <p class="text-sm text-gray-500 mb-1">Mulai dari harga</p>
+                        <p class="text-3xl font-bold text-primary-600">
+                            Rp <span class="text-2xl">{{ $busType === 'Big Bus' ? '2.000.000' : '1.800.000' }}</span>
+                        </p>
+                        <p class="text-xs text-gray-400 mt-2">Per bus per malam</p>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-500 mr-3 font-bold"></i>
+                            <span>AC + WiFi Gratis</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-500 mr-3 font-bold"></i>
+                            <span>Driver Profesional</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-500 mr-3 font-bold"></i>
+                            <span>Asuransi Perjalanan</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check text-green-500 mr-3 font-bold"></i>
+                            <span>Fleksibel Tanggal</span>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('packages.index') }}" 
+                       class="w-full inline-flex items-center justify-center bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 rounded-xl font-bold transition-all hover:shadow-lg hover:-translate-y-1">
+                        Pesan Sekarang <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-12" data-aos="fade-up">
+                <div class="inline-flex items-center bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-4">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    <span class="text-sm font-semibold">Lokasi Kami</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Kunjungi Kantor Endah Trans
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Lokasi strategis di pusat kota, mudah diakses dari berbagai tempat. Kunjungi kantor kami untuk konsultasi dan pemesanan paket wisata.
+                </p>
+            </div>
+
+            <!-- Maps Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Maps Embed -->
+                <div class="lg:col-span-2" data-aos="fade-right">
+                    <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-primary-100 h-96 lg:h-96">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.200488506536!2d110.750231!3d-6.7453843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70ddc096dc10ad%3A0xef6083aef28b357b!2sPo.Endah%20Trans%20Jepara!5e0!3m2!1sid!2sid!4v1769998406551!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; min-height: 384px;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                allow="geolocation"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Info Card -->
+                <div class="lg:col-span-1" data-aos="fade-left">
+                    <div class="bg-gradient-to-br from-primary-600 to-primary-700 text-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <i class="fas fa-map-location-dot mr-2"></i> Informasi Lokasi
+                        </h3>
+
+                        <!-- Address -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">ALAMAT</p>
+                            <p class="text-base font-semibold">Jl. Raya Jepara - Kudus, Rw. 03<br>Pelang, Kec. Mayong<br>Kabupaten Jepara, Jawa Tengah</p>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">TELEPON</p>
+                            <a href="tel:+6281234567890" class="text-lg font-semibold hover:text-primary-200 transition">
+                                <i class="fas fa-phone-alt mr-2"></i> +62 812-3456-7890
+                            </a>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-6 pb-6 border-b border-white/20">
+                            <p class="text-sm text-white/70 mb-2 font-semibold">EMAIL</p>
+                            <a href="mailto:info@endahtravel.com" class="text-lg font-semibold hover:text-primary-200 transition">
+                                <i class="fas fa-envelope mr-2"></i> info@endahtravel.com
+                            </a>
+                        </div>
+
+                        <!-- Operating Hours -->
+                        <div class="mb-6">
+                            <p class="text-sm text-white/70 mb-3 font-semibold">JAM OPERASIONAL</p>
+                            <div class="space-y-2 text-sm">
+                                <p><span class="font-semibold">Senin - Jumat:</span> 08:00 - 17:00 WIB</p>
+                                <p><span class="font-semibold">Sabtu:</span> 09:00 - 14:00 WIB</p>
+                                <p><span class="font-semibold">Minggu:</span> Tutup</p>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="space-y-3 mt-8">
+                            <a href="https://maps.app.goo.gl/SQ1EFkbtUonSbyha7?g_st=aw" target="_blank"
+                               class="w-full inline-flex items-center justify-center bg-white text-primary-600 py-3 rounded-xl font-bold hover:bg-gray-100 transition-all hover:shadow-lg">
+                                <i class="fas fa-directions mr-2"></i> Lihat di Google Maps
+                            </a>
+                            <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Travel,%20saya%20ingin%20bertanya%20tentang%20lokasi%20dan%20jam%20operasional" target="_blank"
+                               class="w-full inline-flex items-center justify-center bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600 transition-all hover:shadow-lg">
+                                <i class="fab fa-whatsapp mr-2"></i> Hubungi WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
 

@@ -40,10 +40,12 @@
                         <div class="ml-4 flex-1">
                             <h3 class="font-semibold text-gray-900 text-lg">{{ $booking->package->name }}</h3>
                             <p class="text-gray-500">{{ $booking->package->destination->name }}</p>
-                            <div class="flex items-center mt-2 text-sm text-gray-600">
+                            <div class="flex items-center flex-wrap gap-3 mt-2 text-sm text-gray-600">
                                 <span><i class="fas fa-calendar mr-1"></i> {{ $booking->booking_date->format('d F Y') }}</span>
-                                <span class="mx-3">•</span>
-                                <span><i class="fas fa-users mr-1"></i> {{ $booking->number_of_persons }} Orang</span>
+                                <span class="text-gray-300">|</span>
+                                <span><i class="fas fa-clock mr-1"></i> {{ $booking->departure_time->format('H:i') ?? '-' }} WIB</span>
+                                <span class="text-gray-300">|</span>
+                                <span><i class="fas fa-bus mr-1"></i> {{ $booking->number_of_buses }} Bus ({{ $booking->number_of_buses * ($booking->package->capacity ?? 35) }} Penumpang)</span>
                             </div>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
                             <h4 class="font-semibold text-gray-900 mb-3">Rincian Biaya</h4>
                             <div class="space-y-2 text-sm">
                                 <div class="flex justify-between">
-                                    <span class="text-gray-500">Harga x {{ $booking->number_of_persons }} orang</span>
+                                    <span class="text-gray-500">Harga x {{ $booking->number_of_buses }} bus</span>
                                     <span>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="border-t pt-2 mt-2">

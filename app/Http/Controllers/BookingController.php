@@ -26,25 +26,28 @@ class BookingController extends Controller
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:20',
             'customer_address' => 'nullable|string|max:500',
-            'number_of_persons' => 'required|integer|min:1',
+            'number_of_buses' => 'required|integer|min:1|max:10',
             'booking_date' => 'required|date|after_or_equal:today',
+            'departure_time' => 'required|date_format:H:i',
             'special_requests' => 'nullable|string|max:1000',
         ]);
 
         $package = Package::findOrFail($validated['package_id']);
 
-        // Check min/max persons
-        if ($validated['number_of_persons'] < $package->min_person) {
-            return back()->withErrors(['number_of_persons' => 'Jumlah penumpang minimal ' . $package->min_person . ' orang.'])->withInput();
+        // Check buses count
+        if ($validated['number_of_buses'] < 1) {
+            return back()->withErrors(['number_of_buses' => 'Jumlah bus minimal 1.'])->withInput();
         }
         
-        if ($validated['number_of_persons'] > $package->max_person) {
-            return back()->withErrors(['number_of_persons' => 'Jumlah penumpang maksimal ' . $package->max_person . ' orang.'])->withInput();
+        if ($validated['number_of_buses'] > 10) {
+            return back()->withErrors(['number_of_buses' => 'Jumlah bus maksimal 10.'])->withInput();
         }
 
-        // Calculate total price
-        $pricePerPerson = $package->final_price;
-        $totalPrice = $pricePerPerson * $validated['number_of_persons'];
+        // Calculate total price (price per bus × number of buses × duration days)
+        // Duration days = jumlah perjalanan malam yang dibutuhkan
+        $pricePerBus = $package->final_price;
+        $durationMultiplier = $package->duration_days ?? 1;
+        $totalPrice = $pricePerBus * $validated['number_of_buses'] * $durationMultiplier;
 
         $booking = Booking::create([
             'booking_code' => Booking::generateBookingCode(),
@@ -53,8 +56,9 @@ class BookingController extends Controller
             'customer_email' => $validated['customer_email'],
             'customer_phone' => $validated['customer_phone'],
             'customer_address' => $validated['customer_address'],
-            'number_of_persons' => $validated['number_of_persons'],
+            'number_of_buses' => $validated['number_of_buses'],
             'booking_date' => $validated['booking_date'],
+            'departure_time' => $validated['departure_time'],
             'total_price' => $totalPrice,
             'special_requests' => $validated['special_requests'],
             'status' => 'pending',

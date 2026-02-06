@@ -55,4 +55,24 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', compact('stats', 'recentBookings', 'revenueData', 'bookingStats'));
     }
+
+    /**
+     * Get updated revenue data (for AJAX real-time update)
+     */
+    public function getRevenueUpdate()
+    {
+        $totalRevenue = Booking::where('payment_status', 'paid')->sum('total_price');
+        $totalBookings = Booking::count();
+        $pendingBookings = Booking::where('status', 'pending')->count();
+        $activePackages = Package::active()->count();
+
+        return response()->json([
+            'total_revenue' => $totalRevenue,
+            'total_revenue_formatted' => 'Rp ' . number_format($totalRevenue / 1000000, 1) . 'Jt',
+            'total_bookings' => $totalBookings,
+            'pending_bookings' => $pendingBookings,
+            'active_packages' => $activePackages,
+            'updated_at' => now()->format('H:i:s'),
+        ]);
+    }
 }
