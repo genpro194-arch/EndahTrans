@@ -52,6 +52,19 @@ class Package extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function packageFacilities()
+    {
+        return $this->hasMany(PackageBusFacility::class);
+    }
+
+    public function busFacilities()
+    {
+        return $this->belongsToMany(BusFacility::class, 'package_bus_facilities', 'package_id', 'bus_facility_id')
+            ->withPivot('price', 'discount_price')
+            ->withTimestamps()
+            ->orderBy('display_order');
+    }
+
     public function getImageUrlAttribute()
     {
         if ($this->image) {

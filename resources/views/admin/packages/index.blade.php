@@ -159,6 +159,11 @@
                             <i class="fas fa-star"></i>
                         </button>
                     </form>
+                    <a href="{{ route('admin.packages.edit-facilities', $package) }}" 
+                       class="w-10 h-10 flex items-center justify-center text-amber-600 hover:text-white bg-amber-50 hover:bg-amber-500 rounded-xl transition"
+                       title="Edit Fasilitas">
+                        <i class="fas fa-cog"></i>
+                    </a>
                     <a href="{{ route('admin.packages.edit', $package) }}" 
                        class="flex-1 py-2.5 text-center text-primary-600 hover:text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-xl transition text-sm font-semibold">
                         <i class="fas fa-edit mr-1"></i> Edit

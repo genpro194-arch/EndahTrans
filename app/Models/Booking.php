@@ -12,6 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'booking_code',
         'package_id',
+        'bus_facility_id',
         'customer_name',
         'customer_email',
         'customer_phone',
@@ -39,6 +40,11 @@ class Booking extends Model
     public function package()
     {
         return $this->belongsTo(Package::class);
+    }
+
+    public function busFacility()
+    {
+        return $this->belongsTo(BusFacility::class);
     }
 
     public static function generateBookingCode()

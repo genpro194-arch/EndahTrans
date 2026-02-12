@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Destination;
+use App\Models\BusFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,8 @@ class PackageController extends Controller
     public function create()
     {
         $destinations = Destination::where('is_active', true)->get();
-        return view('admin.packages.create', compact('destinations'));
+        $busFacilities = BusFacility::where('is_active', true)->orderBy('display_order')->get();
+        return view('admin.packages.create', compact('destinations', 'busFacilities'));
     }
 
     public function store(Request $request)
@@ -59,6 +61,10 @@ class PackageController extends Controller
             'meeting_point' => 'nullable|string|max:255',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
+            'facilities' => 'nullable|array',
+            'facilities.*.bus_facility_id' => 'required|exists:bus_facilities,id',
+            'facilities.*.price' => 'required|numeric|min:0',
+            'facilities.*.discount_price' => 'nullable|numeric|min:0',
         ]);
 
         $validated['slug'] = Str::slug($validated['name']) . '-' . Str::random(5);
@@ -69,7 +75,10 @@ class PackageController extends Controller
             $validated['image'] = $request->file('image')->store('packages', 'public');
         }
 
-        Package::create($validated);
+        $package = Package::create($validated);
+
+        // Save facilities
+        $this->syncFacilities($package, $request->facilities ?? []);
 
         return redirect()->route('admin.packages.index')
             ->with('success', 'Paket berhasil ditambahkan!');
@@ -78,7 +87,8 @@ class PackageController extends Controller
     public function edit(Package $package)
     {
         $destinations = Destination::where('is_active', true)->get();
-        return view('admin.packages.edit', compact('package', 'destinations'));
+        $busFacilities = BusFacility::where('is_active', true)->orderBy('display_order')->get();
+        return view('admin.packages.edit', compact('package', 'destinations', 'busFacilities'));
     }
 
     public function update(Request $request, Package $package)
@@ -101,6 +111,10 @@ class PackageController extends Controller
             'meeting_point' => 'nullable|string|max:255',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
+            'facilities' => 'nullable|array',
+            'facilities.*.bus_facility_id' => 'required|exists:bus_facilities,id',
+            'facilities.*.price' => 'required|numeric|min:0',
+            'facilities.*.discount_price' => 'nullable|numeric|min:0',
         ]);
 
         $validated['is_featured'] = $request->has('is_featured');
@@ -115,6 +129,9 @@ class PackageController extends Controller
         }
 
         $package->update($validated);
+
+        // Update facilities
+        $this->syncFacilities($package, $request->facilities ?? []);
 
         return redirect()->route('admin.packages.index')
             ->with('success', 'Paket berhasil diperbarui!');
@@ -139,5 +156,56 @@ class PackageController extends Controller
         $status = $package->is_featured ? 'ditambahkan ke' : 'dihapus dari';
         return redirect()->route('admin.packages.index')
             ->with('success', "Paket berhasil $status rute terpopuler!");
+    }
+
+    public function editFacilities(Package $package)
+    {
+        $package->load(['packageFacilities.busFacility', 'destination']);
+        $busFacilities = BusFacility::where('is_active', true)->orderBy('display_order')->get();
+        
+        return view('admin.packages.edit-facilities', compact('package', 'busFacilities'));
+    }
+
+    public function updateFacilities(Request $request, Package $package)
+    {
+        $validated = $request->validate([
+            'facilities' => 'required|array|min:1',
+            'facilities.*.bus_facility_id' => 'required|exists:bus_facilities,id',
+            'facilities.*.price' => 'required|numeric|min:0',
+            'facilities.*.discount_price' => 'nullable|numeric|min:0',
+            'facilities.*.features' => 'nullable|string',
+        ]);
+
+        // Update facilities
+        $this->syncFacilities($package, $validated['facilities']);
+
+        return redirect()->route('admin.packages.edit', $package)
+            ->with('success', 'Fasilitas paket berhasil diperbarui!');
+    }
+
+    private function syncFacilities(Package $package, $facilities)
+    {
+        // Delete existing facilities
+        $package->packageFacilities()->delete();
+
+        // Add new facilities
+        if ($facilities) {
+            foreach ($facilities as $facility) {
+                // Parse features from comma-separated string to array
+                $features = null;
+                if (!empty($facility['features'])) {
+                    $features = array_map('trim', explode(',', $facility['features']));
+                    $features = array_filter($features); // Remove empty strings
+                    $features = array_values($features); // Re-index array
+                }
+
+                $package->packageFacilities()->create([
+                    'bus_facility_id' => $facility['bus_facility_id'],
+                    'price' => $facility['price'],
+                    'discount_price' => $facility['discount_price'] ?? null,
+                    'features' => $features ? $features : null,
+                ]);
+            }
+        }
     }
 }

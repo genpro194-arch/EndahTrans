@@ -248,7 +248,45 @@
                 <!-- Sidebar -->
                 <div class="lg:w-1/3">
                     <div class="bg-white rounded-3xl shadow-xl p-6 sticky top-24" data-aos="fade-left">
-                        <!-- Price -->
+                        <!-- Facilities Info -->
+                        @if($package->packageFacilities && $package->packageFacilities->count() > 0)
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <i class="fas fa-bus text-primary-600 mr-2"></i>
+                                Fasilitas Bus Tersedia
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                @foreach($package->packageFacilities as $facility)
+                                <div class="border-2 border-gray-200 rounded-2xl p-4">
+                                    <!-- Header -->
+                                    <h4 class="font-bold text-gray-900 mb-3">{{ $facility->busFacility->name }}</h4>
+                                    
+                                    <!-- Features -->
+                                    @php
+                                        $displayFeatures = $facility->features ?? $facility->busFacility->features;
+                                    @endphp
+                                    @if($displayFeatures)
+                                    <ul class="space-y-2">
+                                        @foreach((array) $displayFeatures as $feature)
+                                            @if($feature)
+                                            <li class="text-sm text-gray-600 flex items-center">
+                                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                                <span>{{ is_array($feature) ? implode(', ', $feature) : $feature }}</span>
+                                            </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-100 mb-6 pb-6"></div>
+                        @endif
+
+                        <!-- Price Display -->
                         <div class="text-center mb-6 pb-6 border-b border-gray-100">
                             @if($package->discount_price)
                                 <div class="inline-block bg-secondary-100 text-secondary-600 px-3 py-1 rounded-full text-sm font-semibold mb-2">
@@ -363,5 +401,6 @@
             @endif
         </div>
     </section>
+
 @endsection
 

@@ -61,6 +61,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     // Packages
     Route::resource('packages', AdminPackageController::class);
     Route::post('packages/{package}/toggle-featured', [AdminPackageController::class, 'toggleFeatured'])->name('packages.toggle-featured');
+    Route::get('packages/{package}/facilities', [AdminPackageController::class, 'editFacilities'])->name('packages.edit-facilities');
+    Route::post('packages/{package}/facilities', [AdminPackageController::class, 'updateFacilities'])->name('packages.update-facilities');
     
     // Destinations
     Route::resource('destinations', DestinationController::class);

@@ -1,0 +1,98 @@
+<?php
+$pkg_data = json_encode([
+    'buses' => 1,
+    'selectedFacility' => '1',
+    'facilities' => ["1" => 2800000, "2" => 3094000],
+    'durationDays' => 1,
+    'capacity' => 40
+], JSON_UNESCAPED_SLASHES);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Alpine.js Debug Test</h1>
+    
+    <div class="bg-white p-8 rounded-xl shadow" 
+         x-data='{
+             buses: 1,
+             selectedFacility: "1",
+             facilities: {"1": 2800000, "2": 3094000},
+             durationDays: 1,
+             capacity: 40,
+             get pricePerBus() {
+                 let price = this.facilities[this.selectedFacility];
+                 console.log("Getting price for facility:", this.selectedFacility, "Result:", price);
+                 return price ? price : 0;
+             },
+             get total() {
+                 return this.buses * this.pricePerBus * this.durationDays;
+             },
+             increase() {
+                 if (this.buses < 10) this.buses++;
+                 console.log("Buses increased to:", this.buses);
+             },
+             decrease() {
+                 if (this.buses > 1) this.buses--;
+                 console.log("Buses decreased to:", this.buses);
+             },
+             format(num) {
+                 return new Intl.NumberFormat("id-ID").format(num);
+             }
+         }'>
+        
+        <div class="space-y-6">
+            <!-- Bus Counter -->
+            <div class="border-2 border-gray-200 p-4 rounded-lg">
+                <h3 class="font-bold mb-3">Bus Counter</h3>
+                <div class="flex gap-2 items-center mb-3">
+                    <button type="button" @click="decrease()" class="px-4 py-2 bg-red-500 text-white rounded">-</button>
+                    <span class="text-3xl font-bold" x-text="buses"></span>
+                    <button type="button" @click="increase()" class="px-4 py-2 bg-green-500 text-white rounded">+</button>
+                </div>
+                <p class="text-sm text-gray-600">Click buttons to test if buses value changes</p>
+            </div>
+            
+            <!-- Facility Selection -->
+            <div class="border-2 border-gray-200 p-4 rounded-lg">
+                <h3 class="font-bold mb-3">Facility Selection</h3>
+                <div class="space-y-2 mb-3">
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="facility" value="1" 
+                               @change="selectedFacility = $el.value; console.log('Changed to:', selectedFacility)"
+                               checked
+                               class="w-4 h-4">
+                        <span>Reguler (Rp 2.800.000)</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="radio" name="facility" value="2" 
+                               @change="selectedFacility = $el.value; console.log('Changed to:', selectedFacility)"
+                               class="w-4 h-4">
+                        <span>Ekslusif (Rp 3.094.000)</span>
+                    </label>
+                </div>
+                <p class="text-sm text-gray-600">Click radios to test if facility selection works</p>
+            </div>
+            
+            <!-- Display -->
+            <div class="border-2 border-blue-200 bg-blue-50 p-4 rounded-lg">
+                <h3 class="font-bold mb-3">Values</h3>
+                <div class="space-y-2 text-sm font-mono">
+                    <p>Buses: <span x-text="buses" class="font-bold"></span></p>
+                    <p>Selected Facility: <span x-text="selectedFacility" class="font-bold"></span></p>
+                    <p>Price Per Bus: <span x-text="'Rp ' + format(pricePerBus)" class="font-bold text-green-600"></span></p>
+                    <p>Total: <span x-text="'Rp ' + format(total)" class="font-bold text-blue-600"></span></p>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">Open browser console (F12) to see logs</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

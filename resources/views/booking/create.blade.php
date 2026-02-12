@@ -67,21 +67,33 @@
         </div>
     </section>
 
-    <section class="py-8 bg-gray-50 min-h-screen" 
-        x-data="{ 
-            buses: {{ old('number_of_buses', 1) }},
-            pricePerBus: {{ $package->final_price ?? 0 }},
-            minBuses: 1,
-            maxBuses: 10,
-            capacity: {{ $package->capacity ?? 35 }},
-            busType: '{{ $package->bus_type ?? 'medium' }}',
+    <div class="py-8 bg-gray-50 min-h-screen"
+        x-data='{
+            buses: 1,
+            selectedFacility: "{{ $package->packageFacilities->first()->id ?? 1 }}",
+            facilities: @json($package->packageFacilities->mapWithKeys(function($f) { return [$f->id => (int)($f->discount_price ?? $f->price)]; })),
             durationDays: {{ $package->duration_days ?? 1 }},
-            get total() { return this.buses * this.pricePerBus * this.durationDays },
-            get totalCapacity() { return this.buses * this.capacity },
-            increase() { if (this.buses < this.maxBuses) this.buses++ },
-            decrease() { if (this.buses > this.minBuses) this.buses-- },
-            format(num) { return new Intl.NumberFormat('id-ID').format(num) }
-        }">
+            capacity: {{ $package->capacity ?? 40 }},
+            get pricePerBus() {
+                let price = this.facilities[this.selectedFacility];
+                return price ? price : 0;
+            },
+            get total() {
+                return this.buses * this.pricePerBus * this.durationDays;
+            },
+            get totalCapacity() {
+                return this.buses * this.capacity;
+            },
+            increase() {
+                if (this.buses < 10) this.buses++;
+            },
+            decrease() {
+                if (this.buses > 1) this.buses--;
+            },
+            format(num) {
+                return new Intl.NumberFormat("id-ID").format(num);
+            }
+        }'>>
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row gap-8">
                 
@@ -207,19 +219,19 @@
                                         <div class="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl p-2">
                                             <button type="button" @click="decrease()" 
                                                     class="w-12 h-12 bg-white rounded-lg shadow flex items-center justify-center text-primary-600 hover:bg-primary-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                                    :disabled="buses <= minBuses">
+                                                    :disabled="buses <= 1">
                                                 <i class="fas fa-minus text-lg"></i>
                                             </button>
                                             <div class="flex-1">
                                                 <div class="text-center">
                                                     <input type="hidden" name="number_of_buses" :value="buses">
                                                     <span class="text-3xl font-bold text-gray-900" x-text="buses"></span>
-                                                    <p class="text-xs text-gray-500">Bus <span x-text="busType === 'big' ? '40' : '35'"></span> Penumpang</p>
+                                                    <p class="text-xs text-gray-500">Bus <span x-text="capacity"></span> Penumpang</p>
                                                 </div>
                                             </div>
                                             <button type="button" @click="increase()" 
                                                     class="w-12 h-12 bg-white rounded-lg shadow flex items-center justify-center text-primary-600 hover:bg-primary-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                                    :disabled="buses >= maxBuses">
+                                                    :disabled="buses >= 10">
                                                 <i class="fas fa-plus text-lg"></i>
                                             </button>
                                         </div>
@@ -234,6 +246,94 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Facility Selection -->
+                        @if($package->packageFacilities && $package->packageFacilities->count() > 0)
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 mb-6">
+                            <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4">
+                                <h3 class="text-lg font-bold text-white flex items-center">
+                                    <i class="fas fa-bus mr-2"></i> Pilih Fasilitas Bus
+                                </h3>
+                            </div>
+                            <div class="p-6">
+                                @if ($errors->has('bus_facility_id'))
+                                <div class="bg-red-50 border border-red-200 rounded-xl p-3 mb-4">
+                                    <p class="text-red-600 text-sm"><i class="fas fa-exclamation-circle mr-1"></i> {{ $errors->first('bus_facility_id') }}</p>
+                                </div>
+                                @endif
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    @foreach($package->packageFacilities as $facility)
+                                    <div class="relative">
+                                        <input type="radio" name="bus_facility_id" id="facility_{{ $facility->id }}" 
+                                               value="{{ $facility->id }}" 
+                                               class="hidden peer"
+                                               @if($loop->first) checked @endif
+                                               @change="selectedFacility = $el.value"
+                                               @error('bus_facility_id') checked @enderror>
+                                        
+                                        <div class="border-2 border-gray-200 rounded-2xl p-5 transition-all cursor-default peer-checked:border-primary-500 peer-checked:bg-primary-50">
+                                            
+                                            <!-- Facility Name & Radio -->
+                                            <div class="flex items-start justify-between mb-4">
+                                                <div class="flex-1">
+                                                    <h4 class="font-bold text-gray-900 text-lg">{{ $facility->busFacility->name }}</h4>
+                                                    <p class="text-xs text-gray-500 mt-1"><i class="fas fa-chair mr-1"></i> Kapasitas: {{ $package->capacity ?? '40' }} orang</p>
+                                                </div>
+                                                <label for="facility_{{ $facility->id }}" 
+                                                       class="w-6 h-6 border-2 border-gray-300 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 cursor-pointer hover:border-primary-500 peer-checked:border-primary-500 peer-checked:bg-primary-500 transition-all">
+                                                    <i class="fas fa-check text-white text-xs hidden peer-checked:inline"></i>
+                                                </label>
+                                            </div>
+                                            
+                                            <!-- Features List -->
+                                            <div class="mb-4 pb-4 border-b border-gray-100">
+                                                @php
+                                                    $displayFeatures = $facility->features ?? $facility->busFacility->features;
+                                                @endphp
+                                                @if($displayFeatures)
+                                                <ul class="space-y-2">
+                                                    @foreach((array) $displayFeatures as $feature)
+                                                        @if($feature)
+                                                        <li class="text-xs text-gray-600 flex items-center">
+                                                            <i class="fas fa-check-circle text-green-500 mr-2 text-xs"></i>
+                                                            <span>{{ is_array($feature) ? implode(', ', $feature) : $feature }}</span>
+                                                        </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </div>
+                                            
+                                            <!-- Price Display -->
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    @if($facility->discount_price)
+                                                        <p class="text-xs text-gray-500 line-through mb-1">Rp {{ number_format($facility->price, 0, ',', '.') }}</p>
+                                                        <p class="text-2xl font-bold text-primary-600">Rp {{ number_format($facility->discount_price, 0, ',', '.') }}</p>
+                                                    @else
+                                                        <p class="text-2xl font-bold text-primary-600">Rp {{ number_format($facility->price, 0, ',', '.') }}</p>
+                                                    @endif
+                                                    <p class="text-xs text-gray-500 mt-1">per orang</p>
+                                                </div>
+                                                @if($facility->discount_price)
+                                                <div class="text-right">
+                                                    @php
+                                                        $discountPercent = round((($facility->price - $facility->discount_price) / $facility->price) * 100);
+                                                    @endphp
+                                                    <span class="text-xs font-bold text-secondary-600 bg-secondary-100 px-3 py-1 rounded-full">
+                                                        Hemat {{ $discountPercent }}%
+                                                    </span>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @endif
 
                         <!-- Contact Person Card -->
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 mb-6">
@@ -344,12 +444,7 @@
                             <div class="space-y-4 mb-6">
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Harga Per Bus</span>
-                                    <div class="text-right">
-                                        @if($package->discount_price)
-                                        <span class="text-sm text-gray-400 line-through block">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
-                                        @endif
-                                        <span class="font-semibold text-gray-900">Rp {{ number_format($package->final_price, 0, ',', '.') }}</span>
-                                    </div>
+                                    <span class="font-semibold text-gray-900" x-text="'Rp ' + format(pricePerBus)"></span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-gray-600">Jumlah Bus</span>
@@ -433,5 +528,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection

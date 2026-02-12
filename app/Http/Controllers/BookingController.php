@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Package;
+use App\Models\PackageBusFacility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -12,6 +13,7 @@ class BookingController extends Controller
     public function create($packageSlug)
     {
         $package = Package::where('slug', $packageSlug)
+            ->with('packageFacilities.busFacility')
             ->active()
             ->firstOrFail();
 
@@ -22,6 +24,7 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'package_id' => 'required|exists:packages,id',
+            'bus_facility_id' => 'nullable|exists:package_bus_facilities,id',
             'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:20',
@@ -43,15 +46,24 @@ class BookingController extends Controller
             return back()->withErrors(['number_of_buses' => 'Jumlah bus maksimal 10.'])->withInput();
         }
 
-        // Calculate total price (price per bus × number of buses × duration days)
-        // Duration days = jumlah perjalanan malam yang dibutuhkan
-        $pricePerBus = $package->final_price;
+        // Calculate total price based on selected facility or package default
         $durationMultiplier = $package->duration_days ?? 1;
+        
+        if ($validated['bus_facility_id']) {
+            // Get price from selected facility
+            $facility = PackageBusFacility::findOrFail($validated['bus_facility_id']);
+            $pricePerBus = $facility->final_price;
+        } else {
+            // Fallback to package default price if no facility selected
+            $pricePerBus = $package->final_price;
+        }
+        
         $totalPrice = $pricePerBus * $validated['number_of_buses'] * $durationMultiplier;
 
         $booking = Booking::create([
             'booking_code' => Booking::generateBookingCode(),
             'package_id' => $validated['package_id'],
+            'bus_facility_id' => $validated['bus_facility_id'] ?? null,
             'customer_name' => $validated['customer_name'],
             'customer_email' => $validated['customer_email'],
             'customer_phone' => $validated['customer_phone'],

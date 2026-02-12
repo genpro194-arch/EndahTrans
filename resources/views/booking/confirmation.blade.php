@@ -46,6 +46,10 @@
                                 <span><i class="fas fa-clock mr-1"></i> {{ $booking->departure_time->format('H:i') ?? '-' }} WIB</span>
                                 <span class="text-gray-300">|</span>
                                 <span><i class="fas fa-bus mr-1"></i> {{ $booking->number_of_buses }} Bus ({{ $booking->number_of_buses * ($booking->package->capacity ?? 35) }} Penumpang)</span>
+                                @if($booking->busFacility)
+                                <span class="text-gray-300">|</span>
+                                <span><i class="fas fa-check-circle text-green-500 mr-1"></i> {{ $booking->busFacility->name }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ class PackageController extends Controller
 
     public function show($slug)
     {
-        $package = Package::with('destination')
+        $package = Package::with(['destination', 'packageFacilities.busFacility'])
             ->where('slug', $slug)
             ->active()
             ->firstOrFail();
@@ -87,11 +87,11 @@ class PackageController extends Controller
     }
 
     /**
-     * API: Get all packages with optional filters
+     * API: Get all packages with optional filters and facilities
      */
     public function apiIndex(Request $request)
     {
-        $query = Package::with('destination')->active();
+        $query = Package::with(['destination', 'packageFacilities.busFacility'])->active();
 
         if ($request->has('bus_type')) {
             $query->where('bus_type', $request->bus_type);
@@ -107,12 +107,12 @@ class PackageController extends Controller
     }
 
     /**
-     * API: Get packages by bus type
+     * API: Get packages by bus type with facilities
      */
     public function apiByBusType($busType)
     {
         $packages = Package::where('bus_type', $busType)
-            ->with('destination')
+            ->with(['destination', 'packageFacilities.busFacility'])
             ->active()
             ->get();
 
@@ -134,14 +134,14 @@ class PackageController extends Controller
     }
 
     /**
-     * API: Get pricing comparison for a destination
+     * API: Get pricing comparison for a destination with facilities
      */
     public function apiComparison($destinationSlug)
     {
         $packages = Package::whereHas('destination', function ($q) use ($destinationSlug) {
             $q->where('slug', $destinationSlug);
         })
-            ->with('destination')
+            ->with(['destination', 'packageFacilities.busFacility'])
             ->active()
             ->get();
 
@@ -154,12 +154,23 @@ class PackageController extends Controller
 
         $comparison = [];
         foreach ($packages as $package) {
+            $facilities = $package->packageFacilities->map(function ($pf) {
+                return [
+                    'id' => $pf->id,
+                    'facility' => $pf->busFacility->name,
+                    'features' => $pf->busFacility->features,
+                    'price' => (float) $pf->price,
+                    'discount_price' => $pf->discount_price ? (float) $pf->discount_price : null,
+                ];
+            });
+
             $comparison[$package->bus_type] = [
                 'name' => $package->name,
                 'capacity' => $package->capacity,
-                'price' => $package->price,
+                'price' => (float) $package->price,
                 'slug' => $package->slug,
                 'id' => $package->id,
+                'facilities' => $facilities,
             ];
         }
 
@@ -172,13 +183,13 @@ class PackageController extends Controller
     }
 
     /**
-     * API: Get Featured Routes (Rute Populer)
+     * API: Get Featured Routes (Rute Populer) with facilities
      */
     public function apiFeaturedRoutes()
     {
         $featuredDestinations = Destination::where('is_featured', true)
             ->with(['packages' => function ($q) {
-                $q->where('is_active', true);
+                $q->where('is_active', true)->with('packageFacilities.busFacility');
             }])
             ->active()
             ->get();
@@ -202,14 +213,24 @@ class PackageController extends Controller
                 'big_bus' => $bigBus ? [
                     'name' => $bigBus->name,
                     'capacity' => $bigBus->capacity,
-                    'price' => $bigBus->price,
+                    'price' => (float) $bigBus->price,
                     'slug' => $bigBus->slug,
+                    'facilities' => $bigBus->packageFacilities->map(fn($pf) => [
+                        'name' => $pf->busFacility->name,
+                        'price' => (float) $pf->price,
+                        'discount_price' => $pf->discount_price ? (float) $pf->discount_price : null,
+                    ]),
                 ] : null,
                 'medium_bus' => $mediumBus ? [
                     'name' => $mediumBus->name,
                     'capacity' => $mediumBus->capacity,
-                    'price' => $mediumBus->price,
+                    'price' => (float) $mediumBus->price,
                     'slug' => $mediumBus->slug,
+                    'facilities' => $mediumBus->packageFacilities->map(fn($pf) => [
+                        'name' => $pf->busFacility->name,
+                        'price' => (float) $pf->price,
+                        'discount_price' => $pf->discount_price ? (float) $pf->discount_price : null,
+                    ]),
                 ] : null,
             ];
         }
@@ -223,13 +244,15 @@ class PackageController extends Controller
     }
 
     /**
-     * API: Get Cheapest Routes (Harga Terbaik)
+     * API: Get Cheapest Routes (Harga Terbaik) with facilities
      */
     public function apiCheapestRoutes()
     {
         // Get packages grouped by destination and bus type, ordered by price
         $destinations = Destination::with(['packages' => function ($q) {
-            $q->where('is_active', true)->orderBy('price', 'asc');
+            $q->where('is_active', true)
+                ->with('packageFacilities.busFacility')
+                ->orderBy('price', 'asc');
         }])
             ->active()
             ->get();
@@ -252,16 +275,26 @@ class PackageController extends Controller
                 $routes[] = [
                     'destination' => $destination->name,
                     'slug' => $destination->slug,
-                    'cheapest_price' => $cheapestPrice,
+                    'cheapest_price' => (float) $cheapestPrice,
                     'big_bus' => $bigBus ? [
-                        'price' => $bigBus->price,
+                        'price' => (float) $bigBus->price,
                         'capacity' => $bigBus->capacity,
                         'slug' => $bigBus->slug,
+                        'facilities' => $bigBus->packageFacilities->map(fn($pf) => [
+                            'name' => $pf->busFacility->name,
+                            'price' => (float) $pf->price,
+                            'discount_price' => $pf->discount_price ? (float) $pf->discount_price : null,
+                        ]),
                     ] : null,
                     'medium_bus' => $mediumBus ? [
-                        'price' => $mediumBus->price,
+                        'price' => (float) $mediumBus->price,
                         'capacity' => $mediumBus->capacity,
                         'slug' => $mediumBus->slug,
+                        'facilities' => $mediumBus->packageFacilities->map(fn($pf) => [
+                            'name' => $pf->busFacility->name,
+                            'price' => (float) $pf->price,
+                            'discount_price' => $pf->discount_price ? (float) $pf->discount_price : null,
+                        ]),
                     ] : null,
                 ];
             }

@@ -180,6 +180,21 @@
                 </div>
             </div>
 
+            <!-- Facilities Management -->
+            @if($package->exists)
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl shadow-sm border border-amber-200 p-8 mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900 mb-2">Kelola Fasilitas</h2>
+                            <p class="text-sm text-slate-600">Atur harga dan fasilitas untuk setiap paket</p>
+                        </div>
+                        <a href="{{ route('admin.packages.edit-facilities', $package) }}" class="inline-flex items-center px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md">
+                            <i class="fas fa-cog mr-2"></i> Edit Fasilitas
+                        </a>
+                    </div>
+                </div>
+            @endif
+
             <!-- Action Buttons -->
             <div class="flex justify-end gap-4">
                 <a href="{{ route('admin.packages.index') }}" class="px-6 py-3 border border-slate-300 rounded-lg text-slate-900 font-medium hover:bg-slate-50 transition">
