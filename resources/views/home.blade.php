@@ -69,11 +69,11 @@
                         <span class="text-sm font-medium">10K+ Travelers</span>
                     </div>
                     <div class="flex items-center gap-2 text-white/80">
-                        <div class="flex gap-0.5">@for($i=0;$i<5;$i++)<i class="fas fa-star text-yellow-400 text-sm"></i>@endfor</div>
+                        <div class="flex gap-0.5">@for($i=0;$i<5;$i++)<i class="fas fa-star text-secondary-300 text-sm"></i>@endfor</div>
                         <span class="text-sm font-medium">Rating 4.9</span>
                     </div>
                     <div class="flex items-center gap-2 text-white/80">
-                        <i class="fas fa-shield-alt text-green-400"></i>
+                        <i class="fas fa-shield-alt text-secondary-400"></i>
                         <span class="text-sm font-medium">Asuransi Penumpang</span>
                     </div>
                 </div>
@@ -147,8 +147,8 @@
             @foreach([
                 ['icon'=>'fas fa-phone-alt','color'=>'from-primary-500 to-primary-600','title'=>'Pesan Sekarang','desc'=>'Reservasi mudah & cepat'],
                 ['icon'=>'fas fa-info-circle','color'=>'from-secondary-500 to-secondary-600','title'=>'Informasi Lengkap','desc'=>'Detail armada & fasilitas'],
-                ['icon'=>'fas fa-magic','color'=>'from-purple-500 to-purple-600','title'=>'Praktis & Mudah','desc'=>'Cukup hubungi kami'],
-                ['icon'=>'fas fa-headset','color'=>'from-green-500 to-green-600','title'=>'Support 24/7','desc'=>'Siap bantu kapan saja'],
+                ['icon'=>'fas fa-magic','color'=>'from-primary-600 to-primary-700','title'=>'Praktis & Mudah','desc'=>'Cukup hubungi kami'],
+                ['icon'=>'fas fa-headset','color'=>'from-secondary-600 to-secondary-700','title'=>'Support 24/7','desc'=>'Siap bantu kapan saja'],
             ] as $f)
             <div class="bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up">
                 <div class="w-12 h-12 bg-gradient-to-br {{ $f['color'] }} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
@@ -449,10 +449,10 @@
             @foreach([
                 ['ico'=>'fas fa-calendar-check','c'=>'from-primary-500 to-primary-700','t'=>'Pesan Jauh Hari','d'=>'Reservasi minimal 1-2 minggu sebelum keberangkatan untuk ketersediaan armada & harga terbaik.'],
                 ['ico'=>'fas fa-map-marked-alt','c'=>'from-secondary-500 to-secondary-700','t'=>'Riset Destinasi','d'=>'Pelajari cuaca, tempat menarik, budaya lokal, dan waktu terbaik sebelum berangkat.'],
-                ['ico'=>'fas fa-suitcase-rolling','c'=>'from-blue-500 to-blue-700','t'=>'Bawa Secukupnya','d'=>'Bawa barang sesuai kebutuhan. Perhatikan kapasitas bagasi dan sertakan dokumen penting.'],
-                ['ico'=>'fas fa-users','c'=>'from-green-500 to-green-700','t'=>'Koordinasi Tim','d'=>'Sinkronkan jadwal dan rencana dengan semua anggota rombongan agar perjalanan tepat waktu.'],
-                ['ico'=>'fas fa-first-aid','c'=>'from-red-500 to-red-700','t'=>'Siapkan P3K','d'=>'Bawa obat-obatan pribadi dan P3K. Konsultasikan kesehatan sebelum perjalanan jauh.'],
-                ['ico'=>'fas fa-camera','c'=>'from-purple-500 to-purple-700','t'=>'Abadikan Momen','d'=>'Isi daya kamera dan ponsel. Siapkan memori cukup untuk semua momen berharga perjalanan.'],
+                ['ico'=>'fas fa-suitcase-rolling','c'=>'from-primary-500 to-primary-700','t'=>'Bawa Secukupnya','d'=>'Bawa barang sesuai kebutuhan. Perhatikan kapasitas bagasi dan sertakan dokumen penting.'],
+                ['ico'=>'fas fa-users','c'=>'from-secondary-500 to-secondary-700','t'=>'Koordinasi Tim','d'=>'Sinkronkan jadwal dan rencana dengan semua anggota rombongan agar perjalanan tepat waktu.'],
+                ['ico'=>'fas fa-first-aid','c'=>'from-primary-600 to-primary-800','t'=>'Siapkan P3K','d'=>'Bawa obat-obatan pribadi dan P3K. Konsultasikan kesehatan sebelum perjalanan jauh.'],
+                ['ico'=>'fas fa-camera','c'=>'from-secondary-600 to-secondary-800','t'=>'Abadikan Momen','d'=>'Isi daya kamera dan ponsel. Siapkan memori cukup untuk semua momen berharga perjalanan.'],
             ] as $i => $tip)
             <div class="group flex gap-5 p-6 rounded-3xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
                 <div class="w-14 h-14 bg-gradient-to-br {{ $tip['c'] }} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform">
@@ -493,7 +493,7 @@
                 <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-full -translate-y-8 translate-x-8"></div>
                 <div class="flex items-center mb-5 gap-1">
                     @for($s=1;$s<=5;$s++)
-                    <i class="fas fa-star {{ $s<=$t->rating ? 'text-yellow-400' : 'text-gray-200' }} text-lg"></i>
+                    <i class="fas fa-star {{ $s<=$t->rating ? 'text-secondary-400' : 'text-gray-200' }} text-lg"></i>
                     @endfor
                     <span class="ml-2 text-sm text-gray-400 font-medium">({{ $t->rating }}.0)</span>
                 </div>
@@ -505,8 +505,8 @@
                         <div class="font-extrabold text-gray-900">{{ $t->name }}</div>
                         @if($t->location) <div class="text-xs text-gray-500 flex items-center gap-1"><i class="fas fa-map-marker-alt text-primary-500"></i> {{ $t->location }}</div> @endif
                     </div>
-                    <div class="ml-auto w-9 h-9 bg-green-100 rounded-full flex items-center justify-center">
-                        <i class="fas fa-check text-green-600 text-sm"></i>
+                    <div class="ml-auto w-9 h-9 bg-primary-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check text-primary-600 text-sm"></i>
                     </div>
                 </div>
             </div>
@@ -517,7 +517,7 @@
             <p class="text-gray-500 mb-4 text-lg">Pernah berwisata bersama kami?</p>
             <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Trans,%20saya%20ingin%20memberikan%20ulasan" target="_blank"
                class="inline-flex items-center btn-gradient text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all text-lg">
-                <i class="fas fa-star mr-3 text-yellow-300"></i> Bagikan Ulasan Anda
+                <i class="fas fa-star mr-3 text-secondary-200"></i> Bagikan Ulasan Anda
             </a>
         </div>
     </div>
@@ -548,8 +548,8 @@
                         <img src="{{ $tm->image ? asset('storage/'.$tm->image) : 'https://ui-avatars.com/api/?name='.urlencode($tm->name).'&background=ef4444&color=fff&bold=true&size=144' }}" alt="{{ $tm->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-primary-900/70 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-3">
                             <div class="flex gap-2">
-                                @if($tm->instagram_url)<a href="{{ $tm->instagram_url }}" target="_blank" class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center"><i class="fab fa-instagram text-white text-xs"></i></a>@endif
-                                @if($tm->linkedin_url)<a href="{{ $tm->linkedin_url }}" target="_blank" class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center"><i class="fab fa-linkedin text-white text-xs"></i></a>@endif
+                                @if($tm->instagram_url)<a href="{{ $tm->instagram_url }}" target="_blank" class="w-8 h-8 bg-secondary-600 rounded-full flex items-center justify-center"><i class="fab fa-instagram text-white text-xs"></i></a>@endif
+                                @if($tm->linkedin_url)<a href="{{ $tm->linkedin_url }}" target="_blank" class="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center"><i class="fab fa-linkedin text-white text-xs"></i></a>@endif
                             </div>
                         </div>
                     </div>
@@ -610,10 +610,10 @@
 
             <div class="grid grid-cols-2 gap-5" data-aos="fade-left">
                 @foreach([
-                    ['icon'=>'fas fa-percentage','c'=>'from-green-400 to-green-600','t'=>'Komisi Menarik','d'=>'Hingga 10%\nper booking'],
-                    ['icon'=>'fas fa-graduation-cap','c'=>'from-blue-400 to-blue-600','t'=>'Training Gratis','d'=>'Pelatihan\nlengkap'],
-                    ['icon'=>'fas fa-headset','c'=>'from-primary-400 to-primary-600','t'=>'Support 24/7','d'=>'Siap bantu\nkapan saja'],
-                    ['icon'=>'fas fa-trophy','c'=>'from-yellow-400 to-yellow-600','t'=>'Bonus Reward','d'=>'Hadiah\nbulanan'],
+                    ['icon'=>'fas fa-percentage','c'=>'from-secondary-400 to-secondary-600','t'=>'Komisi Menarik','d'=>'Hingga 10%\nper booking'],
+                    ['icon'=>'fas fa-graduation-cap','c'=>'from-primary-400 to-primary-600','t'=>'Training Gratis','d'=>'Pelatihan\nlengkap'],
+                    ['icon'=>'fas fa-headset','c'=>'from-primary-500 to-primary-700','t'=>'Support 24/7','d'=>'Siap bantu\nkapan saja'],
+                    ['icon'=>'fas fa-trophy','c'=>'from-secondary-500 to-secondary-700','t'=>'Bonus Reward','d'=>'Hadiah\nbulanan'],
                 ] as $c)
                 <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-3xl p-6 text-center hover:bg-white/20 transition-all hover:-translate-y-1">
                     <div class="w-14 h-14 bg-gradient-to-br {{ $c['c'] }} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
