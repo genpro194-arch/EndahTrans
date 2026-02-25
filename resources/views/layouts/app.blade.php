@@ -287,18 +287,24 @@
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-8">
+                <div class="hidden lg:flex items-center space-x-6">
                     <a href="{{ route('home') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('home') ? 'active text-primary-600' : '' }}">
                         Beranda
-                    </a>
-                    <a href="{{ route('packages.index') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('packages.*') ? 'active text-primary-600' : '' }}">
-                        Paket Wisata
                     </a>
                     <a href="{{ route('about') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'active text-primary-600' : '' }}">
                         Tentang Kami
                     </a>
+                    <a href="{{ route('artikel') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('artikel') ? 'active text-primary-600' : '' }}">
+                        Artikel
+                    </a>
                     <a href="{{ route('contact') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
                         Kontak
+                    </a>
+                    <a href="{{ route('armada') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'active text-primary-600' : '' }}">
+                        Armada
+                    </a>
+                    <a href="{{ route('agen') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('agen') ? 'active text-primary-600' : '' }}">
+                        Agen
                     </a>
                     <a href="{{ route('booking.check-status') }}" class="btn-gradient text-white px-6 py-2.5 rounded-xl font-medium shadow-lg">
                         <i class="fas fa-search mr-2"></i>Cek Booking
@@ -329,14 +335,20 @@
                 <a href="{{ route('home') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('home') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-home w-6"></i> Beranda
                 </a>
-                <a href="{{ route('packages.index') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('packages.*') ? 'bg-primary-50 text-primary-600' : '' }}">
-                    <i class="fas fa-suitcase w-6"></i> Paket Wisata
-                </a>
                 <a href="{{ route('about') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-info-circle w-6"></i> Tentang Kami
                 </a>
+                <a href="{{ route('artikel') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('artikel') ? 'bg-primary-50 text-primary-600' : '' }}">
+                    <i class="fas fa-newspaper w-6"></i> Artikel
+                </a>
                 <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-envelope w-6"></i> Kontak
+                </a>
+                <a href="{{ route('armada') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'bg-primary-50 text-primary-600' : '' }}">
+                    <i class="fas fa-bus w-6"></i> Armada
+                </a>
+                <a href="{{ route('agen') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('agen') ? 'bg-primary-50 text-primary-600' : '' }}">
+                    <i class="fas fa-user-tie w-6"></i> Agen
                 </a>
                 <a href="{{ route('booking.check-status') }}" class="flex items-center justify-center btn-gradient text-white px-4 py-3 rounded-xl font-medium mt-2">
                     <i class="fas fa-search mr-2"></i> Cek Booking
@@ -441,9 +453,11 @@
                     </h4>
                     <ul class="space-y-3">
                         <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Beranda</a></li>
-                        <li><a href="{{ route('packages.index') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Paket Wisata</a></li>
                         <li><a href="{{ route('about') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Tentang Kami</a></li>
+                        <li><a href="{{ route('artikel') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Artikel</a></li>
                         <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Kontak</a></li>
+                        <li><a href="{{ route('armada') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Armada</a></li>
+                        <li><a href="{{ route('agen') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Agen</a></li>
                         <li><a href="{{ route('booking.check-status') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Cek Booking</a></li>
                     </ul>
                 </div>
@@ -531,7 +545,36 @@
             offset: 50
         });
     </script>
-    
+
+    <!-- Animated Counter Script -->
+    <script>
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-target')) || 0;
+            const duration = 2000;
+            const step = Math.ceil(target / (duration / 16));
+            let current = 0;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current + '+';
+            }, 16);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    animateCounter(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(el => observer.observe(el));
+    </script>
+
     @stack('scripts')
 </body>
 </html>

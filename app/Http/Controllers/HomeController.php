@@ -69,4 +69,19 @@ class HomeController extends Controller
 
         return view('featured-packages', compact('popularPackages', 'stats'));
     }
+
+    public function armada()
+    {
+        return view('armada');
+    }
+
+    public function agen()
+    {
+        return view('agen');
+    }
+
+    public function artikel()
+    {
+        return view('artikel');
+    }
 }

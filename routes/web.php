@@ -24,6 +24,9 @@ Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/paket-unggulan', [HomeController::class, 'popularRoutes'])->name('popular-routes');
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/armada', [HomeController::class, 'armada'])->name('armada');
+Route::get('/agen', [HomeController::class, 'agen'])->name('agen');
+Route::get('/artikel', [HomeController::class, 'artikel'])->name('artikel');
 
 // Packages
 Route::get('/paket', [PackageController::class, 'index'])->name('packages.index');

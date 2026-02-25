@@ -156,28 +156,28 @@
                     <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary-500/30">
                         <i class="fas fa-map-marked-alt text-white text-2xl"></i>
                     </div>
-                    <div class="text-4xl font-extrabold gradient-text mb-1">{{ $stats['destinations'] }}+</div>
+                    <div class="text-4xl font-extrabold gradient-text mb-1 counter" data-target="{{ $stats['destinations'] }}">0</div>
                     <div class="text-gray-600 font-medium">Destinasi</div>
                 </div>
                 <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-secondary-500/30">
                         <i class="fas fa-suitcase-rolling text-white text-2xl"></i>
                     </div>
-                    <div class="text-4xl font-extrabold gradient-text mb-1">{{ $stats['packages'] }}+</div>
+                    <div class="text-4xl font-extrabold gradient-text mb-1 counter" data-target="{{ $stats['packages'] }}">0</div>
                     <div class="text-gray-600 font-medium">Paket Wisata</div>
                 </div>
                 <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary-500/30">
                         <i class="fas fa-smile-beam text-white text-2xl"></i>
                     </div>
-                    <div class="text-4xl font-extrabold gradient-text mb-1">{{ $stats['customers'] }}+</div>
+                    <div class="text-4xl font-extrabold gradient-text mb-1 counter" data-target="{{ max($stats['customers'], 100) }}">0</div>
                     <div class="text-gray-600 font-medium">Pelanggan Puas</div>
                 </div>
                 <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-primary-500/30">
                         <i class="fas fa-award text-white text-2xl"></i>
                     </div>
-                    <div class="text-4xl font-extrabold gradient-text mb-1">10+</div>
+                    <div class="text-4xl font-extrabold gradient-text mb-1 counter" data-target="10">0</div>
                     <div class="text-gray-600 font-medium">Tahun Pengalaman</div>
                 </div>
             </div>
@@ -237,6 +237,141 @@
                     <h3 class="text-xl font-bold text-gray-900 mb-3">Pengalaman Terbaik</h3>
                     <p class="text-gray-600 leading-relaxed">Itinerary menarik dan destinasi pilihan untuk kenangan indah</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Siapa Kami Section -->
+    <section class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-80 h-80 bg-primary-500/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative" data-aos="fade-right">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80" alt="Armada Endah Trans" class="w-full h-96 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary-900/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="text-lg font-bold">Endah Trans Jepara</p>
+                            <p class="text-sm text-white/80">Melayani Sejak 2014</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-gradient-to-br from-primary-500 to-secondary-500 text-white rounded-2xl p-5 shadow-xl z-10">
+                        <div class="text-3xl font-extrabold leading-none">10+</div>
+                        <div class="text-xs font-semibold mt-1">Tahun Beroperasi</div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl z-10 border border-primary-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">Penumpang Puas</div>
+                                <div class="text-lg font-bold text-gray-900">10.000+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        <i class="fas fa-users mr-1"></i> SIAPA KAMI
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                        Mengenal <span class="gradient-text">Endah Trans</span><br>Lebih Dekat
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Endah Trans adalah perusahaan transportasi wisata yang telah berpengalaman lebih dari 10 tahun melayani perjalanan wisata di seluruh Indonesia. Berbasis di Jepara, Jawa Tengah, kami hadir untuk memberikan layanan transportasi yang aman, nyaman, dan terpercaya.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-8">
+                        Dengan armada bus modern yang terawat dan tim driver profesional bersertifikat, kami berkomitmen untuk menjadikan setiap perjalanan Anda menjadi pengalaman yang tak terlupakan.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm border border-primary-100">
+                            <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-bus text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">Armada Modern</div>
+                                <div class="text-sm text-gray-500">Bus AC terbaru</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm border border-secondary-100">
+                            <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-id-card text-secondary-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">Driver Bersertifikat</div>
+                                <div class="text-sm text-gray-500">Profesional & ramah</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm border border-primary-100">
+                            <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-shield-alt text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">Asuransi Penuh</div>
+                                <div class="text-sm text-gray-500">Perjalanan terlindungi</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-white rounded-2xl shadow-sm border border-secondary-100">
+                            <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-headset text-secondary-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">Layanan 24/7</div>
+                                <div class="text-sm text-gray-500">Siap kapan saja</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ route('about') }}" class="inline-flex items-center btn-gradient text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                        Selengkapnya Tentang Kami <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fasilitas Kami Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-block bg-secondary-100 text-secondary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-star mr-1"></i> FASILITAS KAMI
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    Fasilitas <span class="gradient-text">Lengkap & Modern</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Perjalanan nyaman dengan berbagai fasilitas premium di setiap armada kami
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                @foreach([
+                    ['icon' => 'fas fa-snowflake', 'label' => 'AC Full', 'color' => 'from-blue-400 to-blue-600'],
+                    ['icon' => 'fas fa-wifi', 'label' => 'WiFi Gratis', 'color' => 'from-green-400 to-green-600'],
+                    ['icon' => 'fas fa-tv', 'label' => 'LCD TV', 'color' => 'from-purple-400 to-purple-600'],
+                    ['icon' => 'fas fa-bolt', 'label' => 'USB Charger', 'color' => 'from-yellow-400 to-yellow-600'],
+                    ['icon' => 'fas fa-couch', 'label' => 'Kursi Reclining', 'color' => 'from-primary-400 to-primary-600'],
+                    ['icon' => 'fas fa-toilet', 'label' => 'Toilet', 'color' => 'from-secondary-400 to-secondary-600'],
+                    ['icon' => 'fas fa-music', 'label' => 'Audio System', 'color' => 'from-red-400 to-red-600'],
+                    ['icon' => 'fas fa-tint', 'label' => 'Air Minum', 'color' => 'from-cyan-400 to-cyan-600'],
+                    ['icon' => 'fas fa-suitcase', 'label' => 'Bagasi Luas', 'color' => 'from-orange-400 to-orange-600'],
+                    ['icon' => 'fas fa-camera', 'label' => 'CCTV', 'color' => 'from-gray-500 to-gray-700'],
+                    ['icon' => 'fas fa-first-aid', 'label' => 'P3K', 'color' => 'from-red-400 to-red-600'],
+                    ['icon' => 'fas fa-fire-extinguisher', 'label' => 'APAR', 'color' => 'from-orange-500 to-red-600'],
+                ] as $index => $facility)
+                <div class="text-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($index % 6) * 50 }}">
+                    <div class="w-14 h-14 bg-gradient-to-br {{ $facility['color'] }} rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md">
+                        <i class="{{ $facility['icon'] }} text-white text-xl"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-700">{{ $facility['label'] }}</p>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-10" data-aos="fade-up">
+                <a href="{{ route('armada') }}" class="inline-flex items-center px-8 py-4 border-2 border-primary-500 text-primary-600 font-bold rounded-2xl hover:bg-primary-50 transition-all hover:-translate-y-1">
+                    <i class="fas fa-bus mr-2"></i> Lihat Selengkapnya Armada Kami
+                </a>
             </div>
         </div>
     </section>
@@ -329,6 +464,41 @@
         </div>
     </section>
 
+    <!-- Tips Perjalanan Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-lightbulb mr-1"></i> TIPS WISATA
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    Tips <span class="gradient-text">Perjalanan</span> Anda
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Persiapkan perjalanan wisata Anda dengan tips dan panduan dari tim profesional kami
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach([
+                    ['icon' => 'fas fa-calendar-check', 'color' => 'from-primary-500 to-primary-700', 'bg' => 'primary', 'title' => 'Pesan Jauh Hari', 'desc' => 'Reservasi bus minimal 1-2 minggu sebelum keberangkatan untuk memastikan ketersediaan armada dan mendapatkan harga terbaik.'],
+                    ['icon' => 'fas fa-map-marked-alt', 'color' => 'from-secondary-500 to-secondary-700', 'bg' => 'secondary', 'title' => 'Riset Destinasi', 'desc' => 'Pelajari informasi destinasi Anda terlebih dahulu: cuaca, tempat menarik, budaya lokal, dan waktu terbaik untuk berkunjung.'],
+                    ['icon' => 'fas fa-suitcase-rolling', 'color' => 'from-blue-500 to-blue-700', 'bg' => 'blue', 'title' => 'Bawa Barang Secukupnya', 'desc' => 'Kemas barang sesuai kebutuhan. Perhatikan batas bagasi bus dan bawa obat-obatan pribadi serta dokumen penting.'],
+                    ['icon' => 'fas fa-users', 'color' => 'from-green-500 to-green-700', 'bg' => 'green', 'title' => 'Koordinasi Rombongan', 'desc' => 'Koordinasikan jadwal keberangkatan dan rencana perjalanan dengan seluruh anggota rombongan untuk menghindari keterlambatan.'],
+                    ['icon' => 'fas fa-first-aid', 'color' => 'from-red-500 to-red-700', 'bg' => 'red', 'title' => 'Siapkan P3K', 'desc' => 'Bawa perlengkapan P3K dan obat-obatan yang diperlukan. Konsultasikan kondisi kesehatan dengan dokter sebelum perjalanan jauh.'],
+                    ['icon' => 'fas fa-camera', 'color' => 'from-purple-500 to-purple-700', 'bg' => 'purple', 'title' => 'Abadikan Momen', 'desc' => 'Pastikan baterai kamera dan ponsel terisi penuh. Siapkan memori penyimpanan yang cukup untuk mengabadikan setiap momen indah.'],
+                ] as $index => $tip)
+                <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                    <div class="w-16 h-16 bg-gradient-to-br {{ $tip['color'] }} rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <i class="{{ $tip['icon'] }} text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $tip['title'] }}</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ $tip['desc'] }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials -->
     @if($testimonials->count() > 0)
     <section class="py-20 bg-white relative overflow-hidden">
@@ -386,9 +556,121 @@
                 </div>
                 @endforeach
             </div>
+            <!-- Bagikan Ulasan Button -->
+            <div class="text-center mt-14" data-aos="fade-up">
+                <p class="text-gray-600 mb-4 text-lg">Pernah berwisata bersama kami? Bagikan pengalaman Anda!</p>
+                <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Trans,%20saya%20ingin%20memberikan%20ulasan%20tentang%20perjalanan%20saya" target="_blank"
+                   class="inline-flex items-center btn-gradient text-white px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 text-lg">
+                    <i class="fas fa-star mr-3"></i> Bagikan Ulasan Anda
+                </a>
+            </div>
         </div>
     </section>
     @endif
+
+    <!-- Tim Profesional Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-users mr-1"></i> TIM KAMI
+                </span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                    Tim <span class="gradient-text">Profesional</span> Kami
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Dikelola oleh orang-orang berpengalaman dan berdedikasi tinggi untuk kepuasan Anda
+                </p>
+            </div>
+            @php $teams = \App\Models\Team::all(); @endphp
+            @if($teams->count() > 0)
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($teams as $index => $team)
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="{{ ($index % 4) * 100 }}">
+                    <div class="relative w-40 h-40 mx-auto mb-5">
+                        <img src="{{ $team->image ? asset('storage/'.$team->image) : 'https://ui-avatars.com/api/?name='.urlencode($team->name).'&background=ef4444&color=fff&bold=true&size=160' }}"
+                             alt="{{ $team->name }}"
+                             class="w-full h-full rounded-3xl object-cover shadow-xl group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary-900/60 via-transparent to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        @if($team->linkedin_url || $team->instagram_url)
+                        <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            @if($team->linkedin_url)
+                            <a href="{{ $team->linkedin_url }}" target="_blank" class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition">
+                                <i class="fab fa-linkedin text-white text-xs"></i>
+                            </a>
+                            @endif
+                            @if($team->instagram_url)
+                            <a href="{{ $team->instagram_url }}" target="_blank" class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center hover:scale-110 transition">
+                                <i class="fab fa-instagram text-white text-xs"></i>
+                            </a>
+                            @endif
+                        </div>
+                        @endif
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">{{ $team->name }}</h3>
+                    <p class="text-sm text-primary-600 font-semibold">{{ $team->role }}</p>
+                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach([
+                    ['name' => 'Budi Santoso', 'role' => 'Direktur Utama'],
+                    ['name' => 'Siti Rahayu', 'role' => 'Manajer Operasional'],
+                    ['name' => 'Ahmad Fauzi', 'role' => 'Kepala Driver'],
+                    ['name' => 'Dewi Kusuma', 'role' => 'Customer Service'],
+                ] as $index => $member)
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="relative w-40 h-40 mx-auto mb-5">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($member['name']) }}&background=ef4444&color=fff&bold=true&size=160"
+                             alt="{{ $member['name'] }}"
+                             class="w-full h-full rounded-3xl object-cover shadow-xl group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">{{ $member['name'] }}</h3>
+                    <p class="text-sm text-primary-600 font-semibold">{{ $member['role'] }}</p>
+                </div>
+                @endforeach
+            </div>
+            @endif
+        </div>
+    </section>
+
+    <!-- Mari Diskusi Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 rounded-3xl p-10 md:p-16 shadow-xl border border-primary-100 text-center" data-aos="zoom-in">
+                <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                    <i class="fas fa-comments text-white text-3xl"></i>
+                </div>
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-headset mr-1"></i> KONSULTASI GRATIS
+                </span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    Mari Diskusi <span class="gradient-text">Perjalanan Anda</span>
+                </h2>
+                <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Tim kami siap membantu Anda merencanakan perjalanan wisata yang sempurna. Dari pemilihan destinasi hingga penjadwalan, kami ada untuk Anda. Konsultasi gratis, tanpa biaya!
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Trans,%20saya%20ingin%20diskusi%20tentang%20perjalanan%20wisata" target="_blank"
+                       class="group inline-flex items-center justify-center bg-green-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-green-600 transition-all hover:shadow-2xl hover:-translate-y-1">
+                        <i class="fab fa-whatsapp mr-3 text-2xl"></i>
+                        Chat via WhatsApp
+                    </a>
+                    <a href="{{ route('contact') }}"
+                       class="group inline-flex items-center justify-center btn-gradient text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+                        <i class="fas fa-envelope mr-3"></i>
+                        Kirim Pesan
+                    </a>
+                    <a href="tel:+6281234567890"
+                       class="group inline-flex items-center justify-center bg-white border-2 border-primary-500 text-primary-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary-50 transition-all hover:-translate-y-1">
+                        <i class="fas fa-phone mr-3"></i>
+                        Telepon Langsung
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- CTA Section -->
     <section class="py-20 relative overflow-hidden">
