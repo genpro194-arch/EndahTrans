@@ -118,9 +118,13 @@
                     </div>
                     
                     <!-- Experience Badge -->
-                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-primary-600 to-primary-800 text-white p-6 rounded-3xl shadow-2xl shadow-primary-500/30">
-                        <div class="text-4xl font-extrabold">10+</div>
-                        <div class="text-sm opacity-90">Tahun Pengalaman</div>
+                    <div class="mt-6 inline-block">
+                        <div class="bg-gradient-to-br from-primary-600 to-primary-800 text-white px-8 py-6 rounded-3xl shadow-2xl inline-block">
+                            <div class="bg-white text-red-600 px-6 py-3 rounded-2xl inline-block mb-2">
+                                <div class="text-5xl font-extrabold">10+</div>
+                            </div>
+                            <div class="text-base font-semibold text-white">Tahun Pengalaman</div>
+                        </div>
                     </div>
                 </div>
             </div>

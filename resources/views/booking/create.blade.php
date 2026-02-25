@@ -126,17 +126,17 @@
                                         @endif
                                     </div>
                                     <h4 class="text-xl font-bold text-gray-900 mb-2">{{ $package->name }}</h4>
-                                    <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ $package->description }}</p>
+                                    <p class="text-gray-700 font-semibold text-sm mb-4 line-clamp-2">{{ $package->description }}</p>
                                     
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         <div class="bg-gray-50 rounded-xl p-3 text-center">
                                             <i class="fas fa-calendar-alt text-primary-500 text-lg mb-1"></i>
-                                            <p class="text-xs text-gray-500">Durasi</p>
+                                            <p class="text-xs text-gray-700 font-semibold">Durasi</p>
                                             <p class="font-bold text-gray-900">{{ $package->duration_days }}H/{{ $package->duration_nights }}M</p>
                                         </div>
                                         <div class="bg-gray-50 rounded-xl p-3 text-center">
                                             <i class="fas fa-users text-primary-500 text-lg mb-1"></i>
-                                            <p class="text-xs text-gray-500">Kapasitas Bus</p>
+                                            <p class="text-xs text-gray-700 font-semibold">Kapasitas Bus</p>
                                             <p class="font-bold text-gray-900">{{ $package->capacity }} Orang</p>
                                         </div>
                                     </div>
@@ -241,7 +241,7 @@
 
                                 <!-- Total Capacity -->
                                 <div class="mt-6 bg-primary-50 border border-primary-200 rounded-xl p-4">
-                                    <p class="text-sm text-gray-600 mb-2">Total Kapasitas Penumpang:</p>
+                                    <p class="text-sm text-gray-800 font-semibold mb-2">Total Kapasitas Penumpang:</p>
                                     <p class="text-2xl font-bold text-primary-600" x-text="totalCapacity + ' Penumpang'"></p>
                                 </div>
                             </div>
@@ -355,8 +355,8 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">
                                             <i class="fas fa-user text-primary-500 mr-1"></i> Nama Lengkap <span class="text-red-500">*</span>
                                         </label>
-                                        <input type="text" name="customer_name" value="{{ old('customer_name') }}" required
-                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all @error('customer_name') border-red-500 @enderror"
+                        <input type="text" name="customer_name" value="{{ old('customer_name') }}" required
+                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all font-semibold text-gray-900 @error('customer_name') border-red-500 @enderror"
                                                placeholder="Nama sesuai KTP/Identitas">
                                         @error('customer_name')
                                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -368,7 +368,7 @@
                                             <i class="fas fa-envelope text-primary-500 mr-1"></i> Email <span class="text-red-500">*</span>
                                         </label>
                                         <input type="email" name="customer_email" value="{{ old('customer_email') }}" required
-                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all @error('customer_email') border-red-500 @enderror"
+                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all font-semibold text-gray-900 @error('customer_email') border-red-500 @enderror"
                                                placeholder="email@contoh.com">
                                         @error('customer_email')
                                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -384,7 +384,7 @@
                                                 +62
                                             </span>
                                             <input type="tel" name="customer_phone" value="{{ old('customer_phone') }}" required
-                                                   class="flex-1 px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-r-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all @error('customer_phone') border-red-500 @enderror"
+                                                   class="flex-1 px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-r-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all font-semibold text-gray-900 @error('customer_phone') border-red-500 @enderror"
                                                    placeholder="812xxxxxxxx">
                                         </div>
                                         @error('customer_phone')
@@ -397,7 +397,7 @@
                                             <i class="fas fa-map-marker-alt text-primary-500 mr-1"></i> Alamat
                                         </label>
                                         <input type="text" name="customer_address" value="{{ old('customer_address') }}"
-                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all"
+                                               class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all font-semibold text-gray-900"
                                                placeholder="Alamat lengkap (opsional)">
                                     </div>
                                 </div>
@@ -413,7 +413,7 @@
                             </div>
                             <div class="p-6">
                                 <textarea name="special_requests" rows="3"
-                                          class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all resize-none"
+                                          class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all resize-none font-semibold text-gray-900"
                                           placeholder="Contoh: Alergi makanan tertentu, butuh kursi roda, request kamar connecting, dll.">{{ old('special_requests') }}</textarea>
                             </div>
                         </div>
@@ -443,23 +443,23 @@
                             <!-- Price Breakdown -->
                             <div class="space-y-4 mb-6">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Harga Per Bus</span>
+                                    <span class="text-gray-800 font-semibold">Harga Per Bus</span>
                                     <span class="font-semibold text-gray-900" x-text="'Rp ' + format(pricePerBus)"></span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Jumlah Bus</span>
+                                    <span class="text-gray-800 font-semibold">Jumlah Bus</span>
                                     <span class="font-semibold text-gray-900">
                                         <span x-text="buses"></span> bus
                                     </span>
                                 </div>
                                 <div class="flex justify-between items-center bg-blue-50 p-3 rounded-lg border border-blue-200">
-                                    <span class="text-gray-600 text-sm">Durasi (Perjalanan Malam)</span>
+                                    <span class="text-gray-800 font-semibold text-sm">Durasi (Perjalanan Malam)</span>
                                     <span class="font-semibold text-blue-600">
                                         <span x-text="durationDays"></span>x
                                     </span>
                                 </div>
                                 <div class="flex justify-between items-center pt-3 border-t-2 border-gray-200">
-                                    <span class="text-gray-600">Subtotal</span>
+                                    <span class="text-gray-800 font-semibold">Subtotal</span>
                                     <span class="font-semibold text-gray-900">
                                         <span x-text="'Rp ' + format(buses * pricePerBus * durationDays)"></span>
                                     </span>
@@ -483,7 +483,7 @@
 
                             <!-- Submit Button (Desktop) -->
                             <button type="button" onclick="document.getElementById('booking-form').submit()"
-                                    class="hidden lg:flex w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all items-center justify-center group">
+                                    class="hidden lg:flex w-full bg-gradient-to-r from-primary-600 to-primary-700 text-black py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all items-center justify-center group">
                                 <i class="fas fa-lock mr-2 group-hover:animate-bounce"></i> Lanjutkan Pembayaran
                             </button>
 
