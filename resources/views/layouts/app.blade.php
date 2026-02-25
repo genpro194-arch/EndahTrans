@@ -14,28 +14,28 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            200: '#c7d2fe',
-                            300: '#a5b4fc',
-                            400: '#818cf8',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            800: '#3730a3',
-                            900: '#312e81',
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
                         },
                         secondary: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
                         }
                     },
                     fontFamily: {
@@ -99,16 +99,16 @@
             background: #f1f1f1;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #6366f1, #10b981);
+            background: linear-gradient(135deg, #dc2626, #db2777);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #4f46e5, #059669);
+            background: linear-gradient(135deg, #b91c1c, #be185d);
         }
         
         /* Hero Gradient */
         .hero-gradient {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.9) 0%, rgba(16, 185, 129, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.85) 0%, rgba(219, 39, 119, 0.75) 100%);
         }
         
         /* Glass Effect */
@@ -214,7 +214,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, #6366f1, #10b981);
+            background: linear-gradient(90deg, #dc2626, #db2777);
             transition: width 0.3s ease;
             border-radius: 2px;
         }
