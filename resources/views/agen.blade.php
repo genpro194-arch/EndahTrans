@@ -74,7 +74,7 @@
                              alt="{{ $agent['name'] }}"
                              class="w-20 h-20 rounded-2xl mx-auto shadow-lg border-4 border-white/20">
                         <h3 class="text-white font-bold text-lg mt-3">{{ $agent['name'] }}</h3>
-                        <p class="text-white/80 text-sm">{{ $agent['area'] }}</p>
+                        <p class="text-white/80 text-base">{{ $agent['area'] }}</p>
                         @if($agent['verified'])
                         <div class="absolute top-4 right-4">
                             <span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
@@ -87,7 +87,7 @@
                         <div class="space-y-3 mb-5">
                             <div class="flex items-start gap-3">
                                 <i class="fas fa-map-marker-alt text-primary-500 mt-1 w-4 flex-shrink-0"></i>
-                                <p class="text-gray-600 text-sm">{{ $agent['address'] }}</p>
+                                <p class="text-gray-600 text-base">{{ $agent['address'] }}</p>
                             </div>
                             <div class="flex items-center gap-3">
                                 <i class="fas fa-phone text-primary-500 w-4 flex-shrink-0"></i>
@@ -172,7 +172,7 @@
                         </div>
                     </div>
                     <h4 class="font-bold text-gray-900 mb-2">{{ $step['title'] }}</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed">{{ $step['desc'] }}</p>
+                    <p class="text-base text-gray-600 leading-relaxed">{{ $step['desc'] }}</p>
                 </div>
                 @endforeach
             </div>

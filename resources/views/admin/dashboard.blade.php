@@ -11,7 +11,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
                     <p class="text-sm font-semibold text-slate-400 mb-2 uppercase tracking-widest">Selamat Datang Kembali</p>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-3">{{ auth()->user()->name ?? 'Admin' }} 👋</h1>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-3">{{ auth()->user()->name ?? 'Admin' }}</h1>
                     <p class="text-slate-300 text-lg">Pantau performa bisnis Endah Travel secara real-time</p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3">
@@ -55,10 +55,10 @@
                 </div>
                 @if($stats['pending_bookings'] > 0)
                 <span class="text-xs font-extrabold text-red-600 bg-red-50 px-3 py-1.5 rounded-lg animate-pulse">
-                    ⚠️ {{ $stats['pending_bookings'] }} AKSI
+                    <i class="fas fa-exclamation-triangle mr-1"></i> {{ $stats['pending_bookings'] }} AKSI
                 </span>
                 @else
-                <span class="text-xs font-extrabold text-green-600 bg-green-50 px-3 py-1.5 rounded-lg">✓ AMAN</span>
+                <span class="text-xs font-extrabold text-green-600 bg-green-50 px-3 py-1.5 rounded-lg"><i class="fas fa-check mr-1"></i> AMAN</span>
                 @endif
             </div>
             <div class="space-y-1 mb-5">
@@ -77,7 +77,7 @@
                     <i class="fas fa-chart-line text-emerald-600 text-xl"></i>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg">📈 +12%</span>
+                    <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg"><i class="fas fa-chart-line mr-1"></i> +12%</span>
                     <span id="revenueUpdateIndicator" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                 </div>
             </div>

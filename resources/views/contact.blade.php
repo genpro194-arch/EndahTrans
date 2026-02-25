@@ -43,7 +43,7 @@
                     </div>
                     <h3 class="text-lg font-bold text-gray-900 mb-2">WhatsApp</h3>
                     <p class="text-gray-600 mb-3">+62 812-3456-7890</p>
-                    <span class="text-secondary-600 font-semibold text-sm group-hover:underline">Chat Sekarang →</span>
+                    <span class="text-secondary-600 font-semibold text-sm group-hover:underline">Chat Sekarang <i class="fas fa-arrow-right ml-1"></i></span>
                 </a>
                 
                 <!-- Phone -->
@@ -193,11 +193,11 @@
                                     <select name="subject" required
                                             class="w-full px-4 py-3.5 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition-all @error('subject') border-red-500 @enderror">
                                         <option value="">Pilih Subjek</option>
-                                        <option value="Informasi Paket" {{ old('subject') == 'Informasi Paket' ? 'selected' : '' }}>📦 Informasi Paket</option>
-                                        <option value="Pemesanan" {{ old('subject') == 'Pemesanan' ? 'selected' : '' }}>🎫 Pemesanan</option>
-                                        <option value="Pembayaran" {{ old('subject') == 'Pembayaran' ? 'selected' : '' }}>💳 Pembayaran</option>
-                                        <option value="Keluhan" {{ old('subject') == 'Keluhan' ? 'selected' : '' }}>⚠️ Keluhan</option>
-                                        <option value="Lainnya" {{ old('subject') == 'Lainnya' ? 'selected' : '' }}>📝 Lainnya</option>
+                                        <option value="Informasi Paket" {{ old('subject') == 'Informasi Paket' ? 'selected' : '' }}>Informasi Paket</option>
+                                        <option value="Pemesanan" {{ old('subject') == 'Pemesanan' ? 'selected' : '' }}>Pemesanan</option>
+                                        <option value="Pembayaran" {{ old('subject') == 'Pembayaran' ? 'selected' : '' }}>Pembayaran</option>
+                                        <option value="Keluhan" {{ old('subject') == 'Keluhan' ? 'selected' : '' }}>Keluhan</option>
+                                        <option value="Lainnya" {{ old('subject') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                                     </select>
                                     @error('subject')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -293,7 +293,7 @@
                         <!-- Operating Hours -->
                         <div class="mb-6">
                             <p class="text-sm text-white/70 mb-3 font-semibold">JAM OPERASIONAL</p>
-                            <div class="space-y-2 text-sm">
+                            <div class="space-y-2 text-base">
                                 <p><span class="font-semibold">Senin - Jumat:</span> 08:00 - 17:00 WIB</p>
                                 <p><span class="font-semibold">Sabtu:</span> 09:00 - 14:00 WIB</p>
                                 <p><span class="font-semibold">Minggu:</span> Tutup</p>

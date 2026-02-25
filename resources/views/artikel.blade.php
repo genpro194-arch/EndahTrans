@@ -119,7 +119,7 @@
                             <span><i class="fas fa-clock mr-1"></i> {{ $article['read_time'] }}</span>
                         </div>
                         <h3 class="font-extrabold text-gray-900 text-lg mb-3 leading-snug line-clamp-2">{{ $article['title'] }}</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-5 line-clamp-3">{{ $article['excerpt'] }}</p>
+                        <p class="text-gray-600 text-base leading-relaxed mb-5 line-clamp-3">{{ $article['excerpt'] }}</p>
                         <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                             <div class="flex items-center gap-2">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($article['author']) }}&background=ef4444&color=fff&bold=true&size=32"

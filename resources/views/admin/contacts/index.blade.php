@@ -59,8 +59,8 @@
                 <div class="w-full md:w-48">
                     <select name="status" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition">
                         <option value="">Semua Status</option>
-                        <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>📩 Belum Dibaca</option>
-                        <option value="read" {{ request('status') == 'read' ? 'selected' : '' }}>✅ Sudah Dibaca</option>
+                        <option value="unread" {{ request('status') == 'unread' ? 'selected' : '' }}>Belum Dibaca</option>
+                        <option value="read" {{ request('status') == 'read' ? 'selected' : '' }}>Sudah Dibaca</option>
                     </select>
                 </div>
                 <button type="submit" class="w-full md:w-auto bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-xl hover:from-primary-600 hover:to-primary-700 transition font-semibold shadow-lg shadow-primary-500/30">

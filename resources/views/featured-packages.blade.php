@@ -13,7 +13,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">
-                ⭐ Paket <span class="text-secondary-300">Unggulan</span>
+                <i class="fas fa-star mr-3 text-secondary-300"></i>Paket <span class="text-secondary-300">Unggulan</span>
             </h1>
             <p class="text-lg md:text-xl text-primary-100 max-w-2xl mx-auto">
                 Pilihan paket wisata terbaik dari Endah Travel untuk pengalaman perjalanan yang tak terlupakan
@@ -120,7 +120,7 @@
                                     {{ $package->destination->name }}
                                 </p>
                                 <h3 class="text-xl font-bold text-gray-900 line-clamp-2 mb-2">{{ $package->name }}</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2">{{ $package->description }}</p>
+                                <p class="text-gray-600 text-base line-clamp-2">{{ $package->description }}</p>
                             </div>
                             
                             <!-- Duration & Capacity -->

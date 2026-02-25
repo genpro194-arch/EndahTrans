@@ -88,7 +88,10 @@
     
     <style>
         body { 
-            font-family: 'Poppins', sans-serif; 
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1e293b;
         }
         
         /* Custom Scrollbar */
@@ -551,16 +554,20 @@
         function animateCounter(el) {
             const target = parseInt(el.getAttribute('data-target')) || 0;
             const duration = 2000;
-            const step = Math.ceil(target / (duration / 16));
-            let current = 0;
+            const startFrom = Math.max(1, Math.floor(target * 0.01));
+            const range = target - startFrom;
+            const stepTime = Math.max(Math.floor(duration / range), 10);
+            let current = startFrom;
+            el.textContent = current + '+';
             const timer = setInterval(() => {
-                current += step;
+                const increment = Math.max(1, Math.ceil((target - current) / ((duration / stepTime) * 0.3)));
+                current += increment;
                 if (current >= target) {
                     current = target;
                     clearInterval(timer);
                 }
                 el.textContent = current + '+';
-            }, 16);
+            }, stepTime);
         }
 
         const observer = new IntersectionObserver((entries) => {

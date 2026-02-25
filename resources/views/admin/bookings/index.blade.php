@@ -62,11 +62,11 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Status</label>
                     <select name="status" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition">
                         <option value="">Semua Status</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>🕐 Menunggu</option>
-                        <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>✓ Dikonfirmasi</option>
-                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>💰 Dibayar</option>
-                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>✅ Selesai</option>
-                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>❌ Dibatalkan</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu</option>
+                        <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>Dikonfirmasi</option>
+                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Dibayar</option>
+                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Selesai</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                     </select>
                 </div>
                 <div class="w-full md:w-48">

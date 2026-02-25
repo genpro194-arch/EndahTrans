@@ -61,7 +61,7 @@
                 </div>
                 <div class="w-full md:w-48">
                     <select name="destination" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition">
-                        <option value="">📍 Semua Destinasi</option>
+                        <option value="">Semua Destinasi</option>
                         @foreach($destinations as $destination)
                             <option value="{{ $destination->id }}" {{ request('destination') == $destination->id ? 'selected' : '' }}>
                                 {{ $destination->name }}
@@ -72,8 +72,8 @@
                 <div class="w-full md:w-40">
                     <select name="status" class="w-full px-4 py-3 bg-gray-50 border-2 border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:bg-white transition">
                         <option value="">Semua Status</option>
-                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>✅ Aktif</option>
-                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>⛔ Nonaktif</option>
+                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                 </div>
                 <button type="submit" class="w-full md:w-auto bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-900 transition font-semibold">

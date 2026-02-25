@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\CharteredBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store
 Route::get('/armada', [HomeController::class, 'armada'])->name('armada');
 Route::get('/agen', [HomeController::class, 'agen'])->name('agen');
 Route::get('/artikel', [HomeController::class, 'artikel'])->name('artikel');
+
+// Charter (Armada) Booking
+Route::post('/charter-armada', [CharteredBookingController::class, 'store'])->name('charter.store');
+Route::get('/charter-armada/{code}/nota', [CharteredBookingController::class, 'receipt'])->name('charter.receipt');
 
 // Packages
 Route::get('/paket', [PackageController::class, 'index'])->name('packages.index');

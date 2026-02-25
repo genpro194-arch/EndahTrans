@@ -30,9 +30,7 @@
     <div class="absolute inset-0 bg-gradient-to-br from-primary-900/85 via-primary-800/70 to-secondary-900/60"></div>
     <div class="absolute inset-0" style="background: radial-gradient(ellipse at 70% 50%, rgba(219,39,119,0.15) 0%, transparent 60%)"></div>
 
-    {{-- Floating Shapes --}}
-    <div class="absolute top-20 right-20 w-64 h-64 rounded-full bg-white/5 blur-3xl animate-pulse-slow hidden lg:block"></div>
-    <div class="absolute bottom-20 left-20 w-96 h-96 rounded-full bg-secondary-500/10 blur-3xl animate-pulse-slow hidden lg:block" style="animation-delay:2s"></div>
+
 
     {{-- Content --}}
     <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -141,22 +139,20 @@
 {{-- ====================================================
      QUICK FEATURES BAR
      ==================================================== --}}
-<section class="relative z-20 -mt-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<section class="relative z-20 -mt-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
             @foreach([
-                ['icon'=>'fas fa-phone-alt','color'=>'from-primary-500 to-primary-600','title'=>'Pesan Sekarang','desc'=>'Reservasi mudah & cepat'],
-                ['icon'=>'fas fa-info-circle','color'=>'from-secondary-500 to-secondary-600','title'=>'Informasi Lengkap','desc'=>'Detail armada & fasilitas'],
-                ['icon'=>'fas fa-magic','color'=>'from-primary-600 to-primary-700','title'=>'Praktis & Mudah','desc'=>'Cukup hubungi kami'],
-                ['icon'=>'fas fa-headset','color'=>'from-secondary-600 to-secondary-700','title'=>'Support 24/7','desc'=>'Siap bantu kapan saja'],
+                ['icon'=>'fas fa-phone-alt','title'=>'Pesan Sekarang','desc'=>'Reservasi mudah & cepat'],
+                ['icon'=>'fas fa-info-circle','title'=>'Info Lengkap','desc'=>'Detail armada & fasilitas'],
+                ['icon'=>'fas fa-magic','title'=>'Praktis & Mudah','desc'=>'Cukup hubungi kami'],
+                ['icon'=>'fas fa-headset','title'=>'Support 24/7','desc'=>'Siap bantu kapan saja'],
             ] as $f)
-            <div class="bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up">
-                <div class="w-12 h-12 bg-gradient-to-br {{ $f['color'] }} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                    <i class="{{ $f['icon'] }} text-white text-xl"></i>
-                </div>
+            <div class="bg-white border border-primary-100 rounded-xl p-4 flex items-center gap-3 hover:border-primary-300 hover:shadow-md transition-all duration-300" data-aos="fade-up">
+                <i class="{{ $f['icon'] }} text-primary-500 text-lg flex-shrink-0"></i>
                 <div>
-                    <div class="font-bold text-gray-900 text-sm">{{ $f['title'] }}</div>
-                    <div class="text-xs text-gray-500">{{ $f['desc'] }}</div>
+                    <div class="font-semibold text-primary-900 text-sm">{{ $f['title'] }}</div>
+                    <div class="text-sm text-primary-600 leading-tight">{{ $f['desc'] }}</div>
                 </div>
             </div>
             @endforeach
@@ -168,21 +164,19 @@
 {{-- ====================================================
      STATS COUNTER
      ==================================================== --}}
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<section class="py-16 bg-white border-y border-primary-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-primary-100">
             @foreach([
-                ['icon'=>'fas fa-bus','from'=>'primary','val'=>$stats['packages'],'label'=>'Unit Armada','suffix'=>'+'],
-                ['icon'=>'fas fa-map-marked-alt','from'=>'secondary','val'=>$stats['destinations'],'label'=>'Destinasi','suffix'=>'+'],
-                ['icon'=>'fas fa-smile-beam','from'=>'primary','val'=>max($stats['customers'],1000),'label'=>'Penumpang Puas','suffix'=>'+'],
-                ['icon'=>'fas fa-calendar-check','from'=>'secondary','val'=>10,'label'=>'Tahun Beroperasi','suffix'=>'+'],
-            ] as $s)
-            <div class="text-center" data-aos="fade-up">
-                <div class="w-20 h-20 bg-gradient-to-br from-{{ $s['from'] }}-500 to-{{ $s['from'] }}-700 rounded-3xl flex items-center justify-center mx-auto mb-5 shadow-xl shadow-{{ $s['from'] }}-500/30 transform hover:rotate-6 transition-transform">
-                    <i class="{{ $s['icon'] }} text-white text-3xl"></i>
-                </div>
-                <div class="text-5xl font-extrabold gradient-text mb-2 counter" data-target="{{ $s['val'] }}">0</div>
-                <div class="text-gray-600 font-semibold text-base">{{ $s['label'] }}</div>
+                ['icon'=>'fas fa-bus','val'=>$stats['packages'],'label'=>'Unit Armada'],
+                ['icon'=>'fas fa-map-marked-alt','val'=>$stats['destinations'],'label'=>'Destinasi'],
+                ['icon'=>'fas fa-smile-beam','val'=>max($stats['customers'],1000),'label'=>'Penumpang Puas'],
+                ['icon'=>'fas fa-calendar-check','val'=>10,'label'=>'Tahun Beroperasi'],
+            ] as $i => $s)
+            <div class="text-center py-10 px-6" data-aos="fade-up" data-aos-delay="{{ $i * 80 }}">
+                <i class="{{ $s['icon'] }} text-primary-300 text-xl mb-4 block"></i>
+                <div class="text-4xl lg:text-5xl font-extrabold gradient-text mb-2 counter" data-target="{{ $s['val'] }}">1</div>
+                <div class="text-primary-700 font-medium text-xs uppercase tracking-widest">{{ $s['label'] }}</div>
             </div>
             @endforeach
         </div>
@@ -194,8 +188,7 @@
      ABOUT US
      ==================================================== --}}
 <section class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-    <div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-secondary-500/5 rounded-full blur-3xl"></div>
+
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -232,13 +225,13 @@
                 <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                     <i class="fas fa-building mr-1"></i> TENTANG KAMI
                 </span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-900 mb-5 leading-tight">
                     Kenali <span class="gradient-text">Endah Trans</span><br>Lebih Dekat
                 </h2>
-                <p class="text-gray-600 text-lg leading-relaxed mb-5">
-                    <strong class="text-gray-800">PO. Endah Trans</strong> adalah perusahaan transportasi bus wisata yang telah berdiri sejak 2014. Bermarkas di <strong class="text-gray-800">Jepara, Jawa Tengah</strong>, kami melayani perjalanan wisata ke berbagai destinasi di seluruh Indonesia.
+                <p class="text-primary-800 text-lg leading-relaxed mb-5">
+                    <strong class="text-primary-800">PO. Endah Trans</strong> adalah perusahaan transportasi bus wisata yang telah berdiri sejak 2014. Bermarkas di <strong class="text-primary-800">Jepara, Jawa Tengah</strong>, kami melayani perjalanan wisata ke berbagai destinasi di seluruh Indonesia.
                 </p>
-                <p class="text-gray-600 leading-relaxed mb-8">
+                <p class="text-primary-800 leading-relaxed mb-8">
                     Dengan armada bus modern, driver berpengalaman dan bersertifikat, serta layanan pelanggan yang ramah, kami berkomitmen menjadikan setiap perjalanan Anda sebagai pengalaman yang berkesan dan tak terlupakan.
                 </p>
 
@@ -249,13 +242,11 @@
                         ['icon'=>'fas fa-shield-alt','color'=>'primary','title'=>'Asuransi Penuh','sub'=>'Terlindungi'],
                         ['icon'=>'fas fa-headset','color'=>'secondary','title'=>'Support 24/7','sub'=>'Selalu siap'],
                     ] as $f)
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                        <div class="w-10 h-10 bg-{{ $f['color'] }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="{{ $f['icon'] }} text-{{ $f['color'] }}-600"></i>
-                        </div>
+                <div class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl hover:border-{{ $f['color'] }}-300 transition">
+                        <i class="{{ $f['icon'] }} text-{{ $f['color'] }}-500 text-lg flex-shrink-0"></i>
                         <div>
-                            <div class="font-bold text-gray-900 text-sm">{{ $f['title'] }}</div>
-                            <div class="text-xs text-gray-500">{{ $f['sub'] }}</div>
+                            <div class="font-semibold text-primary-900 text-sm">{{ $f['title'] }}</div>
+                            <div class="text-sm text-primary-600">{{ $f['sub'] }}</div>
                         </div>
                     </div>
                     @endforeach
@@ -275,14 +266,14 @@
      ==================================================== --}}
 <section class="py-20 bg-white relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14" data-aos="fade-up">
+        <div class="text-center mb-12" data-aos="fade-up">
             <span class="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 <i class="fas fa-award mr-1"></i> KENAPA KAMI
             </span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-3">
                 Mengapa Memilih <span class="gradient-text">Endah Trans?</span>
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Kami hadir dengan standar layanan terbaik untuk setiap perjalanan wisata Anda</p>
+            <p class="text-primary-700 text-base max-w-xl mx-auto">Kami hadir dengan standar layanan terbaik untuk setiap perjalanan wisata Anda</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -292,13 +283,12 @@
                 ['icon'=>'fas fa-headset','color'=>'primary','title'=>'Layanan 24/7','desc'=>'Tim customer service kami siap membantu kapanpun Anda membutuhkan.'],
                 ['icon'=>'fas fa-medal','color'=>'secondary','title'=>'Pengalaman 10+ Tahun','desc'=>'Telah melayani ribuan perjalanan wisata dengan reputasi yang terjaga.'],
             ] as $i => $w)
-            <div class="group relative bg-gradient-to-br from-{{ $w['color'] }}-50 via-white to-{{ $w['color'] }}-50 rounded-3xl p-8 border border-{{ $w['color'] }}-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="{{ $i*100 }}">
-                <div class="w-20 h-20 bg-gradient-to-br from-{{ $w['color'] }}-500 to-{{ $w['color'] }}-700 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-{{ $w['color'] }}-500/30 transform group-hover:rotate-6 transition-transform duration-500">
-                    <i class="{{ $w['icon'] }} text-white text-3xl"></i>
+            <div class="group bg-white rounded-2xl p-8 border border-primary-100 hover:border-{{ $w['color'] }}-300 hover:shadow-lg transition-all duration-400" data-aos="fade-up" data-aos-delay="{{ $i*100 }}">
+                <div class="w-12 h-12 flex items-center justify-center mb-6 border-l-4 border-{{ $w['color'] }}-500 pl-3">
+                    <i class="{{ $w['icon'] }} text-{{ $w['color'] }}-600 text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-extrabold text-gray-900 mb-3">{{ $w['title'] }}</h3>
-                <p class="text-gray-600 leading-relaxed">{{ $w['desc'] }}</p>
-                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-{{ $w['color'] }}-500 to-{{ $w['color'] }}-600 rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <h3 class="text-lg font-bold text-primary-900 mb-2">{{ $w['title'] }}</h3>
+                <p class="text-primary-700 text-base leading-relaxed">{{ $w['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -362,24 +352,24 @@
 {{-- ====================================================
      ARTIKEL BERTAB (inspired by New Shantika)
      ==================================================== --}}
-<section class="py-20 bg-gray-50"
+<section class="py-16 bg-gray-50"
          x-data="{ tab: 'semua' }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-10" data-aos="fade-up">
+        <div class="text-center mb-8" data-aos="fade-up">
             <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 <i class="fas fa-newspaper mr-1"></i> ARTIKEL
             </span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-3">
                 Artikel & <span class="gradient-text">Tips Wisata</span>
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Informasi terbaru, tips perjalanan, dan panduan wisata untuk Anda</p>
+            <p class="text-primary-700 text-base max-w-xl mx-auto">Informasi terbaru, tips perjalanan, dan panduan wisata untuk Anda</p>
         </div>
 
         {{-- Tab Buttons --}}
         <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up">
             @foreach([['key'=>'semua','label'=>'Semua'],['key'=>'tips','label'=>'Tips'],['key'=>'armada','label'=>'Armada'],['key'=>'rute','label'=>'Rute']] as $t)
             <button @click="tab='{{ $t['key'] }}'"
-                    :class="tab==='{{ $t['key'] }}' ? 'btn-gradient text-white shadow-lg shadow-primary-500/30' : 'bg-white text-gray-600 border border-gray-200 hover:border-primary-300 hover:text-primary-600'"
+                    :class="tab==='{{ $t['key'] }}' ? 'btn-gradient text-white shadow-lg shadow-primary-500/30' : 'bg-white text-primary-800 border border-gray-200 hover:border-primary-300 hover:text-primary-600'"
                     class="px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 text-sm">
                 {{ $t['label'] }}
             </button>
@@ -404,17 +394,17 @@
                  x-transition:enter="transition duration-300 ease-out"
                  x-transition:enter-start="opacity-0 scale-95"
                  x-transition:enter-end="opacity-100 scale-100"
-                 class="group bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100"
+                 class="group bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-400 border border-primary-100 hover:border-primary-200"
                  data-aos="fade-up" data-aos-delay="{{ ($i % 3) * 100 }}">
-                <div class="relative h-52 overflow-hidden">
+                <div class="relative h-48 overflow-hidden">
                     <img src="{{ $a['img'] }}" alt="{{ $a['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     <span class="absolute top-4 left-4 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-full">{{ $a['cat'] }}</span>
                 </div>
-                <div class="p-6">
-                    <p class="text-xs text-gray-400 mb-2"><i class="fas fa-calendar mr-1"></i> {{ $a['date'] }}</p>
-                    <h3 class="font-extrabold text-gray-900 text-lg mb-3 leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors">{{ $a['title'] }}</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">{{ $a['exc'] }}</p>
+                <div class="p-5">
+                    <p class="text-xs text-primary-500 mb-2 font-medium"><i class="fas fa-calendar mr-1"></i> {{ $a['date'] }}</p>
+                    <h3 class="font-bold text-primary-900 text-base mb-2 leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors">{{ $a['title'] }}</h3>
+                    <p class="text-primary-700 text-sm leading-relaxed line-clamp-2 mb-4">{{ $a['exc'] }}</p>
                     <a href="{{ route('artikel') }}" class="inline-flex items-center text-primary-600 font-bold text-sm hover:gap-3 gap-2 transition-all">
                         Baca Selengkapnya <i class="fas fa-arrow-right"></i>
                     </a>
@@ -437,11 +427,11 @@
      ==================================================== --}}
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14" data-aos="fade-up">
+        <div class="text-center mb-10" data-aos="fade-up">
             <span class="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 <i class="fas fa-lightbulb mr-1"></i> TIPS & PANDUAN
             </span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-3">
                 Tips <span class="gradient-text">Perjalanan</span> Terbaik
             </h2>
         </div>
@@ -454,13 +444,13 @@
                 ['ico'=>'fas fa-first-aid','c'=>'from-primary-600 to-primary-800','t'=>'Siapkan P3K','d'=>'Bawa obat-obatan pribadi dan P3K. Konsultasikan kesehatan sebelum perjalanan jauh.'],
                 ['ico'=>'fas fa-camera','c'=>'from-secondary-600 to-secondary-800','t'=>'Abadikan Momen','d'=>'Isi daya kamera dan ponsel. Siapkan memori cukup untuk semua momen berharga perjalanan.'],
             ] as $i => $tip)
-            <div class="group flex gap-5 p-6 rounded-3xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
-                <div class="w-14 h-14 bg-gradient-to-br {{ $tip['c'] }} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform">
+            <div class="group flex gap-4 p-5 rounded-xl border border-primary-100 hover:border-primary-300 bg-white hover:shadow-sm transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
+                <div class="w-11 h-11 bg-gradient-to-br {{ $tip['c'] }} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                     <i class="{{ $tip['ico'] }} text-white text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="font-extrabold text-gray-900 text-lg mb-2">{{ $tip['t'] }}</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">{{ $tip['d'] }}</p>
+                    <h3 class="font-extrabold text-primary-900 text-lg mb-2">{{ $tip['t'] }}</h3>
+                    <p class="text-primary-700 text-base leading-relaxed">{{ $tip['d'] }}</p>
                 </div>
             </div>
             @endforeach
@@ -477,33 +467,31 @@
     <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle, #ef4444 1px, transparent 1px); background-size: 30px 30px;"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14" data-aos="fade-up">
-            <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 <i class="fas fa-heart mr-1"></i> ULASAN PELANGGAN
             </span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-3">
                 Apa Kata <span class="gradient-text">Sahabat Endah Trans?</span>
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Berikut adalah penilaian dari pelanggan setia kami</p>
+            <p class="text-primary-700 text-base max-w-xl mx-auto">Berikut adalah penilaian dari pelanggan setia kami</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($testimonials as $i => $t)
-            <div class="group bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-full -translate-y-8 translate-x-8"></div>
-                <div class="flex items-center mb-5 gap-1">
+            <div class="group bg-white rounded-2xl p-7 border border-primary-100 hover:border-primary-300 hover:shadow-md transition-all duration-400" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
+                <div class="flex items-center mb-4 gap-1">
                     @for($s=1;$s<=5;$s++)
-                    <i class="fas fa-star {{ $s<=$t->rating ? 'text-secondary-400' : 'text-gray-200' }} text-lg"></i>
+                    <i class="fas fa-star {{ $s<=$t->rating ? 'text-secondary-400' : 'text-primary-100' }} text-lg"></i>
                     @endfor
-                    <span class="ml-2 text-sm text-gray-400 font-medium">({{ $t->rating }}.0)</span>
+                    <span class="ml-2 text-sm text-primary-600 font-medium">({{ $t->rating }}.0)</span>
                 </div>
-                <i class="fas fa-quote-left text-5xl text-primary-100 mb-3 block"></i>
-                <p class="text-gray-600 leading-relaxed italic mb-6">"{{ $t->content }}"</p>
+                <p class="text-primary-800 text-base leading-relaxed italic mb-6 border-l-2 border-primary-200 pl-4">"{{ $t->content }}"</p>
                 <div class="flex items-center gap-4 pt-5 border-t border-gray-100">
                     <img src="https://ui-avatars.com/api/?name={{ urlencode($t->name) }}&background=ef4444&color=fff&bold=true&size=56" alt="{{ $t->name }}" class="w-14 h-14 rounded-2xl shadow-md">
                     <div>
-                        <div class="font-extrabold text-gray-900">{{ $t->name }}</div>
-                        @if($t->location) <div class="text-xs text-gray-500 flex items-center gap-1"><i class="fas fa-map-marker-alt text-primary-500"></i> {{ $t->location }}</div> @endif
+                        <div class="font-extrabold text-primary-900">{{ $t->name }}</div>
+                        @if($t->location) <div class="text-xs text-primary-700 flex items-center gap-1"><i class="fas fa-map-marker-alt text-primary-500"></i> {{ $t->location }}</div> @endif
                     </div>
                     <div class="ml-auto w-9 h-9 bg-primary-100 rounded-full flex items-center justify-center">
                         <i class="fas fa-check text-primary-600 text-sm"></i>
@@ -514,7 +502,7 @@
         </div>
 
         <div class="text-center mt-14" data-aos="fade-up">
-            <p class="text-gray-500 mb-4 text-lg">Pernah berwisata bersama kami?</p>
+            <p class="text-primary-700 mb-4 text-lg">Pernah berwisata bersama kami?</p>
             <a href="https://wa.me/6281234567890?text=Halo%20Endah%20Trans,%20saya%20ingin%20memberikan%20ulasan" target="_blank"
                class="inline-flex items-center btn-gradient text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all text-lg">
                 <i class="fas fa-star mr-3 text-secondary-200"></i> Bagikan Ulasan Anda
@@ -528,43 +516,65 @@
 {{-- ====================================================
      TIM PROFESIONAL
      ==================================================== --}}
-<section class="py-20 bg-white">
+<section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14" data-aos="fade-up">
-            <span class="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
-                <i class="fas fa-users mr-1"></i> TIM PROFESIONAL
+        <div class="text-center mb-16" data-aos="fade-up">
+            <span class="inline-flex items-center bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <i class="fas fa-users mr-2"></i> TIM PROFESIONAL
             </span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">
                 Dikelola oleh Tim <span class="gradient-text">Berpengalaman</span>
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Orang-orang terbaik di balik layanan prima Endah Trans</p>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Orang-orang terbaik di balik layanan prima Endah Trans</p>
         </div>
         @php $teams = \App\Models\Team::all(); @endphp
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             @if($teams->count() > 0)
                 @foreach($teams as $i => $tm)
-                <div class="group text-center" data-aos="fade-up" data-aos-delay="{{ ($i%4)*100 }}">
-                    <div class="relative w-36 h-36 mx-auto mb-4 overflow-hidden rounded-3xl shadow-xl">
-                        <img src="{{ $tm->image ? asset('storage/'.$tm->image) : 'https://ui-avatars.com/api/?name='.urlencode($tm->name).'&background=ef4444&color=fff&bold=true&size=144' }}" alt="{{ $tm->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary-900/70 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-3">
-                            <div class="flex gap-2">
-                                @if($tm->instagram_url)<a href="{{ $tm->instagram_url }}" target="_blank" class="w-8 h-8 bg-secondary-600 rounded-full flex items-center justify-center"><i class="fab fa-instagram text-white text-xs"></i></a>@endif
-                                @if($tm->linkedin_url)<a href="{{ $tm->linkedin_url }}" target="_blank" class="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center"><i class="fab fa-linkedin text-white text-xs"></i></a>@endif
+                <div class="group" data-aos="fade-up" data-aos-delay="{{ ($i%4)*150 }}">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="relative h-80 overflow-hidden">
+                            <img src="{{ $tm->image ? asset('storage/'.$tm->image) : 'https://ui-avatars.com/api/?name='.urlencode($tm->name).'&background=ef4444&color=fff&bold=true&size=400' }}"
+                                 alt="{{ $tm->name }}"
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <div class="flex justify-center space-x-3">
+                                    @if($tm->linkedin_url)
+                                    <a href="{{ $tm->linkedin_url }}" target="_blank" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-blue-600 transition">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    @endif
+                                    @if($tm->instagram_url)
+                                    <a href="{{ $tm->instagram_url }}" target="_blank" class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-white hover:bg-white hover:text-pink-600 transition">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $tm->name }}</h3>
+                            <p class="text-primary-600 font-medium text-base">{{ $tm->role }}</p>
+                        </div>
                     </div>
-                    <h3 class="font-extrabold text-gray-900 mb-0.5">{{ $tm->name }}</h3>
-                    <p class="text-sm text-primary-600 font-semibold">{{ $tm->role }}</p>
                 </div>
                 @endforeach
             @else
                 @foreach([['Budi Santoso','Direktur Utama'],['Siti Rahayu','Manajer Operasional'],['Ahmad Fauzi','Kepala Driver'],['Dewi Kusuma','Customer Service']] as $i => $m)
-                <div class="group text-center" data-aos="fade-up" data-aos-delay="{{ $i*100 }}">
-                    <div class="relative w-36 h-36 mx-auto mb-4 overflow-hidden rounded-3xl shadow-xl">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($m[0]) }}&background=ef4444&color=fff&bold=true&size=144" alt="{{ $m[0] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="group" data-aos="fade-up" data-aos-delay="{{ $i*150 }}">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                        <div class="relative h-80 overflow-hidden">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($m[0]) }}&background=ef4444&color=fff&bold=true&size=400"
+                                 alt="{{ $m[0] }}"
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $m[0] }}</h3>
+                            <p class="text-primary-600 font-medium text-base">{{ $m[1] }}</p>
+                        </div>
                     </div>
-                    <h3 class="font-extrabold text-gray-900 mb-0.5">{{ $m[0] }}</h3>
-                    <p class="text-sm text-primary-600 font-semibold">{{ $m[1] }}</p>
                 </div>
                 @endforeach
             @endif
@@ -587,10 +597,10 @@
                 <span class="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-bold mb-5 border border-white/20">
                     <i class="fas fa-handshake mr-1"></i> BERGABUNG BERSAMA KAMI
                 </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                     Jadilah Bagian<br>dari <span class="text-secondary-400">Keluarga Endah Trans</span>
                 </h2>
-                <p class="text-white/75 text-lg leading-relaxed mb-8">
+                <p class="text-white/75 text-base leading-relaxed mb-8">
                     Bergabung sebagai agen resmi kami dan dapatkan komisi menarik, pelatihan gratis, serta dukungan penuh dari tim profesional kami.
                 </p>
                 <div class="space-y-4 mb-8">
@@ -703,10 +713,10 @@
             <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-3">
                 <i class="fas fa-map-marker-alt mr-1"></i> LOKASI KAMI
             </span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-primary-900 mb-3">
                 Kunjungi Kantor <span class="gradient-text">Endah Trans</span>
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Lokasi strategis di Jepara, mudah dijangkau dari berbagai arah</p>
+            <p class="text-primary-800 text-lg max-w-2xl mx-auto">Lokasi strategis di Jepara, mudah dijangkau dari berbagai arah</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch" data-aos="fade-up">
@@ -722,7 +732,7 @@
                     <div class="space-y-5">
                         <div class="border-b border-white/20 pb-4">
                             <p class="text-white/60 text-xs font-bold uppercase mb-1">Alamat</p>
-                            <p class="font-semibold text-sm leading-relaxed">Jl. Raya Jepara - Kudus, Rw. 03<br>Pelang, Kec. Mayong<br>Kab. Jepara, Jawa Tengah</p>
+                            <p class="font-semibold text-base leading-relaxed">Jl. Raya Jepara - Kudus, Rw. 03<br>Pelang, Kec. Mayong<br>Kab. Jepara, Jawa Tengah</p>
                         </div>
                         <div class="border-b border-white/20 pb-4">
                             <p class="text-white/60 text-xs font-bold uppercase mb-1">Telepon</p>
@@ -730,11 +740,11 @@
                         </div>
                         <div class="border-b border-white/20 pb-4">
                             <p class="text-white/60 text-xs font-bold uppercase mb-1">Email</p>
-                            <a href="mailto:info@endahtrans.com" class="font-bold hover:text-secondary-300 transition text-sm"><i class="fas fa-envelope mr-1"></i> info@endahtrans.com</a>
+                            <a href="mailto:info@endahtrans.com" class="font-bold hover:text-secondary-300 transition text-base"><i class="fas fa-envelope mr-1"></i> info@endahtrans.com</a>
                         </div>
                         <div>
                             <p class="text-white/60 text-xs font-bold uppercase mb-1">Jam Operasional</p>
-                            <p class="text-sm font-semibold">Sen–Jum: 08:00 – 17:00<br>Sabtu: 09:00 – 14:00<br><span class="text-red-300">Minggu: Tutup</span></p>
+                            <p class="text-base font-semibold">Sen–Jum: 08:00 – 17:00<br>Sabtu: 09:00 – 14:00<br><span class="text-red-300">Minggu: Tutup</span></p>
                         </div>
                     </div>
                 </div>
@@ -752,3 +762,4 @@
 </section>
 
 @endsection
+

@@ -42,9 +42,9 @@
                     <i class="fas fa-info-circle mr-2"></i> Informasi Kode Booking
                 </h3>
                 <ul class="text-sm text-blue-800 space-y-1">
-                    <li>✓ Dikirim ke email Anda setelah pemesanan berhasil</li>
-                    <li>✓ Format: <strong>ET + tanggal + kode unik</strong> (contoh: ET20260206ABCD)</li>
-                    <li>✓ Gunakan untuk mengecek status pemesanan kapan saja</li>
+                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Dikirim ke email Anda setelah pemesanan berhasil</li>
+                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Format: <strong>ET + tanggal + kode unik</strong> (contoh: ET20260206ABCD)</li>
+                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Gunakan untuk mengecek status pemesanan kapan saja</li>
                 </ul>
             </div>
 

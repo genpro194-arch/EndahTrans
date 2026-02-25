@@ -76,7 +76,7 @@
                                         @foreach((array) $featuresDisplay as $feature)
                                             @if($feature)
                                                 <li class="flex items-center">
-                                                    <span class="text-primary-500 mr-2">✓</span>
+                                                    <i class="fas fa-check text-primary-500 mr-2"></i>
                                                     {{ $feature }}
                                                 </li>
                                             @endif
