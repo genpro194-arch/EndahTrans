@@ -244,8 +244,8 @@
                         {{-- Section: Detail Perjalanan --}}
                         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                             <div class="px-6 py-4 border-b border-slate-100 flex items-center gap-3">
-                                <div class="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-route text-blue-600 text-xs"></i>
+                                <div class="w-8 h-8 bg-primary-50 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-route text-primary-600 text-xs"></i>
                                 </div>
                                 <h3 class="font-bold text-slate-800 text-sm">Detail Perjalanan</h3>
                             </div>
@@ -400,8 +400,8 @@
                         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                             <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-green-50 rounded-xl flex items-center justify-center">
-                                        <i class="fas fa-clipboard-check text-green-600 text-xs"></i>
+                                    <div class="w-8 h-8 bg-secondary-50 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-clipboard-check text-secondary-600 text-xs"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-sm">Ringkasan Pesanan</h3>
                                 </div>
@@ -434,11 +434,11 @@
                                     <div>
                                         <div class="px-6 py-4 flex items-center justify-between">
                                             <span class="text-sm text-slate-500 flex items-center gap-2"><i class="fas fa-tag w-4 text-center text-slate-400"></i> Harga/Bus/Hari</span>
-                                            <span x-text="rp(rate)" class="font-bold text-emerald-600 text-sm"></span>
+                                            <span x-text="rp(rate)" class="font-bold text-primary-600 text-sm"></span>
                                         </div>
-                                        <div class="px-6 py-4 flex items-center justify-between bg-emerald-50">
-                                            <span class="text-sm font-bold text-slate-700 flex items-center gap-2"><i class="fas fa-coins w-4 text-center text-emerald-500"></i> Total Estimasi</span>
-                                            <span x-text="rp(total)" class="font-extrabold text-emerald-700 text-base"></span>
+                                        <div class="px-6 py-4 flex items-center justify-between bg-primary-50">
+                                            <span class="text-sm font-bold text-slate-700 flex items-center gap-2"><i class="fas fa-coins w-4 text-center text-primary-500"></i> Total Estimasi</span>
+                                            <span x-text="rp(total)" class="font-extrabold text-primary-700 text-base"></span>
                                         </div>
                                     </div>
                                 </template>
@@ -458,8 +458,8 @@
                         ═══════════════════════════════════════ --}}
                         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-5">
                             <div class="px-6 py-4 border-b border-slate-100 flex items-center gap-3">
-                                <div class="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-credit-card text-blue-600 text-xs"></i>
+                                <div class="w-8 h-8 bg-primary-50 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-credit-card text-primary-600 text-xs"></i>
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-slate-800 text-sm">Metode Pembayaran</h3>
@@ -729,11 +729,11 @@
                                     <div class="space-y-2">
                                         <div class="flex items-center justify-between text-sm">
                                             <span class="text-slate-500">Harga/bus/hari</span>
-                                            <span x-text="rp(rate)" class="font-bold text-emerald-600"></span>
+                                            <span x-text="rp(rate)" class="font-bold text-primary-600"></span>
                                         </div>
                                         <div class="flex items-center justify-between text-sm pt-2 border-t border-slate-100">
                                             <span class="font-bold text-slate-700">Total Estimasi</span>
-                                            <span x-text="rp(total)" class="font-extrabold text-emerald-700 text-base"></span>
+                                            <span x-text="rp(total)" class="font-extrabold text-primary-700 text-base"></span>
                                         </div>
                                         <p class="text-xs text-slate-400" x-text="numBuses + ' bus × ' + durationDays + ' hari'"></p>
                                     </div>

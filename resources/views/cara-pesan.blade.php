@@ -30,8 +30,8 @@
                         <span class="inline-flex items-center gap-2 bg-secondary-50 border border-secondary-200 text-secondary-700 px-4 py-2 rounded-full text-sm font-semibold">
                             <i class="fas fa-check-circle text-secondary-500"></i> 4 Langkah Mudah
                         </span>
-                        <span class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold">
-                            <i class="fas fa-bolt text-emerald-500"></i> Fast Response
+                        <span class="inline-flex items-center gap-2 bg-primary-50 border border-primary-200 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold">
+                            <i class="fas fa-bolt text-primary-500"></i> Fast Response
                         </span>
                     </div>
                     {{-- Breadcrumb --}}
@@ -155,7 +155,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach([
                     ['icon'=>'fas fa-clock','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Waktu Pemesanan','desc'=>'Disarankan memesan minimal 3-7 hari sebelum keberangkatan. Untuk high season (libur nasional/lebaran) minimal 2 minggu sebelumnya.'],
-                    ['icon'=>'fas fa-money-bill-wave','color'=>'text-emerald-500','bg'=>'bg-emerald-50','border'=>'border-emerald-100','title'=>'Pembayaran','desc'=>'DP minimal 30% saat konfirmasi. Pelunasan dilakukan H-1 atau sebelum kendaraan berangkat. Tersedia transfer bank, tunai, dan QRIS.'],
+                    ['icon'=>'fas fa-money-bill-wave','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Pembayaran','desc'=>'DP minimal 30% saat konfirmasi. Pelunasan dilakukan H-1 atau sebelum kendaraan berangkat. Tersedia transfer bank, tunai, dan QRIS.'],
                     ['icon'=>'fas fa-undo','color'=>'text-primary-500','bg'=>'bg-primary-50','border'=>'border-primary-100','title'=>'Pembatalan','desc'=>'Pembatalan lebih dari 3 hari: DP kembali 50%. Pembatalan kurang dari 3 hari: DP tidak kembali. Force majeure dikaji case by case.'],
                 ] as $info)
                 <div class="bg-white rounded-2xl p-6 border {{ $info['border'] }} hover:shadow-lg transition-all duration-300" data-aos="fade-up">

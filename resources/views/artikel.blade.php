@@ -65,7 +65,7 @@
                     [
                         'img' => 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
                         'category' => 'Panduan',
-                        'cat_color' => 'bg-green-100 text-green-700',
+                        'cat_color' => 'bg-secondary-100 text-secondary-700',
                         'title' => 'Panduan Lengkap Memilih Bus Wisata yang Tepat untuk Rombongan',
                         'excerpt' => 'Memilih bus wisata bukan hanya soal harga. Ada banyak faktor yang perlu dipertimbangkan agar perjalanan Anda nyaman dan aman.',
                         'date' => '10 Februari 2026',
@@ -95,7 +95,7 @@
                     [
                         'img' => 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80',
                         'category' => 'Panduan',
-                        'cat_color' => 'bg-green-100 text-green-700',
+                        'cat_color' => 'bg-secondary-100 text-secondary-700',
                         'title' => 'Cara Memesan Bus Wisata dengan Mudah dan Aman',
                         'excerpt' => 'Proses pemesanan bus wisata kini semakin mudah. Berikut panduan langkah demi langkah untuk memesan armada bus wisata kami secara online maupun offline.',
                         'date' => '25 Januari 2026',

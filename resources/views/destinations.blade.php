@@ -96,7 +96,7 @@
                             </div>
                             <div class="flex items-center gap-2">
                                 @if($hasPrices)
-                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-1 rounded-full">
+                                <span class="text-xs text-secondary-500 font-semibold bg-secondary-50 px-2 py-1 rounded-full border border-secondary-100">
                                     Harga tersedia
                                 </span>
                                 @endif

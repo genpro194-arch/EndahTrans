@@ -211,7 +211,7 @@
                          alt="Executive Big Top" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
                     <div class="absolute top-5 left-5 right-5 flex items-start justify-between">
-                        <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1.5 rounded-xl tracking-wider shadow-lg">
+                        <span class="bg-secondary-700 text-white text-xs font-extrabold px-3 py-1.5 rounded-xl tracking-wider shadow-lg">
                             EXECUTIVE BIG TOP
                         </span>
                     </div>
@@ -227,11 +227,11 @@
                 </div>
                 <div class="bg-white px-6 py-4 flex items-center justify-between">
                     <div class="flex items-center gap-3 text-sm text-slate-500">
-                        <span class="flex items-center gap-1.5"><i class="fas fa-users text-indigo-500"></i> 45 Kursi</span>
+                        <span class="flex items-center gap-1.5"><i class="fas fa-users text-secondary-500"></i> 45 Kursi</span>
                         <span class="w-px h-4 bg-slate-200"></span>
-                        <span class="flex items-center gap-1.5"><i class="fas fa-binoculars text-indigo-500"></i> Panorama</span>
+                        <span class="flex items-center gap-1.5"><i class="fas fa-binoculars text-secondary-500"></i> Panorama</span>
                     </div>
-                    <span class="flex items-center gap-1.5 text-sm font-extrabold text-indigo-600 group-hover:gap-3 transition-all">
+                    <span class="flex items-center gap-1.5 text-sm font-extrabold text-primary-600 group-hover:gap-3 transition-all">
                         Pilih <i class="fas fa-arrow-right text-xs"></i>
                     </span>
                 </div>
