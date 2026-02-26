@@ -24,7 +24,7 @@
                         Armada
                     </h1>
                     <p class="text-lg text-gray-500 max-w-xl leading-relaxed">
-                        Proses pemesanan yang mudah, cepat, dan transparan — hanya 4 langkah dari kontak hingga berangkat
+                        Pesan bus wisata Endah Trans dari Jepara dengan mudah — cukup 4 langkah, armada siap menjemput rombongan Anda
                     </p>
                     <div class="mt-5 flex flex-wrap gap-3 justify-center md:justify-start">
                         <span class="inline-flex items-center gap-2 bg-secondary-50 border border-secondary-200 text-secondary-700 px-4 py-2 rounded-full text-sm font-semibold">
@@ -69,7 +69,7 @@
                 <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
                     Hanya <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-500 to-primary-500">4 Langkah</span> Mudah
                 </h2>
-                <p class="text-gray-500 max-w-xl mx-auto">Dari pertama kontak hingga berangkat, kami pastikan prosesnya mulus</p>
+                <p class="text-gray-500 max-w-xl mx-auto">Dari pertama kontak hingga rombongan Anda berangkat bersama armada Endah Trans</p>
             </div>
 
             <div class="relative">
@@ -83,17 +83,17 @@
                             'icon' => 'fas fa-phone-alt',
                             'from' => 'from-secondary-400', 'to' => 'to-secondary-600',
                             'title'=> 'Hubungi Kami',
-                            'desc' => 'Kontak kami via WhatsApp, telepon, atau email. Ceritakan kebutuhan Anda: tanggal berangkat, jumlah penumpang, dan tujuan.',
-                            'tip'  => 'Tersedia 7 hari seminggu, fast response via WhatsApp',
-                            'tip_icon' => 'fas fa-check-circle',
+                            'desc' => 'Kontak tim Endah Trans via WhatsApp, telepon, atau email. Sampaikan rencana wisata Anda: tanggal berangkat, jumlah rombongan, tujuan destinasi, dan jenis armada yang diinginkan (Big Bus / Medium Bus).',
+                            'tip'  => 'Senin–Sabtu 08.00–17.00 | Fast response via WhatsApp',
+                            'tip_icon' => 'fas fa-clock',
                         ],
                         [
                             'num'  => '02',
                             'icon' => 'fas fa-comments',
                             'from' => 'from-secondary-500', 'to' => 'to-primary-500',
                             'title'=> 'Diskusi & Penawaran',
-                            'desc' => 'Tim kami akan memberikan rekomendasi armada yang paling sesuai beserta detail harga, fasilitas, dan jadwal perjalanan.',
-                            'tip'  => 'Penawaran gratis, tanpa biaya konsultasi',
+                            'desc' => 'Tim kami akan merekomendasikan armada yang paling sesuai — Big Bus 45 kursi atau Medium Bus 35 kursi — lengkap dengan harga transparan sudah termasuk BBM, tol, dan driver bersertifikat.',
+                            'tip'  => 'Konsultasi & penawaran gratis, tanpa biaya apapun',
                             'tip_icon' => 'fas fa-tag',
                         ],
                         [
@@ -101,17 +101,17 @@
                             'icon' => 'fas fa-file-contract',
                             'from' => 'from-primary-400', 'to' => 'to-secondary-500',
                             'title'=> 'Konfirmasi & DP',
-                            'desc' => 'Setelah setuju dengan penawaran, konfirmasi pemesanan dengan membayar uang muka (DP) minimal 30% dari total biaya.',
-                            'tip'  => 'Transfer bank / tunai / QRIS tersedia',
-                            'tip_icon' => 'fas fa-credit-card',
+                            'desc' => 'Setuju dengan penawaran? Konfirmasi pemesanan dengan membayar DP minimal 30% untuk memblokir unit armada dan tanggal keberangkatan Anda. Pembayaran bisa via transfer bank (BCA/Mandiri/BNI/BRI) atau QRIS.',
+                            'tip'  => 'DP minimal 30% — unit & tanggal langsung diblokir',
+                            'tip_icon' => 'fas fa-lock',
                         ],
                         [
                             'num'  => '04',
                             'icon' => 'fas fa-bus',
                             'from' => 'from-secondary-400', 'to' => 'to-primary-600',
                             'title'=> 'Berangkat!',
-                            'desc' => 'Pada hari keberangkatan, armada kami tiba di lokasi penjemputan sesuai jadwal. Pelunasan dilakukan sebelum berangkat.',
-                            'tip'  => 'Driver berpengalaman & armada terawat siap melayani',
+                            'desc' => 'Pada hari H, armada Endah Trans tiba tepat waktu di lokasi penjemputan yang disepakati. Lakukan pelunasan sebelum bus berangkat, dan nikmati perjalanan wisata bersama rombongan Anda!',
+                            'tip'  => 'Driver berpengalaman, armada AC terawat, asuransi penumpang',
                             'tip_icon' => 'fas fa-shield-alt',
                         ],
                     ] as $i => $step)
@@ -154,9 +154,9 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach([
-                    ['icon'=>'fas fa-clock','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Waktu Pemesanan','desc'=>'Disarankan memesan minimal 3-7 hari sebelum keberangkatan. Untuk high season (libur nasional/lebaran) minimal 2 minggu sebelumnya.'],
-                    ['icon'=>'fas fa-money-bill-wave','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Pembayaran','desc'=>'DP minimal 30% saat konfirmasi. Pelunasan dilakukan H-1 atau sebelum kendaraan berangkat. Tersedia transfer bank, tunai, dan QRIS.'],
-                    ['icon'=>'fas fa-undo','color'=>'text-primary-500','bg'=>'bg-primary-50','border'=>'border-primary-100','title'=>'Pembatalan','desc'=>'Pembatalan lebih dari 3 hari: DP kembali 50%. Pembatalan kurang dari 3 hari: DP tidak kembali. Force majeure dikaji case by case.'],
+                    ['icon'=>'fas fa-clock','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Waktu Pemesanan','desc'=>'Disarankan memesan minimal 3–7 hari sebelum keberangkatan. Untuk musim liburan nasional atau Lebaran, pesan minimal 2 minggu sebelumnya agar unit armada tidak kehabisan.'],
+                    ['icon'=>'fas fa-money-bill-wave','color'=>'text-secondary-500','bg'=>'bg-secondary-50','border'=>'border-secondary-100','title'=>'Pembayaran','desc'=>'DP minimal 30% saat konfirmasi untuk memblokir unit. Pelunasan H-1 atau sebelum bus berangkat. Tersedia transfer BCA, Mandiri, BNI, BRI, tunai, dan QRIS.'],
+                    ['icon'=>'fas fa-undo','color'=>'text-primary-500','bg'=>'bg-primary-50','border'=>'border-primary-100','title'=>'Pembatalan','desc'=>'Pembatalan lebih dari 3 hari sebelum keberangkatan: DP dikembalikan 50%. Pembatalan kurang dari 3 hari: DP hangus. Kasus force majeure (bencana, dll) dikaji khusus.'],
                 ] as $info)
                 <div class="bg-white rounded-2xl p-6 border {{ $info['border'] }} hover:shadow-lg transition-all duration-300" data-aos="fade-up">
                     <div class="w-12 h-12 {{ $info['bg'] }} rounded-xl flex items-center justify-center mb-4 border {{ $info['border'] }}">
@@ -182,11 +182,11 @@
 
             <div class="space-y-3">
                 @foreach([
-                    ['q'=>'Apakah bisa pesan tanpa DP?','a'=>'Tidak bisa. DP minimal 30% diperlukan untuk konfirmasi dan pemblokiran unit armada pada tanggal yang Anda inginkan.'],
-                    ['q'=>'Berapa jumlah penumpang minimal?','a'=>'Tidak ada minimal penumpang. Kami melayani dari kapasitas kecil (medium bus 35 kursi) hingga besar (big bus 45 kursi).'],
-                    ['q'=>'Apakah harga sudah termasuk BBM dan tol?','a'=>'Harga biasanya sudah all-in (BBM, tol, driver). Namun harap konfirmasi saat diskusi karena tergantung rute dan jenis charter.'],
-                    ['q'=>'Bisa pesan untuk perjalanan luar kota/pulau?','a'=>'Bisa! Kami melayani perjalanan dalam dan luar kota Jawa Tengah. Hubungi kami untuk rute dan estimasi biaya.'],
-                    ['q'=>'Apakah driver menginap jika perjalanan multi-hari?','a'=>'Ya, biaya akomodasi driver (hotel/penginapan) ditanggung oleh pemesan, atau bisa dikoordinasikan bersama saat pemesanan.'],
+                    ['q'=>'Apakah bisa pesan tanpa DP?','a'=>'Tidak bisa. DP minimal 30% wajib dibayarkan untuk mengkonfirmasi pemesanan dan memblokir unit armada Endah Trans pada tanggal yang Anda inginkan.'],
+                    ['q'=>'Berapa kapasitas penumpang armada Endah Trans?','a'=>'Endah Trans menyediakan Medium Bus berkapasitas 35 kursi dan Big Bus berkapasitas 45 kursi. Semua dilengkapi AC, WiFi, LCD TV, USB Charger, dan reclining seat.'],
+                    ['q'=>'Apakah harga sudah termasuk BBM, tol, dan driver?','a'=>'Ya, harga yang kami tawarkan biasanya sudah all-in mencakup BBM, tol, dan biaya driver. Namun pastikan konfirmasi saat diskusi karena bisa berbeda tergantung rute dan durasi perjalanan.'],
+                    ['q'=>'Bisa pesan untuk perjalanan luar Jawa Tengah?','a'=>'Bisa! Endah Trans melayani perjalanan wisata ke berbagai destinasi di seluruh Indonesia. Hubungi kami via WhatsApp untuk rute dan estimasi biaya.'],
+                    ['q'=>'Apakah driver ikut menginap saat perjalanan multi-hari?','a'=>'Ya. Untuk perjalanan lebih dari 1 hari, biaya akomodasi driver (hotel/penginapan) ditanggung oleh pemesan. Detail ini akan dikoordinasikan saat proses diskusi pemesanan.'],
                 ] as $i => $faq)
                 <div class="border border-gray-100 rounded-2xl overflow-hidden hover:border-secondary-200 transition-colors" data-aos="fade-up" data-aos-delay="{{ $i * 50 }}">
                     <button @click="open === {{ $i }} ? open = null : open = {{ $i }}"
