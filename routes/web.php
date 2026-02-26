@@ -27,7 +27,8 @@ Route::get('/paket-unggulan', [HomeController::class, 'popularRoutes'])->name('p
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/armada', [HomeController::class, 'armada'])->name('armada');
-Route::get('/agen', [HomeController::class, 'agen'])->name('agen');
+Route::get('/armada/{kelas}', [HomeController::class, 'armadaDetail'])->name('armada.detail')
+    ->whereIn('kelas', ['eksklusif', 'reguler', 'bigtop', 'superexec']);
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/rute', [HomeController::class, 'rute'])->name('rute');
 Route::get('/cara-pesan', [HomeController::class, 'caraPesan'])->name('cara-pesan');
@@ -35,6 +36,7 @@ Route::get('/cara-pesan', [HomeController::class, 'caraPesan'])->name('cara-pesa
 // Charter (Armada) Booking
 Route::post('/charter-armada', [CharteredBookingController::class, 'store'])->name('charter.store');
 Route::get('/charter-armada/{code}/nota', [CharteredBookingController::class, 'receipt'])->name('charter.receipt');
+Route::get('/charter-price', [HomeController::class, 'charterPrice'])->name('charter.price');
 
 // Packages
 Route::get('/paket', [PackageController::class, 'index'])->name('packages.index');

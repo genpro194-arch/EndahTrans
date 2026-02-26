@@ -25,6 +25,7 @@ class CharterBooking extends Model
         'price_per_bus_per_day',
         'total_price',
         'special_requests',
+        'payment_method',
         'status',
         'payment_status',
     ];

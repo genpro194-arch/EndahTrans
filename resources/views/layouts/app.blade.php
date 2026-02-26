@@ -350,9 +350,6 @@
                     <a href="{{ route('armada') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'active text-primary-600' : '' }}">
                         Armada
                     </a>
-                    <a href="{{ route('agen') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('agen') ? 'active text-primary-600' : '' }}">
-                        Agen
-                    </a>
                     <a href="{{ route('booking.check-status') }}" class="btn-gradient text-white px-6 py-2.5 rounded-xl font-medium shadow-lg">
                         <i class="fas fa-search mr-2"></i>Cek Booking
                     </a>
@@ -407,9 +404,6 @@
                 </a>
                 <a href="{{ route('armada') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-bus w-6"></i> Armada
-                </a>
-                <a href="{{ route('agen') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('agen') ? 'bg-primary-50 text-primary-600' : '' }}">
-                    <i class="fas fa-user-tie w-6"></i> Agen
                 </a>
                 <a href="{{ route('booking.check-status') }}" class="flex items-center justify-center btn-gradient text-white px-4 py-3 rounded-xl font-medium mt-2">
                     <i class="fas fa-search mr-2"></i> Cek Booking
@@ -520,7 +514,6 @@
                         <li><a href="{{ route('cara-pesan') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Cara Pesan</a></li>
                         <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Kontak</a></li>
                         <li><a href="{{ route('armada') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Armada</a></li>
-                        <li><a href="{{ route('agen') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Agen</a></li>
                         <li><a href="{{ route('booking.check-status') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Cek Booking</a></li>
                     </ul>
                 </div>

@@ -28,6 +28,16 @@ class Destination extends Model
         return $this->hasMany(Package::class);
     }
 
+    public function prices()
+    {
+        return $this->hasMany(DestinationPrice::class);
+    }
+
+    public function priceForFleet(string $fleetType): int
+    {
+        return $this->prices->where('fleet_type', $fleetType)->first()?->price_per_day ?? 0;
+    }
+
     public function getImageUrlAttribute()
     {
         if ($this->image) {
