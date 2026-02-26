@@ -28,6 +28,8 @@ class Booking extends Model
         'payment_proof',
         'paid_at',
         'admin_notes',
+        'doku_order_id',
+        'doku_payment_url',
     ];
 
     protected $casts = [

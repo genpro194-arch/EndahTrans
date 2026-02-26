@@ -92,41 +92,30 @@
                     @endif
 
                     <!-- Payment Info -->
-                    <div class="bg-blue-50 rounded-lg p-6">
-                        <h4 class="font-semibold text-blue-900 mb-4">
-                            <i class="fas fa-credit-card mr-2"></i> Instruksi Pembayaran
+                    <div class="rounded-2xl p-6" style="background: linear-gradient(135deg, #fff1f5 0%, #fff5f5 100%); border: 1px solid #fecdd3;">
+                        <h4 class="font-semibold text-gray-900 mb-2">
+                            <i class="fas fa-credit-card mr-2 text-primary-600"></i> Pembayaran
                         </h4>
-                        <p class="text-blue-800 mb-4">Silakan transfer ke rekening berikut:</p>
-                        
-                        <div class="bg-white rounded-lg p-4 mb-4">
-                            <div class="grid grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <p class="text-gray-500">Bank</p>
-                                    <p class="font-semibold">BCA</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">No. Rekening</p>
-                                    <p class="font-semibold">1234567890</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">Atas Nama</p>
-                                    <p class="font-semibold">PT Endah Travel</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-500">Jumlah Transfer</p>
-                                    <p class="font-semibold text-primary-600">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</p>
-                                </div>
+                        <p class="text-gray-600 text-sm mb-5">Selesaikan pembayaran Anda melalui DOKU — tersedia Virtual Account, QRIS, dan Kartu Kredit.</p>
+
+                        <div class="bg-white rounded-xl p-4 mb-5 flex items-center justify-between shadow-sm">
+                            <div>
+                                <p class="text-xs text-gray-400 mb-1">Total Pembayaran</p>
+                                <p class="text-2xl font-bold text-primary-600">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-400 mb-1">Kode Booking</p>
+                                <p class="font-semibold text-gray-800 text-sm">{{ $booking->booking_code }}</p>
                             </div>
                         </div>
 
-                        <div class="text-sm text-blue-700">
-                            <p class="mb-2"><strong>Penting:</strong></p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li>Simpan kode booking Anda: <strong>{{ $booking->booking_code }}</strong></li>
-                                <li>Konfirmasi pembayaran via WhatsApp dengan mengirimkan bukti transfer</li>
-                                <li>Pembayaran akan diverifikasi dalam 1x24 jam kerja</li>
-                            </ul>
-                        </div>
+                        <a href="{{ route('doku.pay', $booking->booking_code) }}"
+                           class="btn-gradient w-full text-white text-center py-4 rounded-xl font-bold text-base inline-flex items-center justify-center gap-3 shadow-lg hover:-translate-y-1 transition-all duration-200 block">
+                            <i class="fas fa-lock text-lg"></i> Bayar Sekarang via DOKU
+                        </a>
+                        <p class="text-center text-gray-400 text-xs mt-3">
+                            <i class="fas fa-shield-alt mr-1"></i> Pembayaran aman & terenkripsi · Batas waktu 60 menit
+                        </p>
                     </div>
                 </div>
 

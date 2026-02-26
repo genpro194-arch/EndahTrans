@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\CharteredBookingController;
+use App\Http\Controllers\DokuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,13 @@ Route::get('/booking/status/{bookingCode}', function ($bookingCode) {
         ->firstOrFail();
     return view('booking.status', compact('booking'));
 })->name('booking.status');
+
+// DOKU Payment Gateway
+Route::get('/doku/pay/{bookingCode}',   [DokuController::class, 'pay'])->name('doku.pay');
+Route::get('/doku/success',             [DokuController::class, 'success'])->name('doku.success');
+Route::get('/doku/failed',              [DokuController::class, 'failed'])->name('doku.failed');
+Route::post('/doku/notify',             [DokuController::class, 'notify'])->name('doku.notify')
+    ->withoutMiddleware(['web']);
 
 /*
 |--------------------------------------------------------------------------
