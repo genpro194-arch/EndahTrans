@@ -91,7 +91,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
             line-height: 1.6;
-            color: #1e293b;
+            color: #111111;
         }
         
         /* Custom Scrollbar */
@@ -129,7 +129,7 @@
         
         /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #db2777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -137,13 +137,13 @@
         
         /* Button Gradient */
         .btn-gradient {
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #db2777 100%);
             transition: all 0.3s ease;
         }
         .btn-gradient:hover {
-            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #be185d 100%);
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.4);
         }
         
         .btn-gradient-green {
@@ -157,13 +157,13 @@
         }
         
         .btn-gradient-orange {
-            background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
+            background: linear-gradient(135deg, #dc2626 0%, #db2777 100%);
             transition: all 0.3s ease;
         }
         .btn-gradient-orange:hover {
-            background: linear-gradient(135deg, #4f46e5 0%, #059669 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #be185d 100%);
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.4);
         }
         
         /* Card Hover Effects */
@@ -242,7 +242,7 @@
         
         /* Pattern Background */
         .pattern-bg {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         /* Form Input Text Visibility */
@@ -272,7 +272,7 @@
     <!-- Navigation -->
     <nav x-data="{ open: false, scrolled: false }" 
          @scroll.window="scrolled = (window.pageYOffset > 20)"
-         :class="scrolled ? 'glass shadow-lg' : 'bg-white/80'"
+         :class="scrolled ? 'glass shadow-lg' : 'bg-white/90'"
          class="fixed w-full top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
@@ -291,14 +291,14 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-6">
-                    <a href="{{ route('home') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('home') ? 'active text-primary-600' : '' }}">
+                    <a href="{{ route('home') }}" class="nav-link text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('home') ? 'active text-primary-600' : '' }}">
                         Beranda
                     </a>
-                    <a href="{{ route('about') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'active text-primary-600' : '' }}">
+                    <a href="{{ route('about') }}" class="nav-link text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'active text-primary-600' : '' }}">
                         Tentang Kami
                     </a>
                     <div class="relative" x-data="{ ekspOpen: false }" @mouseenter="ekspOpen = true" @mouseleave="ekspOpen = false">
-                        <button class="nav-link flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('galeri','rute','cara-pesan') ? 'active text-primary-600' : '' }}">
+                        <button class="nav-link flex items-center gap-1 text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('galeri','rute','cara-pesan') ? 'active text-primary-600' : '' }}">
                             Eksplorasi
                             <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="ekspOpen ? 'rotate-180' : ''"></i>
                         </button>
@@ -344,13 +344,13 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('destinasi') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('destinasi') ? 'active text-primary-600' : '' }}">
+                    <a href="{{ route('destinasi') }}" class="nav-link text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('destinasi') ? 'active text-primary-600' : '' }}">
                         Tujuan
                     </a>
-                    <a href="{{ route('armada') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'active text-primary-600' : '' }}">
+                    <a href="{{ route('armada') }}" class="nav-link text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'active text-primary-600' : '' }}">
                         Armada
                     </a>
-                    <a href="{{ route('contact') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
+                    <a href="{{ route('contact') }}" class="nav-link text-gray-900 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
                         Kontak
                     </a>
                     <a href="{{ route('booking.check-status') }}" class="btn-gradient text-white px-6 py-2.5 rounded-xl font-medium shadow-lg">
@@ -360,7 +360,7 @@
                 
                 <!-- Mobile menu button -->
                 <div class="lg:hidden flex items-center">
-                    <button @click="open = !open" class="text-gray-700 hover:text-primary-600 p-2 rounded-lg hover:bg-gray-100 transition">
+                    <button @click="open = !open" class="text-gray-900 hover:text-primary-600 p-2 rounded-lg hover:bg-primary-50 transition">
                         <i x-show="!open" class="fas fa-bars text-2xl"></i>
                         <i x-show="open" x-cloak class="fas fa-times text-2xl"></i>
                     </button>
@@ -466,7 +466,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white relative overflow-hidden">
+    <footer class="text-white relative overflow-hidden" style="background: linear-gradient(160deg, #0a0000 0%, #1a0000 40%, #180010 70%, #0d0008 100%)">
         <!-- Decorative Elements -->
         <div class="absolute top-0 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
@@ -488,19 +488,19 @@
                         Jasa travel dan perjalanan wisata terpercaya dengan pengalaman melayani ribuan pelanggan.
                     </p>
                     <div class="flex space-x-3">
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-primary-500 transition-colors duration-300">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-primary-600 transition-colors duration-300">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-pink-500 transition-colors duration-300">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-secondary-500 transition-colors duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
                         <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-green-500 transition-colors duration-300">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-red-500 transition-colors duration-300">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-primary-500 transition-colors duration-300">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-blue-400 transition-colors duration-300">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-secondary-600 transition-colors duration-300">
                             <i class="fab fa-tiktok"></i>
                         </a>
                     </div>
@@ -553,20 +553,20 @@
                             <span class="pt-2">Jl. Pariwisata No. 123<br>Jakarta Selatan, 12345</span>
                         </li>
                         <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-green-500 transition-colors flex-shrink-0">
-                                <i class="fas fa-phone text-green-400 group-hover:text-white transition-colors"></i>
+                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-secondary-500 transition-colors flex-shrink-0">
+                                <i class="fas fa-phone text-secondary-400 group-hover:text-white transition-colors"></i>
                             </div>
                             <span>+62 812-3456-7890</span>
                         </li>
                         <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-blue-500 transition-colors flex-shrink-0">
-                                <i class="fas fa-envelope text-blue-400 group-hover:text-white transition-colors"></i>
+                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-primary-500 transition-colors flex-shrink-0">
+                                <i class="fas fa-envelope text-primary-400 group-hover:text-white transition-colors"></i>
                             </div>
                             <span>info@endahtravel.com</span>
                         </li>
                         <li class="flex items-center group">
-                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-yellow-500 transition-colors flex-shrink-0">
-                                <i class="fas fa-clock text-yellow-400 group-hover:text-white transition-colors"></i>
+                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3 group-hover:bg-secondary-600 transition-colors flex-shrink-0">
+                                <i class="fas fa-clock text-secondary-400 group-hover:text-white transition-colors"></i>
                             </div>
                             <span>Sen - Sab: 08:00 - 17:00</span>
                         </li>
@@ -575,7 +575,7 @@
             </div>
             
             <!-- Bottom Footer -->
-            <div class="border-t border-gray-800 mt-12 pt-8">
+            <div class="border-t border-primary-900/50 mt-12 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <p class="text-gray-400 text-sm">&copy; {{ date('Y') }} Endah Travel. All rights reserved.</p>
                     <div class="flex items-center space-x-6 mt-4 md:mt-0">

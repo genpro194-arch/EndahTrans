@@ -202,13 +202,13 @@
                 <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                     <i class="fas fa-building mr-1"></i> TENTANG KAMI
                 </span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-900 mb-5 leading-tight">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">
                     Kenali <span class="gradient-text">Endah Trans</span><br>Lebih Dekat
                 </h2>
-                <p class="text-primary-800 text-lg leading-relaxed mb-5">
-                    <strong class="text-primary-800">PO. Endah Trans</strong> adalah perusahaan transportasi bus wisata yang telah berdiri sejak 2014. Bermarkas di <strong class="text-primary-800">Jepara, Jawa Tengah</strong>, kami melayani perjalanan wisata ke berbagai destinasi di seluruh Indonesia.
+                <p class="text-gray-800 text-lg leading-relaxed mb-5">
+                    <strong class="text-primary-700">PO. Endah Trans</strong> adalah perusahaan transportasi bus wisata yang telah berdiri sejak 2014. Bermarkas di <strong class="text-primary-700">Jepara, Jawa Tengah</strong>, kami melayani perjalanan wisata ke berbagai destinasi di seluruh Indonesia.
                 </p>
-                <p class="text-primary-800 leading-relaxed mb-8">
+                <p class="text-gray-700 leading-relaxed mb-8">
                     Dengan armada bus modern, driver berpengalaman dan bersertifikat, serta layanan pelanggan yang ramah, kami berkomitmen menjadikan setiap perjalanan Anda sebagai pengalaman yang berkesan dan tak terlupakan.
                 </p>
 
@@ -222,8 +222,8 @@
                 <div class="flex items-center gap-3 p-4 border border-primary-100 rounded-xl hover:border-{{ $f['color'] }}-300 transition">
                         <i class="{{ $f['icon'] }} text-{{ $f['color'] }}-500 text-lg flex-shrink-0"></i>
                         <div>
-                            <div class="font-semibold text-primary-900 text-sm">{{ $f['title'] }}</div>
-                            <div class="text-sm text-primary-600">{{ $f['sub'] }}</div>
+                            <div class="font-semibold text-gray-900 text-sm">{{ $f['title'] }}</div>
+                            <div class="text-sm text-gray-500">{{ $f['sub'] }}</div>
                         </div>
                     </div>
                     @endforeach
@@ -610,7 +610,7 @@
             <span class="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
                 <i class="fas fa-lightbulb mr-1"></i> TIPS & PANDUAN
             </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-primary-900 mb-3">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
                 Tips <span class="gradient-text">Perjalanan</span> Terbaik
             </h2>
         </div>
@@ -623,13 +623,13 @@
                 ['ico'=>'fas fa-first-aid','c'=>'from-primary-600 to-primary-800','t'=>'Siapkan P3K','d'=>'Bawa obat-obatan pribadi dan P3K. Konsultasikan kesehatan sebelum perjalanan jauh.'],
                 ['ico'=>'fas fa-camera','c'=>'from-secondary-600 to-secondary-800','t'=>'Abadikan Momen','d'=>'Isi daya kamera dan ponsel. Siapkan memori cukup untuk semua momen berharga perjalanan.'],
             ] as $i => $tip)
-            <div class="group flex gap-4 p-5 rounded-xl border border-primary-100 hover:border-primary-300 bg-white hover:shadow-sm transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
+            <div class="group flex gap-4 p-5 rounded-xl border border-gray-100 hover:border-primary-300 bg-white hover:shadow-sm transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ ($i%3)*100 }}">
                 <div class="w-11 h-11 bg-gradient-to-br {{ $tip['c'] }} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                     <i class="{{ $tip['ico'] }} text-white text-xl"></i>
                 </div>
                 <div>
-                    <h3 class="font-extrabold text-primary-900 text-lg mb-2">{{ $tip['t'] }}</h3>
-                    <p class="text-primary-700 text-base leading-relaxed">{{ $tip['d'] }}</p>
+                    <h3 class="font-extrabold text-gray-900 text-lg mb-2">{{ $tip['t'] }}</h3>
+                    <p class="text-gray-600 text-base leading-relaxed">{{ $tip['d'] }}</p>
                 </div>
             </div>
             @endforeach
@@ -737,7 +737,7 @@
             <span class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
                 <i class="fas fa-users mr-2"></i> Our Team
             </span>
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Tim Profesional Kami</h2>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Tim <span class="gradient-text">Profesional</span> Kami</h2>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">Orang-orang hebat di balik layanan terbaik kami</p>
         </div>
 
@@ -769,7 +769,7 @@
                         </div>
                         <div class="p-6 text-center">
                             <h4 class="text-xl font-bold text-gray-900 mb-1">{{ $member->name }}</h4>
-                            <p class="text-primary-600 font-medium">{{ $member->role }}</p>
+                            <p class="text-secondary-600 font-medium">{{ $member->role }}</p>
                         </div>
                     </div>
                 </div>
@@ -786,7 +786,7 @@
                         </div>
                         <div class="p-6 text-center">
                             <h4 class="text-xl font-bold text-gray-900 mb-1">{{ $m[0] }}</h4>
-                            <p class="text-primary-600 font-medium">{{ $m[1] }}</p>
+                            <p class="text-secondary-600 font-medium">{{ $m[1] }}</p>
                         </div>
                     </div>
                 </div>
@@ -807,10 +807,10 @@
             <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-3">
                 <i class="fas fa-map-marker-alt mr-1"></i> LOKASI KAMI
             </span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-primary-900 mb-3">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
                 Kunjungi Kantor <span class="gradient-text">Endah Trans</span>
             </h2>
-            <p class="text-primary-800 text-lg max-w-2xl mx-auto">Lokasi strategis di Jepara, mudah dijangkau dari berbagai arah</p>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Lokasi strategis di Jepara, mudah dijangkau dari berbagai arah</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch" data-aos="fade-up">
