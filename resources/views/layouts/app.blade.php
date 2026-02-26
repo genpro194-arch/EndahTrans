@@ -268,7 +268,7 @@
     
     @stack('styles')
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col overflow-x-hidden">
     <!-- Navigation -->
     <nav x-data="{ open: false, scrolled: false }" 
          @scroll.window="scrolled = (window.pageYOffset > 20)"
@@ -297,9 +297,53 @@
                     <a href="{{ route('about') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'active text-primary-600' : '' }}">
                         Tentang Kami
                     </a>
-                    <a href="{{ route('artikel') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('artikel') ? 'active text-primary-600' : '' }}">
-                        Artikel
-                    </a>
+                    <div class="relative" x-data="{ ekspOpen: false }" @mouseenter="ekspOpen = true" @mouseleave="ekspOpen = false">
+                        <button class="nav-link flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('galeri','rute','cara-pesan') ? 'active text-primary-600' : '' }}">
+                            Eksplorasi
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="ekspOpen ? 'rotate-180' : ''"></i>
+                        </button>
+                        <div x-show="ekspOpen"
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 translate-y-1"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-1"
+                             x-cloak
+                             class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-52 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                                <a href="{{ route('galeri') }}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-secondary-50 hover:text-secondary-600 transition {{ request()->routeIs('galeri') ? 'bg-secondary-50 text-secondary-600' : 'text-gray-700' }}">
+                                    <span class="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-images text-secondary-500 text-sm"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-semibold text-sm">Galeri</div>
+                                        <div class="text-xs text-gray-400">Foto perjalanan kami</div>
+                                    </div>
+                                </a>
+                                <div class="h-px bg-gray-100 mx-4"></div>
+                                <a href="{{ route('rute') }}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-secondary-50 hover:text-secondary-600 transition {{ request()->routeIs('rute') ? 'bg-secondary-50 text-secondary-600' : 'text-gray-700' }}">
+                                    <span class="w-8 h-8 bg-secondary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marked-alt text-secondary-500 text-sm"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-semibold text-sm">Rute</div>
+                                        <div class="text-xs text-gray-400">Video rute perjalanan</div>
+                                    </div>
+                                </a>
+                                <div class="h-px bg-gray-100 mx-4"></div>
+                                <a href="{{ route('cara-pesan') }}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-primary-50 hover:text-primary-600 transition {{ request()->routeIs('cara-pesan') ? 'bg-primary-50 text-primary-600' : 'text-gray-700' }}">
+                                    <span class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-clipboard-list text-primary-500 text-sm"></i>
+                                    </span>
+                                    <div>
+                                        <div class="font-semibold text-sm">Cara Pesan</div>
+                                        <div class="text-xs text-gray-400">Panduan pemesanan</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="{{ route('contact') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
                         Kontak
                     </a>
@@ -341,9 +385,23 @@
                 <a href="{{ route('about') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('about') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-info-circle w-6"></i> Tentang Kami
                 </a>
-                <a href="{{ route('artikel') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('artikel') ? 'bg-primary-50 text-primary-600' : '' }}">
-                    <i class="fas fa-newspaper w-6"></i> Artikel
-                </a>
+                <div x-data="{ ekspOpen: {{ request()->routeIs('galeri','cara-pesan') ? 'true' : 'false' }} }">
+                        <button @click="ekspOpen = !ekspOpen" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium transition {{ request()->routeIs('galeri','rute','cara-pesan') ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600' }}">
+                        <span class="flex items-center"><i class="fas fa-compass w-6"></i> Eksplorasi</span>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="ekspOpen ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="ekspOpen" x-cloak class="ml-6 mt-1 space-y-1 border-l-2 border-secondary-200 pl-3">
+                        <a href="{{ route('galeri') }}" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('galeri') ? 'bg-secondary-50 text-secondary-600' : 'text-gray-600 hover:bg-secondary-50 hover:text-secondary-600' }}">
+                            <i class="fas fa-images w-5"></i> Galeri
+                        </a>
+                        <a href="{{ route('rute') }}" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('rute') ? 'bg-secondary-50 text-secondary-600' : 'text-gray-600 hover:bg-secondary-50 hover:text-secondary-600' }}">
+                            <i class="fas fa-map-marked-alt w-5"></i> Rute
+                        </a>
+                        <a href="{{ route('cara-pesan') }}" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('cara-pesan') ? 'bg-primary-50 text-primary-600' : 'text-gray-600 hover:bg-primary-50 hover:text-primary-600' }}">
+                            <i class="fas fa-clipboard-list w-5"></i> Cara Pesan
+                        </a>
+                    </div>
+                </div>
                 <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-envelope w-6"></i> Kontak
                 </a>
@@ -457,7 +515,9 @@
                     <ul class="space-y-3">
                         <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Beranda</a></li>
                         <li><a href="{{ route('about') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Tentang Kami</a></li>
-                        <li><a href="{{ route('artikel') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Artikel</a></li>
+                        <li><a href="{{ route('galeri') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Galeri</a></li>
+                        <li><a href="{{ route('rute') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Rute</a></li>
+                        <li><a href="{{ route('cara-pesan') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Cara Pesan</a></li>
                         <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Kontak</a></li>
                         <li><a href="{{ route('armada') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Armada</a></li>
                         <li><a href="{{ route('agen') }}" class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-400"></i>Agen</a></li>
@@ -544,7 +604,7 @@
         AOS.init({
             duration: 800,
             easing: 'ease-out-cubic',
-            once: true,
+            once: false,
             offset: 50
         });
     </script>
@@ -572,9 +632,12 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                    entry.target.classList.add('counted');
+                if (entry.isIntersecting) {
                     animateCounter(entry.target);
+                } else {
+                    // Reset saat keluar layar agar bisa animasi ulang
+                    const target = parseInt(entry.target.getAttribute('data-target')) || 0;
+                    entry.target.textContent = Math.max(1, Math.floor(target * 0.01)) + '+';
                 }
             });
         }, { threshold: 0.5 });

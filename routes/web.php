@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\RouteVideoController;
 use App\Http\Controllers\CharteredBookingController;
 
 /*
@@ -27,7 +28,9 @@ Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/armada', [HomeController::class, 'armada'])->name('armada');
 Route::get('/agen', [HomeController::class, 'agen'])->name('agen');
-Route::get('/artikel', [HomeController::class, 'artikel'])->name('artikel');
+Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
+Route::get('/rute', [HomeController::class, 'rute'])->name('rute');
+Route::get('/cara-pesan', [HomeController::class, 'caraPesan'])->name('cara-pesan');
 
 // Charter (Armada) Booking
 Route::post('/charter-armada', [CharteredBookingController::class, 'store'])->name('charter.store');
@@ -77,6 +80,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     
     // Teams
     Route::resource('teams', TeamController::class);
+
+    // Route Videos
+    Route::resource('route-videos', RouteVideoController::class)->except(['show']);
     
     // Bookings
     Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');

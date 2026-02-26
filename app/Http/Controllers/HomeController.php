@@ -6,6 +6,7 @@ use App\Models\Package;
 use App\Models\Destination;
 use App\Models\Testimonial;
 use App\Models\Team;
+use App\Models\RouteVideo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -37,7 +38,9 @@ class HomeController extends Controller
             'customers' => \App\Models\Booking::where('status', 'completed')->count(),
         ];
 
-        return view('home', compact('featuredPackages', 'destinations', 'testimonials', 'stats'));
+        $routeVideos = RouteVideo::active()->get();
+
+        return view('home', compact('featuredPackages', 'destinations', 'testimonials', 'stats', 'routeVideos'));
     }
 
     public function about()
@@ -80,8 +83,19 @@ class HomeController extends Controller
         return view('agen');
     }
 
-    public function artikel()
+    public function galeri()
     {
-        return view('artikel');
+        return view('galeri');
+    }
+
+    public function rute()
+    {
+        $routeVideos = RouteVideo::active()->get();
+        return view('rute', compact('routeVideos'));
+    }
+
+    public function caraPesan()
+    {
+        return view('cara-pesan');
     }
 }
