@@ -27,8 +27,8 @@
     </template>
 
     {{-- Overlay --}}
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/85 via-primary-800/70 to-secondary-900/60"></div>
-    <div class="absolute inset-0" style="background: radial-gradient(ellipse at 70% 50%, rgba(219,39,119,0.15) 0%, transparent 60%)"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(157,23,77,0.92) 0%, rgba(107,14,54,0.88) 35%, rgba(30,5,20,0.95) 70%, rgba(0,0,0,0.97) 100%)"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at 30% 50%, rgba(236,72,153,0.30) 0%, transparent 55%)"></div>
 
 
 
