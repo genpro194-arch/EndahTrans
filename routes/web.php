@@ -13,6 +13,11 @@ use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\RouteVideoController;
+use App\Http\Controllers\Admin\CharterBookingController as AdminCharterController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\CharteredBookingController;
 
 /*
@@ -20,6 +25,13 @@ use App\Http\Controllers\CharteredBookingController;
 | Frontend Routes
 |--------------------------------------------------------------------------
 */
+
+// Temporary auto-login for preview (remove after done)
+Route::get('/dev-autologin', function () {
+    $user = \App\Models\User::where('email', 'admin@endahtravel.com')->first();
+    if ($user) { auth()->login($user); return redirect()->route('admin.dashboard'); }
+    return 'User not found';
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
@@ -29,6 +41,7 @@ Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store
 Route::get('/armada', [HomeController::class, 'armada'])->name('armada');
 Route::get('/armada/{kelas}', [HomeController::class, 'armadaDetail'])->name('armada.detail')
     ->whereIn('kelas', ['eksklusif', 'reguler', 'bigtop', 'superexec']);
+Route::get('/destinasi', [HomeController::class, 'destinations'])->name('destinasi');
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/rute', [HomeController::class, 'rute'])->name('rute');
 Route::get('/cara-pesan', [HomeController::class, 'caraPesan'])->name('cara-pesan');
@@ -99,4 +112,27 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('contacts/{contact}', [AdminContactController::class, 'show'])->name('contacts.show');
     Route::post('contacts/{contact}/reply', [AdminContactController::class, 'reply'])->name('contacts.reply');
     Route::delete('contacts/{contact}', [AdminContactController::class, 'destroy'])->name('contacts.destroy');
+
+    // Charter Bookings
+    Route::get('charter-bookings', [AdminCharterController::class, 'index'])->name('charter-bookings.index');
+    Route::get('charter-bookings/{charterBooking}', [AdminCharterController::class, 'show'])->name('charter-bookings.show');
+    Route::post('charter-bookings/{charterBooking}/status', [AdminCharterController::class, 'updateStatus'])->name('charter-bookings.update-status');
+    Route::post('charter-bookings/{charterBooking}/payment', [AdminCharterController::class, 'updatePaymentStatus'])->name('charter-bookings.update-payment');
+    Route::delete('charter-bookings/{charterBooking}', [AdminCharterController::class, 'destroy'])->name('charter-bookings.destroy');
+
+    // Testimonials
+    Route::resource('testimonials', TestimonialController::class)->except(['show']);
+    Route::post('testimonials/{testimonial}/toggle-active', [TestimonialController::class, 'toggleActive'])->name('testimonials.toggle-active');
+
+    // Buses (Armada)
+    Route::resource('buses', BusController::class);
+    Route::post('buses/{bus}/toggle-active', [BusController::class, 'toggleActive'])->name('buses.toggle-active');
+
+    // Gallery
+    Route::resource('gallery', GalleryController::class)->except(['show']);
+    Route::post('gallery/{gallery}/toggle-active', [GalleryController::class, 'toggleActive'])->name('gallery.toggle-active');
+
+    // Settings
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
 });

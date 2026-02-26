@@ -33,16 +33,16 @@
         <!-- Card 1: Total Bookings -->
         <div id="totalBookingsCard" class="group bg-white rounded-2xl p-7 hover:shadow-xl transition-all duration-300 border border-slate-200">
             <div class="flex items-start justify-between mb-6">
-                <div class="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-calendar-check text-blue-600 text-xl"></i>
+                <div class="w-14 h-14 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-calendar-check text-brand-600 text-xl"></i>
                 </div>
-                <span class="text-xs font-extrabold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg">TOTAL</span>
+                <span class="text-xs font-extrabold text-brand-600 bg-pink-50 px-3 py-1.5 rounded-lg">TOTAL</span>
             </div>
             <div class="space-y-1 mb-5">
                 <h3 id="totalBookingsAmount" class="text-4xl font-black text-slate-900">{{ $stats['total_bookings'] }}</h3>
                 <p class="text-sm text-slate-600 font-medium">Total Pemesanan</p>
             </div>
-            <a href="{{ route('admin.bookings.index') }}" class="text-blue-600 text-sm font-bold hover:text-blue-700 transition inline-flex items-center gap-2">
+            <a href="{{ route('admin.bookings.index') }}" class="text-brand-600 text-sm font-bold hover:text-brand-700 transition inline-flex items-center gap-2">
                 Lihat Detail <i class="fas fa-arrow-right text-xs"></i>
             </a>
         </div>
@@ -136,7 +136,7 @@
                     ];
                     $statusColors = [
                         'pending' => ['bar' => 'bg-amber-500', 'light' => 'bg-amber-50'],
-                        'confirmed' => ['bar' => 'bg-blue-500', 'light' => 'bg-blue-50'],
+                        'confirmed' => ['bar' => 'bg-brand-500', 'light' => 'bg-pink-50'],
                         'paid' => ['bar' => 'bg-emerald-500', 'light' => 'bg-emerald-50'],
                         'completed' => ['bar' => 'bg-green-500', 'light' => 'bg-green-50'],
                         'cancelled' => ['bar' => 'bg-red-500', 'light' => 'bg-red-50'],
@@ -165,11 +165,11 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-10">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-10">
         <a href="{{ route('admin.packages.create') }}" 
-           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50/50 transition-all duration-300 text-center">
-            <div class="w-12 h-12 bg-blue-100 group-hover:bg-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                <i class="fas fa-plus text-blue-600 text-lg font-bold"></i>
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-pink-300 hover:shadow-lg hover:bg-pink-50/50 transition-all duration-300 text-center">
+            <div class="w-12 h-12 bg-pink-100 group-hover:bg-pink-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-plus text-brand-600 text-lg font-bold"></i>
             </div>
             <p class="text-sm font-bold text-slate-900">Paket Baru</p>
             <p class="text-xs text-slate-500 mt-1">Buat paket wisata</p>
@@ -207,6 +207,27 @@
             <p class="text-sm font-bold text-slate-900">Pesan</p>
             <p class="text-xs text-slate-500 mt-1">Pesan masuk</p>
         </a>
+        <a href="{{ route('admin.charter-bookings.index') }}" 
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-orange-300 hover:shadow-lg hover:bg-orange-50/50 transition-all duration-300 text-center">
+            @if($stats['pending_charter'] > 0)
+            <div class="absolute -top-3 -right-3 w-7 h-7 bg-orange-500 text-white rounded-full text-xs font-black flex items-center justify-center animate-pulse">
+                {{ $stats['pending_charter'] }}
+            </div>
+            @endif
+            <div class="w-12 h-12 bg-orange-100 group-hover:bg-orange-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-bus text-orange-600 text-lg font-bold"></i>
+            </div>
+            <p class="text-sm font-bold text-slate-900">Charter</p>
+            <p class="text-xs text-slate-500 mt-1">Armada sewaan</p>
+        </a>
+        <a href="{{ route('admin.testimonials.index') }}" 
+           class="group relative bg-white border-2 border-slate-200 rounded-2xl p-6 hover:border-amber-300 hover:shadow-lg hover:bg-amber-50/50 transition-all duration-300 text-center">
+            <div class="w-12 h-12 bg-amber-100 group-hover:bg-amber-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                <i class="fas fa-star text-amber-500 text-lg font-bold"></i>
+            </div>
+            <p class="text-sm font-bold text-slate-900">Testimoni</p>
+            <p class="text-xs text-slate-500 mt-1">{{ $stats['active_testimonials'] }} aktif</p>
+        </a>
     </div>
 
     <!-- Recent Bookings Table -->
@@ -218,7 +239,7 @@
                     <p class="text-slate-600 text-sm mt-1">10 pemesanan terakhir dari pelanggan Anda</p>
                 </div>
                 <a href="{{ route('admin.bookings.index') }}" 
-                   class="text-blue-600 text-sm font-bold hover:text-blue-700 transition inline-flex items-center gap-2">
+                   class="text-brand-600 text-sm font-bold hover:text-brand-700 transition inline-flex items-center gap-2">
                     Lihat Semua <i class="fas fa-arrow-right text-xs"></i>
                 </a>
             </div>
@@ -241,7 +262,7 @@
                     @forelse($recentBookings as $booking)
                     <tr class="hover:bg-slate-50 transition-colors duration-150">
                         <td class="px-8 py-5 whitespace-nowrap">
-                            <span class="text-xs font-black text-blue-600 font-mono bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200">
+                            <span class="text-xs font-black text-brand-600 font-mono bg-pink-50 px-3 py-1.5 rounded-lg border border-blue-200">
                                 {{ substr($booking->booking_code, 0, 8) }}
                             </span>
                         </td>
@@ -261,7 +282,7 @@
                             @php
                                 $statusMap = [
                                     'pending' => ['bg' => 'bg-amber-50', 'text' => 'text-amber-700', 'border' => 'border-amber-200', 'label' => 'Menunggu'],
-                                    'confirmed' => ['bg' => 'bg-blue-50', 'text' => 'text-blue-700', 'border' => 'border-blue-200', 'label' => 'Dikonfirmasi'],
+                                    'confirmed' => ['bg' => 'bg-pink-50', 'text' => 'text-brand-700', 'border' => 'border-blue-200', 'label' => 'Dikonfirmasi'],
                                     'paid' => ['bg' => 'bg-emerald-50', 'text' => 'text-emerald-700', 'border' => 'border-emerald-200', 'label' => 'Dibayar'],
                                     'completed' => ['bg' => 'bg-green-50', 'text' => 'text-green-700', 'border' => 'border-green-200', 'label' => 'Selesai'],
                                     'cancelled' => ['bg' => 'bg-red-50', 'text' => 'text-red-700', 'border' => 'border-red-200', 'label' => 'Dibatalkan'],
@@ -280,7 +301,7 @@
                         </td>
                         <td class="px-8 py-5 whitespace-nowrap text-center">
                             <a href="{{ route('admin.bookings.show', $booking) }}" 
-                               class="inline-flex items-center justify-center w-9 h-9 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 border border-transparent hover:border-blue-200">
+                               class="inline-flex items-center justify-center w-9 h-9 text-slate-600 hover:text-brand-600 hover:bg-pink-50 rounded-lg transition-all duration-200 border border-transparent hover:border-blue-200">
                                 <i class="fas fa-eye text-sm font-bold"></i>
                             </a>
                         </td>
@@ -290,6 +311,92 @@
                         <td colspan="7" class="px-8 py-20 text-center">
                             <p class="text-slate-600 font-bold text-lg">Belum ada pemesanan</p>
                             <p class="text-slate-500 text-sm mt-2">Pemesanan baru akan muncul di sini</p>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Charter Bookings Summary -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 mt-8">
+        <div class="px-8 py-7 border-b border-slate-200 bg-gradient-to-r from-orange-50 to-transparent">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">Charter Armada Terbaru</h3>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Total: <span class="font-bold text-orange-600">{{ $stats['total_charter'] }}</span> charter
+                        · Pending: <span class="font-bold text-amber-600">{{ $stats['pending_charter'] }}</span>
+                        · Pendapatan: <span class="font-bold text-green-600">Rp {{ number_format($stats['charter_revenue'] / 1000000, 1) }}Jt</span>
+                    </p>
+                </div>
+                <a href="{{ route('admin.charter-bookings.index') }}"
+                   class="text-orange-600 text-sm font-bold hover:text-orange-700 transition inline-flex items-center gap-2">
+                    Lihat Semua <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200 bg-slate-50/50">
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Kode</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Pelanggan</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Tujuan</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Armada</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-center text-xs font-bold text-slate-600 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    @forelse($recentCharters as $charter)
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4">
+                            <span class="font-mono text-xs font-bold text-orange-700 bg-orange-50 px-2 py-1 rounded-lg">{{ $charter->booking_code }}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="font-semibold text-slate-800">{{ \Illuminate\Support\Str::limit($charter->customer_name, 20) }}</p>
+                            <p class="text-xs text-slate-400">{{ $charter->customer_phone }}</p>
+                        </td>
+                        <td class="px-6 py-4 text-slate-700">{{ \Illuminate\Support\Str::limit($charter->destination, 25) }}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 rounded-lg text-xs font-semibold
+                                {{ $charter->fleet_type === 'eksklusif' ? 'bg-purple-100 text-purple-700' : 'bg-pink-100 text-brand-700' }}">
+                                {{ ucfirst($charter->fleet_type) }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-slate-800">Rp {{ number_format($charter->total_price, 0, ',', '.') }}</td>
+                        <td class="px-6 py-4">
+                            @php
+                                $color = match($charter->status) {
+                                    'pending'   => 'bg-amber-100 text-amber-700',
+                                    'confirmed' => 'bg-green-100 text-green-700',
+                                    'cancelled' => 'bg-red-100 text-red-700',
+                                    default     => 'bg-gray-100 text-gray-700',
+                                };
+                                $label = match($charter->status) {
+                                    'pending'   => 'Menunggu',
+                                    'confirmed' => 'Dikonfirmasi',
+                                    'cancelled' => 'Dibatalkan',
+                                    default     => ucfirst($charter->status),
+                                };
+                            @endphp
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold {{ $color }}">{{ $label }}</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ route('admin.charter-bookings.show', $charter) }}"
+                               class="inline-flex items-center justify-center w-9 h-9 text-slate-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition border border-transparent hover:border-orange-200">
+                                <i class="fas fa-eye text-sm"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+                            <i class="fas fa-bus text-3xl mb-2 block opacity-30"></i>
+                            <p>Belum ada data charter armada</p>
                         </td>
                     </tr>
                     @endforelse

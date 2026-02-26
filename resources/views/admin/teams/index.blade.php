@@ -61,7 +61,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex gap-2">
                                             @if ($team->linkedin_url)
-                                                <a href="{{ $team->linkedin_url }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                                                <a href="{{ $team->linkedin_url }}" target="_blank" class="text-brand-600 hover:text-blue-800">
                                                     <i class="fab fa-linkedin"></i>
                                                 </a>
                                             @endif

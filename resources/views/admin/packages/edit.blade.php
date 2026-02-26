@@ -29,7 +29,7 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Nama Paket <span class="text-red-500">*</span></label>
                         <input type="text" name="name" value="{{ old('name', $package->name) }}" required
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all @error('name') border-red-500 @enderror">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all @error('name') border-red-500 @enderror">
                         @error('name')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -39,7 +39,7 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Destinasi <span class="text-red-500">*</span></label>
                         <select name="destination_id" required
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                             @foreach($destinations as $destination)
                                 <option value="{{ $destination->id }}" {{ old('destination_id', $package->destination_id) == $destination->id ? 'selected' : '' }}>
                                     {{ $destination->name }}
@@ -53,7 +53,7 @@
                 <div class="mt-6">
                     <label class="block text-sm font-bold text-slate-900 mb-2">Deskripsi <span class="text-red-500">*</span></label>
                     <textarea name="description" rows="4" required
-                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('description', $package->description) }}</textarea>
+                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">{{ old('description', $package->description) }}</textarea>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-slate-900 mb-2">Itinerary</label>
                     <textarea name="itinerary" rows="3"
-                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('itinerary', $package->itinerary) }}</textarea>
+                              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">{{ old('itinerary', $package->itinerary) }}</textarea>
                 </div>
 
                 <!-- Includes & Excludes -->
@@ -73,12 +73,12 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Termasuk</label>
                         <textarea name="includes" rows="3"
-                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('includes', $package->includes) }}</textarea>
+                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">{{ old('includes', $package->includes) }}</textarea>
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Tidak Termasuk</label>
                         <textarea name="excludes" rows="3"
-                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">{{ old('excludes', $package->excludes) }}</textarea>
+                                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">{{ old('excludes', $package->excludes) }}</textarea>
                     </div>
                 </div>
             </div>
@@ -91,12 +91,12 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Harga Normal <span class="text-red-500">*</span></label>
                         <input type="number" name="price" value="{{ old('price', $package->price) }}" required min="0"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Harga Diskon</label>
                         <input type="number" name="discount_price" value="{{ old('discount_price', $package->discount_price) }}" min="0"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                 </div>
 
@@ -104,17 +104,17 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Durasi (Hari) <span class="text-red-500">*</span></label>
                         <input type="number" name="duration_days" value="{{ old('duration_days', $package->duration_days) }}" required min="1"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Min Peserta <span class="text-red-500">*</span></label>
                         <input type="number" name="min_person" value="{{ old('min_person', $package->min_person) }}" required min="1"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Max Peserta <span class="text-red-500">*</span></label>
                         <input type="number" name="max_person" value="{{ old('max_person', $package->max_person) }}" required min="1"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                 </div>
             </div>
@@ -127,19 +127,19 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Tanggal Keberangkatan</label>
                         <input type="date" name="departure_date" value="{{ old('departure_date', $package->departure_date?->format('Y-m-d')) }}"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-900 mb-2">Jam Keberangkatan</label>
                         <input type="time" name="departure_time" value="{{ old('departure_time', $package->departure_time) }}"
-                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                               class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-bold text-slate-900 mb-2">Titik Kumpul</label>
                     <input type="text" name="meeting_point" value="{{ old('meeting_point', $package->meeting_point) }}"
-                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
                 <div>
                     <label class="block text-sm font-bold text-slate-900 mb-2">Ubah Gambar</label>
                     <input type="file" name="image" accept="image/*"
-                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all">
+                           class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-brand-500/10 transition-all">
                     <p class="text-xs text-slate-600 mt-2">Format: JPG, PNG, WEBP (Max 2MB). Kosongkan jika tidak ingin mengubah.</p>
                 </div>
             </div>
@@ -169,12 +169,12 @@
                 <div class="flex items-center gap-8">
                     <label class="flex items-center cursor-pointer">
                         <input type="checkbox" name="is_active" value="1" {{ old('is_active', $package->is_active) ? 'checked' : '' }}
-                               class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500/50 cursor-pointer">
+                               class="w-5 h-5 text-brand-600 border-slate-300 rounded focus:ring-2 focus:ring-brand-500/50 cursor-pointer">
                         <span class="ml-3 text-sm font-medium text-slate-900">Aktif</span>
                     </label>
                     <label class="flex items-center cursor-pointer">
                         <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $package->is_featured) ? 'checked' : '' }}
-                               class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500/50 cursor-pointer">
+                               class="w-5 h-5 text-brand-600 border-slate-300 rounded focus:ring-2 focus:ring-brand-500/50 cursor-pointer">
                         <span class="ml-3 text-sm font-medium text-slate-900">Paket Unggulan</span>
                     </label>
                 </div>
@@ -200,7 +200,7 @@
                 <a href="{{ route('admin.packages.index') }}" class="px-6 py-3 border border-slate-300 rounded-lg text-slate-900 font-medium hover:bg-slate-50 transition">
                     Batal
                 </a>
-                <button type="submit" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md inline-flex items-center gap-2">
+                <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 shadow-md inline-flex items-center gap-2">
                     <i class="fas fa-save"></i> Update Paket
                 </button>
             </div>

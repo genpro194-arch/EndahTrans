@@ -1,8 +1,155 @@
 @extends('layouts.admin')
 
 @section('title', 'Kelola Destinasi')
-@section('page-title', 'Destinasi Wisata')
-@section('page-subtitle', 'Kelola semua destinasi wisata')
+@section('page-title', 'Destinasi Charter')
+@section('page-subtitle', 'Data destinasi yang terhubung ke form pemesanan charter')
+
+@section('content')
+
+{{-- Header --}}
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <div>
+        <p class="text-sm text-gray-500">{{ $destinations->total() }} destinasi terdaftar</p>
+    </div>
+    <a href="{{ route('admin.destinations.create') }}"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white shadow-lg transition hover:-translate-y-0.5"
+       style="background:linear-gradient(135deg,#ec4899,#ef4444); box-shadow:0 6px 20px rgba(236,72,153,.3)">
+        <i class="fas fa-plus"></i> Tambah Destinasi
+    </a>
+</div>
+
+{{-- Table --}}
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b border-gray-100 bg-gray-50/60">
+                    <th class="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider w-8">#</th>
+                    <th class="text-left px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Destinasi</th>
+                    <th class="text-right px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Sleeper Bus</th>
+                    <th class="text-right px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Executive</th>
+                    <th class="text-right px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden xl:table-cell">Big Top</th>
+                    <th class="text-right px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden xl:table-cell">Super Exec</th>
+                    <th class="text-center px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="text-right px-5 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                @forelse($destinations as $i => $dest)
+                @php
+                    $priceMap = $dest->prices->pluck('price_per_day', 'fleet_type');
+                    $hasPrice = $priceMap->filter(fn($p) => $p > 0)->count();
+                @endphp
+                <tr class="hover:bg-pink-50/30 transition group">
+                    <td class="px-5 py-4 text-gray-400 text-xs">{{ $destinations->firstItem() + $loop->index }}</td>
+
+                    {{-- Name + desc --}}
+                    <td class="px-5 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                                 style="background:linear-gradient(135deg,rgba(236,72,153,.12),rgba(239,68,68,.08))">
+                                <i class="fas fa-map-marker-alt text-brand-500 text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">{{ $dest->name }}</p>
+                                @if($dest->description)
+                                <p class="text-xs text-gray-400 mt-0.5 max-w-xs truncate">{{ $dest->description }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </td>
+
+                    {{-- Price columns --}}
+                    @php $fmt = fn($p) => $p > 0 ? 'Rp ' . number_format($p, 0, ',', '.') : '—'; @endphp
+                    <td class="px-4 py-4 text-right hidden lg:table-cell">
+                        <span class="{{ ($priceMap['eksklusif'] ?? 0) > 0 ? 'font-semibold text-gray-800' : 'text-gray-300' }} text-sm">
+                            {{ $fmt($priceMap['eksklusif'] ?? 0) }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-4 text-right hidden lg:table-cell">
+                        <span class="{{ ($priceMap['reguler'] ?? 0) > 0 ? 'font-semibold text-gray-800' : 'text-gray-300' }} text-sm">
+                            {{ $fmt($priceMap['reguler'] ?? 0) }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-4 text-right hidden xl:table-cell">
+                        <span class="{{ ($priceMap['bigtop'] ?? 0) > 0 ? 'font-semibold text-gray-800' : 'text-gray-300' }} text-sm">
+                            {{ $fmt($priceMap['bigtop'] ?? 0) }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-4 text-right hidden xl:table-cell">
+                        <span class="{{ ($priceMap['superexec'] ?? 0) > 0 ? 'font-semibold text-gray-800' : 'text-gray-300' }} text-sm">
+                            {{ $fmt($priceMap['superexec'] ?? 0) }}
+                        </span>
+                    </td>
+
+                    {{-- Status --}}
+                    <td class="px-4 py-4 text-center">
+                        @if($dest->is_active)
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full border border-emerald-100">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Aktif
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 text-gray-500 text-xs font-semibold rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Nonaktif
+                            </span>
+                        @endif
+                    </td>
+
+                    {{-- Actions --}}
+                    <td class="px-5 py-4 text-right">
+                        <div class="flex items-center justify-end gap-1.5">
+                            <a href="{{ route('admin.destinations.edit', $dest) }}"
+                               class="w-8 h-8 flex items-center justify-center rounded-lg bg-pink-50 hover:bg-brand-500 text-brand-500 hover:text-white transition text-xs"
+                               title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('admin.destinations.destroy', $dest) }}" method="POST"
+                                  onsubmit="return confirm('Hapus destinasi {{ addslashes($dest->name) }}?')">
+                                @csrf @method('DELETE')
+                                <button type="submit"
+                                        class="w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 hover:bg-red-500 text-red-500 hover:text-white transition text-xs"
+                                        title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="8" class="px-5 py-20 text-center">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                             style="background:linear-gradient(135deg,rgba(236,72,153,.1),rgba(239,68,68,.07))">
+                            <i class="fas fa-map-marker-alt text-2xl text-brand-400"></i>
+                        </div>
+                        <p class="font-semibold text-gray-700 mb-1">Belum ada destinasi</p>
+                        <p class="text-sm text-gray-400 mb-5">Tambahkan destinasi agar muncul di form charter</p>
+                        <a href="{{ route('admin.destinations.create') }}"
+                           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
+                           style="background:linear-gradient(135deg,#ec4899,#ef4444)">
+                            <i class="fas fa-plus"></i> Tambah Sekarang
+                        </a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{-- Legend --}}
+<div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-gray-400 px-1">
+    <span class="flex items-center gap-1.5">
+        <i class="fas fa-info-circle text-brand-300"></i>
+        Harga per bus per hari · <span class="hidden lg:inline">Harga charter otomatis tampil di form pemesanan website saat destinasi dipilih</span><span class="lg:hidden">Harga muncul otomatis di form pemesanan</span>
+    </span>
+</div>
+
+@if($destinations->hasPages())
+<div class="mt-5">{{ $destinations->links() }}</div>
+@endif
+
+@endsection
 
 @section('content')
     <!-- Header -->

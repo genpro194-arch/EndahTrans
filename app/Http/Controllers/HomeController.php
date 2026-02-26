@@ -79,6 +79,23 @@ class HomeController extends Controller
         return view('armada');
     }
 
+    public function destinations()
+    {
+        $destinations = \App\Models\Destination::where('is_active', true)
+            ->with('prices')
+            ->orderBy('name')
+            ->get();
+
+        $fleetTypes = [
+            'eksklusif' => 'Sleeper Bus',
+            'reguler'   => 'Executive',
+            'bigtop'    => 'Executive Big Top',
+            'superexec' => 'Super Executive',
+        ];
+
+        return view('destinations', compact('destinations', 'fleetTypes'));
+    }
+
     public function armadaDetail(string $kelas)
     {
         $fleetDetails = [

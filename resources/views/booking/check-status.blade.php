@@ -19,13 +19,13 @@
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Kode Booking</label>
                         <input type="text" name="booking_code" value="{{ old('booking_code') }}" required
-                               placeholder="Contoh: ET20260206ABCD"
+                               placeholder="Contoh: CT20260226ABCD"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-center text-lg tracking-wider uppercase @error('booking_code') border-red-500 @enderror">
                         @error('booking_code')
                             <p class="text-red-500 text-sm mt-2 text-center">{{ $message }}</p>
                         @enderror
                         <p class="text-gray-500 text-xs mt-2 text-center">
-                            Kode booking dikirim via email setelah pemesanan. Format: ET + tanggal + kode unik
+                            Kode ditampilkan di nota setelah pemesanan. Charter: <strong>CT…</strong> &bull; Paket: <strong>ET…</strong>
                         </p>
                     </div>
 
@@ -42,9 +42,9 @@
                     <i class="fas fa-info-circle mr-2"></i> Informasi Kode Booking
                 </h3>
                 <ul class="text-sm text-blue-800 space-y-1">
-                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Dikirim ke email Anda setelah pemesanan berhasil</li>
-                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Format: <strong>ET + tanggal + kode unik</strong> (contoh: ET20260206ABCD)</li>
-                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Gunakan untuk mengecek status pemesanan kapan saja</li>
+                    <li><i class="fas fa-check text-primary-500 mr-2"></i>Kode ditampilkan di <strong>nota/konfirmasi</strong> setelah pemesanan berhasil</li>
+                    <li><i class="fas fa-bus text-primary-500 mr-2"></i>Charter armada: format <strong>CT + tanggal + kode unik</strong> (contoh: CT20260226ABCD)</li>
+                    <li><i class="fas fa-suitcase text-primary-500 mr-2"></i>Paket wisata: format <strong>ET + tanggal + kode unik</strong> (contoh: ET20260226ABCD)</li>
                 </ul>
             </div>
 

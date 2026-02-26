@@ -2,15 +2,55 @@
 
 @section('title', 'Edit Destinasi')
 @section('page-title', 'Edit Destinasi')
+@section('page-subtitle', 'Ubah data & harga charter destinasi')
 
 @section('content')
-    <div class="max-w-2xl">
-        <div class="bg-white rounded-xl shadow-sm">
-            <div class="p-6 border-b">
-                <a href="{{ route('admin.destinations.index') }}" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-arrow-left mr-2"></i> Kembali
-                </a>
+<div class="max-w-xl">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+        {{-- Header --}}
+        <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
+            <a href="{{ route('admin.destinations.index') }}"
+               class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-pink-50 text-gray-400 hover:text-brand-500 transition">
+                <i class="fas fa-arrow-left text-sm"></i>
+            </a>
+            <div>
+                <p class="text-sm font-bold text-gray-900">{{ $destination->name }}</p>
+                <p class="text-xs text-gray-400">Edit data & harga charter destinasi</p>
             </div>
+        </div>
+
+        <form action="{{ route('admin.destinations.update', $destination) }}" method="POST" class="p-6 space-y-5">
+            @csrf
+            @method('PUT')
+            @include('admin.destinations._form')
+
+            <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                <form action="{{ route('admin.destinations.destroy', $destination) }}" method="POST"
+                      onsubmit="return confirm('Hapus destinasi ini?')">
+                    @csrf @method('DELETE')
+                    <button type="submit"
+                            class="inline-flex items-center gap-1.5 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl transition">
+                        <i class="fas fa-trash text-xs"></i> Hapus
+                    </button>
+                </form>
+                <div class="flex gap-3">
+                    <a href="{{ route('admin.destinations.index') }}"
+                       class="px-5 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 hover:bg-gray-50 transition">
+                        Batal
+                    </a>
+                    <button type="submit"
+                            class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition shadow hover:-translate-y-0.5"
+                            style="background:linear-gradient(135deg,#ec4899,#ef4444)">
+                        <i class="fas fa-save mr-1.5"></i> Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
 
             <form action="{{ route('admin.destinations.update', $destination) }}" method="POST" enctype="multipart/form-data" class="p-6">
                 @csrf

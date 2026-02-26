@@ -94,7 +94,7 @@
                             <i class="fab fa-whatsapp mr-1"></i> WhatsApp
                         </a>
                         <a href="mailto:{{ $booking->customer_email }}" 
-                           class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-lg text-sm hover:bg-blue-200">
+                           class="inline-flex items-center px-3 py-1 bg-pink-100 text-brand-700 rounded-lg text-sm hover:bg-blue-200">
                             <i class="fas fa-envelope mr-1"></i> Email
                         </a>
                     </div>
@@ -158,7 +158,7 @@
                             <option value="completed" {{ $booking->status == 'completed' ? 'selected' : '' }}>Selesai</option>
                             <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                         </select>
-                        <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">
+                        <button type="submit" class="w-full px-4 py-2 bg-brand-600 text-white rounded-lg text-sm hover:bg-blue-700">
                             Update Status
                         </button>
                     </form>
@@ -196,7 +196,7 @@
                     <h3 class="font-semibold text-gray-900 mb-4">Timeline</h3>
                     <div class="space-y-4 text-sm">
                         <div class="flex items-start">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-1.5 mr-3"></div>
+                            <div class="w-2 h-2 bg-brand-500 rounded-full mt-1.5 mr-3"></div>
                             <div>
                                 <p class="font-medium text-gray-900">Booking dibuat</p>
                                 <p class="text-gray-500">{{ $booking->created_at->format('d M Y H:i') }}</p>

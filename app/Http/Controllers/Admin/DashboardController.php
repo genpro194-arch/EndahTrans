@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\CharterBooking;
 use App\Models\Package;
 use App\Models\Contact;
 use App\Models\Destination;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -23,6 +25,11 @@ class DashboardController extends Controller
             'active_packages' => Package::active()->count(),
             'total_destinations' => Destination::count(),
             'unread_messages' => Contact::unread()->count(),
+            'total_charter' => CharterBooking::count(),
+            'pending_charter' => CharterBooking::where('status', 'pending')->count(),
+            'charter_revenue' => CharterBooking::where('payment_status', 'paid')->sum('total_price'),
+            'total_testimonials' => Testimonial::count(),
+            'active_testimonials' => Testimonial::where('is_active', true)->count(),
         ];
 
         // Recent bookings
@@ -30,6 +37,9 @@ class DashboardController extends Controller
             ->latest()
             ->take(10)
             ->get();
+
+        // Recent charter bookings
+        $recentCharters = CharterBooking::latest()->take(5)->get();
 
         // Revenue chart data (last 7 days)
         $revenueData = [];
@@ -53,7 +63,7 @@ class DashboardController extends Controller
             'cancelled' => Booking::where('status', 'cancelled')->count(),
         ];
 
-        return view('admin.dashboard', compact('stats', 'recentBookings', 'revenueData', 'bookingStats'));
+        return view('admin.dashboard', compact('stats', 'recentBookings', 'recentCharters', 'revenueData', 'bookingStats'));
     }
 
     /**

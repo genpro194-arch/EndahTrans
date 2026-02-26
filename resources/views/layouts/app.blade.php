@@ -344,11 +344,14 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('contact') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
-                        Kontak
+                    <a href="{{ route('destinasi') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('destinasi') ? 'active text-primary-600' : '' }}">
+                        Tujuan
                     </a>
                     <a href="{{ route('armada') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'active text-primary-600' : '' }}">
                         Armada
+                    </a>
+                    <a href="{{ route('contact') }}" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'active text-primary-600' : '' }}">
+                        Kontak
                     </a>
                     <a href="{{ route('booking.check-status') }}" class="btn-gradient text-white px-6 py-2.5 rounded-xl font-medium shadow-lg">
                         <i class="fas fa-search mr-2"></i>Cek Booking
@@ -399,11 +402,14 @@
                         </a>
                     </div>
                 </div>
-                <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : '' }}">
-                    <i class="fas fa-envelope w-6"></i> Kontak
+                <a href="{{ route('destinasi') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('destinasi') ? 'bg-primary-50 text-primary-600' : '' }}">
+                    <i class="fas fa-map-marker-alt w-6"></i> Tujuan
                 </a>
                 <a href="{{ route('armada') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('armada') ? 'bg-primary-50 text-primary-600' : '' }}">
                     <i class="fas fa-bus w-6"></i> Armada
+                </a>
+                <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 hover:bg-primary-50 hover:text-primary-600 font-medium transition {{ request()->routeIs('contact') ? 'bg-primary-50 text-primary-600' : '' }}">
+                    <i class="fas fa-envelope w-6"></i> Kontak
                 </a>
                 <a href="{{ route('booking.check-status') }}" class="flex items-center justify-center btn-gradient text-white px-4 py-3 rounded-xl font-medium mt-2">
                     <i class="fas fa-search mr-2"></i> Cek Booking

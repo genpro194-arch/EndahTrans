@@ -138,7 +138,7 @@
                             <input type="hidden" name="facilities[{{ $index }}][bus_facility_id]" value="{{ $facility->id }}">
 
                             <!-- Price Preview -->
-                            <div class="mt-3 p-3 bg-blue-50 rounded text-sm">
+                            <div class="mt-3 p-3 bg-pink-50 rounded text-sm">
                                 @php
                                     $pf = $package->packageFacilities->firstWhere('bus_facility_id', $facility->id);
                                     $finalPrice = $pf ? ($pf->discount_price ?? $pf->price) : 'Belum diatur';

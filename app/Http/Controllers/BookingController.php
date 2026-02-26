@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\CharterBooking;
 use App\Models\Package;
 use App\Models\PackageBusFacility;
 use Illuminate\Http\Request;
@@ -96,8 +97,20 @@ class BookingController extends Controller
             'booking_code' => 'required|string',
         ]);
 
+        $code = strtoupper(trim($request->booking_code));
+
+        // Charter booking (code starts with CT)
+        if (str_starts_with($code, 'CT')) {
+            $charter = CharterBooking::where('booking_code', $code)->first();
+            if (!$charter) {
+                return back()->withErrors(['booking_code' => 'Kode booking charter tidak ditemukan.']);
+            }
+            return view('charter.status', ['booking' => $charter]);
+        }
+
+        // Package booking
         $booking = Booking::with('package.destination')
-            ->where('booking_code', $request->booking_code)
+            ->where('booking_code', $code)
             ->first();
 
         if (!$booking) {

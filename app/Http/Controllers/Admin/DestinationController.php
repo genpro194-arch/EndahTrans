@@ -7,7 +7,6 @@ use App\Models\Destination;
 use App\Models\DestinationPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
 {
@@ -20,7 +19,7 @@ class DestinationController extends Controller
 
     public function index()
     {
-        $destinations = Destination::withCount('packages')->with('prices')->latest()->paginate(15);
+        $destinations = Destination::with('prices')->orderBy('name')->paginate(20);
         return view('admin.destinations.index', compact('destinations'));
     }
 
@@ -34,7 +33,6 @@ class DestinationController extends Controller
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_active'   => 'boolean',
             'prices'      => 'nullable|array',
             'prices.*'    => 'nullable|integer|min:0',
@@ -43,33 +41,28 @@ class DestinationController extends Controller
         $validated['slug']      = Str::slug($validated['name']);
         $validated['is_active'] = $request->has('is_active');
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('destinations', 'public');
-        }
-
         $destination = Destination::create($validated);
 
-        // Save prices
         if ($request->filled('prices')) {
             foreach ($request->input('prices', []) as $fleet => $price) {
-                if (array_key_exists($fleet, self::FLEET_TYPES) && $price > 0) {
+                if (array_key_exists($fleet, self::FLEET_TYPES) && (int)$price > 0) {
                     DestinationPrice::updateOrCreate(
                         ['destination_id' => $destination->id, 'fleet_type' => $fleet],
-                        ['price_per_day'  => $price]
+                        ['price_per_day'  => (int)$price]
                     );
                 }
             }
         }
 
         return redirect()->route('admin.destinations.index')
-            ->with('success', 'Destinasi berhasil ditambahkan!');
+            ->with('success', 'Destinasi "' . $destination->name . '" berhasil ditambahkan!');
     }
 
     public function edit(Destination $destination)
     {
         $destination->load('prices');
-        $fleetTypes  = self::FLEET_TYPES;
-        $priceMap    = $destination->prices->pluck('price_per_day', 'fleet_type')->toArray();
+        $fleetTypes = self::FLEET_TYPES;
+        $priceMap   = $destination->prices->pluck('price_per_day', 'fleet_type')->toArray();
         return view('admin.destinations.edit', compact('destination', 'fleetTypes', 'priceMap'));
     }
 
@@ -78,24 +71,16 @@ class DestinationController extends Controller
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_active'   => 'boolean',
             'prices'      => 'nullable|array',
             'prices.*'    => 'nullable|integer|min:0',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
-
-        if ($request->hasFile('image')) {
-            if ($destination->image) {
-                Storage::disk('public')->delete($destination->image);
-            }
-            $validated['image'] = $request->file('image')->store('destinations', 'public');
-        }
+        $validated['slug']      = Str::slug($validated['name']);
 
         $destination->update($validated);
 
-        // Save prices
         foreach (array_keys(self::FLEET_TYPES) as $fleet) {
             $price = (int) $request->input("prices.{$fleet}", 0);
             if ($price > 0) {
@@ -110,19 +95,12 @@ class DestinationController extends Controller
         }
 
         return redirect()->route('admin.destinations.index')
-            ->with('success', 'Destinasi berhasil diperbarui!');
+            ->with('success', 'Destinasi "' . $destination->name . '" berhasil diperbarui!');
     }
 
     public function destroy(Destination $destination)
     {
-        if ($destination->packages()->count() > 0) {
-            return back()->withErrors(['error' => 'Tidak dapat menghapus destinasi yang memiliki paket.']);
-        }
-
-        if ($destination->image) {
-            Storage::disk('public')->delete($destination->image);
-        }
-
+        $destination->prices()->delete();
         $destination->delete();
 
         return redirect()->route('admin.destinations.index')

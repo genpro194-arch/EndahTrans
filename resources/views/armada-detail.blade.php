@@ -204,7 +204,8 @@
                                         <label class="block text-xs font-bold text-slate-500 mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
                                         <div class="relative">
                                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-user text-xs"></i></span>
-                                            <input type="text" name="customer_name" required placeholder="Budi Santoso"
+                                            <input type="text" name="customer_name" required placeholder="Nama lengkap Anda"
+                                                   autocomplete="off"
                                                    x-model="customerName"
                                                    :class="errors.customerName ? 'border-red-400 bg-red-50 focus:ring-red-500 focus:border-red-400' : 'border-slate-200 bg-slate-50 focus:ring-primary-500 focus:border-primary-500 focus:bg-white'"
                                                    class="w-full pl-10 pr-4 py-3.5 rounded-xl text-slate-900 text-sm border transition outline-none">
@@ -215,7 +216,8 @@
                                         <label class="block text-xs font-bold text-slate-500 mb-2">Email <span class="text-red-500">*</span></label>
                                         <div class="relative">
                                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-envelope text-xs"></i></span>
-                                            <input type="email" name="customer_email" required placeholder="budi@email.com"
+                                            <input type="email" name="customer_email" required placeholder="Alamat email Anda"
+                                                   autocomplete="off"
                                                    x-model="customerEmail"
                                                    :class="errors.customerEmail ? 'border-red-400 bg-red-50 focus:ring-red-500 focus:border-red-400' : 'border-slate-200 bg-slate-50 focus:ring-primary-500 focus:border-primary-500 focus:bg-white'"
                                                    class="w-full pl-10 pr-4 py-3.5 rounded-xl text-slate-900 text-sm border transition outline-none">
@@ -227,7 +229,8 @@
                                     <label class="block text-xs font-bold text-slate-500 mb-2">Nomor WhatsApp / Telepon <span class="text-red-500">*</span></label>
                                     <div class="relative">
                                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fab fa-whatsapp text-sm"></i></span>
-                                        <input type="text" name="customer_phone" required placeholder="08123456789"
+                                        <input type="text" name="customer_phone" required placeholder="Nomor WhatsApp aktif"
+                                               autocomplete="off"
                                                x-model="customerPhone"
                                                :class="errors.customerPhone ? 'border-red-400 bg-red-50 focus:ring-red-500 focus:border-red-400' : 'border-slate-200 bg-slate-50 focus:ring-primary-500 focus:border-primary-500 focus:bg-white'"
                                                class="w-full pl-10 pr-4 py-3.5 rounded-xl text-slate-900 text-sm border transition outline-none">
@@ -799,7 +802,7 @@ function bookingForm() {
         customerName: @json(old('customer_name', '')),
         customerEmail: @json(old('customer_email', '')),
         customerPhone: @json(old('customer_phone', '')),
-        destination: @json(old('destination', '')),
+        destination: @json(old('destination', request('destination', ''))),
         departureDate: @json(old('departure_date', '')),
         departureTime: @json(old('departure_time', '07:00')),
         errors: {},
@@ -814,6 +817,12 @@ function bookingForm() {
             this.destination = name;
             this.destOpen = false;
             this.fetchPrice();
+        },
+        init() {
+            // Auto-fetch price if destination is pre-filled from URL param
+            if (this.destination.trim()) {
+                this.$nextTick(() => this.fetchPrice());
+            }
         },
         get total() { return this.rate * this.numBuses * this.durationDays; },
         rp(n) {

@@ -19,7 +19,7 @@
                         <p class="text-sm text-gray-500 mt-1">{{ $contact->created_at->format('d F Y, H:i') }}</p>
                     </div>
                     @if(!$contact->is_read)
-                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Baru</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-pink-100 text-blue-800">Baru</span>
                     @endif
                 </div>
             </div>

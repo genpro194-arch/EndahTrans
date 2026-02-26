@@ -259,6 +259,20 @@
         </a>
     </div>
 
+    {{-- Cek Status Reminder (no print) --}}
+    <div class="no-print mt-4 bg-pink-50 border border-pink-200 rounded-2xl px-5 py-4 flex items-center gap-4">
+        <div class="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-search text-pink-500"></i>
+        </div>
+        <div class="flex-1">
+            <p class="text-sm font-bold text-pink-800">Simpan kode booking Anda: <span class="font-mono tracking-wider">{{ $booking->booking_code }}</span></p>
+            <p class="text-xs text-pink-600 mt-0.5">Gunakan kode ini kapan saja untuk melihat status pemesanan di halaman Cek Booking</p>
+        </div>
+        <a href="{{ route('booking.check-status') }}" class="flex-shrink-0 bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-pink-700 transition">
+            Cek Status
+        </a>
+    </div>
+
 </div>
 </div>
 @endsection
